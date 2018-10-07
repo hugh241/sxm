@@ -2,7 +2,6 @@ package com.suxiaomei.admin.entity.employee.extend;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.suxiaomei.admin.entity.employee.Employee;
 
 /**
@@ -31,7 +30,6 @@ import com.suxiaomei.admin.entity.employee.Employee;
  * @author zl
  * 2018年9月30日 上午9:29:44
  */
-@JsonIgnoreProperties(value = {"handler"})
 public class EmployeeExd extends Employee{
 	private static final long serialVersionUID = 1L;
 	private List<EmployeePositionExtend> positions;//护理员所有工种

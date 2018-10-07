@@ -32,8 +32,8 @@ public class BaseController extends HttpServlet{
 
 	public Map<String, Object> ERROR(Map<String, Object> map) {
 		map = map == null ? map = new HashMap<>() : map;
-		map.put(MESSAGE, Code.CONTROLEFAILED.getMessage());
-		map.put(CODE, Code.CONTROLEFAILED.getCode());
+		map.put(MESSAGE, Code.CONTROLLE_FAILED.getMessage());
+		map.put(CODE, Code.CONTROLLE_FAILED.getCode());
 		return map;
 	}
 	
@@ -52,8 +52,8 @@ public class BaseController extends HttpServlet{
 			map.put(CODE, 241);
 			map.put(MESSAGE, Code.getName(241));
 		}else if(flag == 0) {
-			map.put(CODE, 9999);
-			map.put(MESSAGE, Code.getName(9999));
+			map.put(CODE, 449);
+			map.put(MESSAGE, Code.getName(449));
 		}else {
 			map.put(CODE, flag);
 			map.put(MESSAGE, Code.getName(flag));

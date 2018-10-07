@@ -13,6 +13,7 @@ public interface BusinessService {
 	QueryResult<BusinessExtend> findByPageList(String condition);
 	/**
 	 * 根据企业id查询企业详细信息
+	 * 1.管理端企业管理
 	 * @param id
 	 * @return
 	 */

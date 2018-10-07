@@ -60,7 +60,7 @@ public class PermissionInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String url = request.getRequestURL().toString();
-		System.out.println(url);
+		System.out.print(url);
 		if(!InterceptorUtil.isUserPass(url)){//无论是否登录都不需拦截的连接
 			return true;
 		}
@@ -70,7 +70,8 @@ public class PermissionInterceptor implements HandlerInterceptor{
 			sendUnloginJSON(response);
 			return false;
 		}
-		System.out.println("username:"+username);
+		String method = request.getMethod();
+		System.out.println("  username:"+username + "  method:"+method);
 		boolean flag = TokenUtil.<User>verifyUserToken(redisTemplate,token,username);
 		if(!flag){//username token不匹配
 			sendUnloginJSON(response);
@@ -78,7 +79,6 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		}
 		
 		String menuStr = url.split("/api/")[1];
-		String method = request.getMethod();
 		if(ExceptValidateModule.isExist(menuStr,method)){//登录后不需拦截的链接
 			return true;
 		}

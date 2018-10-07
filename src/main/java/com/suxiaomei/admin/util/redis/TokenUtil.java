@@ -2,13 +2,14 @@ package com.suxiaomei.admin.util.redis;
 
 import java.util.Calendar;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.suxiaomei.admin.common.GlobalConfig;
 import com.suxiaomei.admin.entity.account.User;
 import com.suxiaomei.admin.util.Md5;
 import com.suxiaomei.admin.util.Util;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
   
 public class TokenUtil{
     /** 
@@ -48,7 +49,9 @@ public class TokenUtil{
 		}
 	    userToken.setUser(user);
 	    userToken.setToken(token);
-	    RedisUtil.set(redisTemplate, encryptSignature, userToken,userinfosavetime);
+	    JSONObject json = JSONObject.fromObject(userToken);
+	    json.getJSONObject("user").remove("handler");
+	    RedisUtil.set(redisTemplate, encryptSignature, json.toString(),userinfosavetime);
 	    return token;
     }
     
@@ -154,13 +157,13 @@ public class TokenUtil{
 	    if(obj == null){
 	    	return false;
 	    }
+	    JSONObject json = JSONObject.fromObject(obj);
 	    
 	    //判断解析的用户名称和传入的名称是否相同
 	    if(!userToken.getSignature().equals(username)){
 	    	return false;
 	    }
-	    
-		UserToken userToken2=(UserToken)obj;
+		UserToken userToken2=(UserToken) JSONObject.toBean(json,UserToken.class);
 	    if (userToken2!=null&&(userToken.toString()).equals(userToken2.toString())){  
 	        // 判定时间戳是否过期
 	        long currentTime = Calendar.getInstance().getTimeInMillis();  
@@ -223,6 +226,11 @@ public class TokenUtil{
     public static UserToken getStaticUserToken(RedisTemplate<String,Object> redisTemplate,String token){
 	    UserToken userToken=decryptUserToken(token);  
 	    String encryptSignature=encryptSignature(userToken.getSignature());  
-	    return (UserToken)RedisUtil.get(redisTemplate, encryptSignature);
+	    Object obj = RedisUtil.get(redisTemplate, encryptSignature);
+	    if(obj == null){
+	    	return null;
+	    }
+	    JSONObject json = JSONObject.fromObject(obj);
+	    return (UserToken) JSONObject.toBean(json,UserToken.class);
     }  
 } 

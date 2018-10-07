@@ -12,6 +12,7 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <association property="role" javaType="role" select="com.suxiaomei.admin.dao.account.RoleMapper.selectByPrimaryKey" column="roleid"></association>
   </resultMap>
   <sql id="Base_Column_List">
     userid, roleid, name, username, password, mobile, remark, createtime, updatetime, 
@@ -149,4 +150,15 @@
     update user set status = #{status,jdbcType=TINYINT}
     where roleid = #{roleid,jdbcType=INTEGER}
   </update>
+  <select id="findNormalUserBySystemidAndTypeAndStatus" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List2" />
+    from user u
+    left join role r on (r.roleid = u.roleid and r.type = #{type,jdbcType=INTEGER})
+    where r.relationid = #{sxmsystemid,jdbcType=INTEGER} and r.ismanager = 0
+    <if test="status != null">
+    	and u.status = #{status,jdbcType=INTEGER} and r.status = #{status,jdbcType=INTEGER}
+    </if>
+    order by u.createtime desc
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.suxiaomei.admin.dao.account;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.suxiaomei.admin.entity.account.RoleModule;
@@ -7,7 +9,6 @@ import com.suxiaomei.admin.entity.account.RoleModule;
 public interface RoleModuleMapper {
     int deleteByPrimaryKey(Integer rolemoduleid);
 
-    int insert(RoleModule record);
 
     int insertSelective(RoleModule record);
 
@@ -29,4 +30,22 @@ public interface RoleModuleMapper {
 	 * @param roleid
 	 */
 	int insertByRoleidAndSxmsystemid(@Param("roleid")int roleid);
+	/**
+	 * 根据角色id,模块id删除关联
+	 * @param roleid
+	 * @return
+	 */
+	int deleteRoleModule(@Param("roleid")int roleid,@Param("moduleid")int moduleid);
+	/**
+	 * 根据角色id查询角色所有模块
+	 * @param roleid
+	 * @return
+	 */
+	List<RoleModule> getByRoleid(int roleid);
+	/**
+	 * 为角色模块添加关联
+	 * @param record
+	 * @return
+	 */
+    int insert(RoleModule record);
 }

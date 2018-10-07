@@ -28,6 +28,7 @@ package com.suxiaomei.admin.service.common;
 public interface AddressService {
 	/**
 	 * 更新省市县信息存储打redis
+	 * 1.系统启动运行
 	 */
 	void updateAddressToRedis();
 

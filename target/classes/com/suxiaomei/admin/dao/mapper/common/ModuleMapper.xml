@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suxiaomei.admin.dao.common.ModuleMapper">
-  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.Module">
+  <resultMap id="BaseResultMap" type="Module">
     <id column="moduleid" jdbcType="INTEGER" property="moduleid" />
     <result column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
     <result column="parentid" jdbcType="INTEGER" property="parentid" />
@@ -15,10 +15,16 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <collection property="childsList" select="getSubModule" column="{moduleid=moduleid}"></collection>
   </resultMap>
-  <resultMap id="RightResultMap" type="Module" extends="BaseResultMap">
-    <id column="check" jdbcType="TINYINT" property="check" />
+  <resultMap id="MenuResultMap" type="ModuleWithSubExtend" extends="BaseResultMap">
+    <result column="roleid" jdbcType="TINYINT" property="roleid" />
+    <result column="check" jdbcType="TINYINT" property="check" />
+    <collection property="childsList" select="getSubModule" column="{roleid=roleid,moduleid=moduleid}"></collection>
+  </resultMap>
+  <resultMap id="RightResultMap" type="ModuleWithSubExtend" extends="BaseResultMap">
+    <result column="check" jdbcType="TINYINT" property="check" />
+    <result column="roleid" jdbcType="TINYINT" property="roleid" />
+    <collection property="childsList" select="getSubModuleWithRight" column="{roleid=roleid,moduleid=moduleid}"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     moduleid, sxmsystemid, parentid, type, isautomatic, name, icon, color, sort, url, 
@@ -191,32 +197,42 @@
   </update>
   
   
-  <select id="findByRoleid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByRoleid" parameterType="java.lang.Integer" resultMap="MenuResultMap">
     select 
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,#{roleid,jdbcType=INTEGER} roleid,
+    case 
+    	when moduleid in (select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}) then 1
+    	else 0
+    end 'check'
     from module
     where moduleid in (
     	select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}
     ) and status = 1 and parentid = 0
     order by sort
   </select>
-  <select id="getSubModule" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="getSubModule" parameterType="java.util.Map" resultMap="MenuResultMap">
     select 
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,#{roleid,jdbcType=INTEGER} roleid,
+    case 
+    	when moduleid in (select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}) then 1
+    	else 0
+    end 'check'
     from module
-    where parentid = #{moduleid} and status = 1
+    where moduleid in (
+    	select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}
+    ) and parentid = #{moduleid} and status = 1
     order by sort
   </select>
-  <select id="findBySxmsystemid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!-- <select id="findBySxmsystemid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from module
     where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER} and status = 1
-  </select>
+  </select> -->
   <select id="findAllByRoleid" parameterType="java.lang.Integer" resultMap="RightResultMap">
     select 
     moduleid, sxmsystemid, parentid, type, isautomatic, name, icon, color, sort, url, 
-    createtime, updatetime, status,
+    createtime, updatetime, status,#{roleid,jdbcType=INTEGER} roleid,
     case 
     	when moduleid in (select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}) then 1
     	else 0
@@ -224,6 +240,17 @@
     from module
     where status = 1 and parentid = 0
     and sxmsystemid = (select type from role where roleid = #{roleid,jdbcType=INTEGER} )
+    order by sort
+  </select>
+  <select id="getSubModuleWithRight" parameterType="java.util.Map" resultMap="RightResultMap">
+    select 
+    <include refid="Base_Column_List" />,#{roleid,jdbcType=INTEGER} roleid,
+    case 
+    	when moduleid in (select moduleid from role_module where roleid = #{roleid,jdbcType=INTEGER}) then 1
+    	else 0
+    end 'check'
+    from module
+    where parentid = #{moduleid} and status = 1
     order by sort
   </select>
 </mapper>

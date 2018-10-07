@@ -114,4 +114,16 @@
       status = #{status,jdbcType=TINYINT}
     where toolsid = #{toolsid,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByFamilymemberid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select t.* from tools t
+    left join family_member_tools fmt on fmt.toolsid = t.toolsid
+    where fmt.familymemberid = #{familymemberid,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tools 
+    where status = 1
+  </select>
 </mapper>

@@ -2,13 +2,11 @@ package com.suxiaomei.admin.entity.business.extend;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.suxiaomei.admin.entity.account.Contact;
 import com.suxiaomei.admin.entity.account.User;
 import com.suxiaomei.admin.entity.business.Business;
 import com.suxiaomei.admin.entity.isoc.extend.IsocIdentificationBusinessExtend;
 
-@JsonIgnoreProperties(value = {"handler"})
 public class BusinessExtend extends Business{
 	private static final long serialVersionUID = 1L;
 	private Integer identificationstatus;//企业认证状态 1已认证 2未认证 ！1！2未知

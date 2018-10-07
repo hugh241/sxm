@@ -2,7 +2,6 @@ package com.suxiaomei.admin.entity.common.extend;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.suxiaomei.admin.entity.isoc.IsocExamineOrder;
 import com.suxiaomei.admin.entity.isoc.IsocOrderGoods;
 
@@ -32,7 +31,6 @@ import com.suxiaomei.admin.entity.isoc.IsocOrderGoods;
  * @author zl
  * 2018年9月28日 下午4:44:42
  */
-@JsonIgnoreProperties(value = {"handler"})
 public class IsocGoodsOrder extends IsocExamineOrder{
 	private static final long serialVersionUID = 1L;
 	private String isocname;

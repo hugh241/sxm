@@ -1,11 +1,7 @@
 package com.suxiaomei.admin.util.redis;
 
-import java.io.Serializable;
-
 import com.suxiaomei.admin.entity.account.User;
-
-public class UserToken implements Serializable  {  
-	private static final long serialVersionUID = 1L;
+public class UserToken{  
 	private String signature;// 签名  
     private String timestamp;// 时间戳  
     private String random;// 随机数  

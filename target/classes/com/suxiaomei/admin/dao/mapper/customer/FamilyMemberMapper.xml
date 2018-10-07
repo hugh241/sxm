@@ -10,6 +10,7 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <collection property="tools" ofType="Tools" select="com.suxiaomei.admin.dao.common.ToolsMapper.findByFamilymemberid" column="familymemberid"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     familymemberid, nickname, commonlyname, type, tablename, createtime, updatetime, 
@@ -126,4 +127,17 @@
       status = #{status,jdbcType=TINYINT}
     where familymemberid = #{familymemberid,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="findByOrdertypeid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select fm.* from family_member fm
+    left join order_family_member ofm on ofm.familymemberid = fm.familymemberid
+    where ofm.ordertypeid = #{ordertypeid,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from family_member
+    where status = 1
+  </select>
 </mapper>

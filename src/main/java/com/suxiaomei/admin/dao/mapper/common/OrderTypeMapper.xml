@@ -8,6 +8,7 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <collection property="members" ofType="familyMember" select="com.suxiaomei.admin.dao.customer.FamilyMemberMapper.findByOrdertypeid" column="ordertypeid"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     ordertypeid, name, type, createtime, updatetime, status
@@ -103,4 +104,11 @@
       status = #{status,jdbcType=TINYINT}
     where ordertypeid = #{ordertypeid,jdbcType=INTEGER}
   </update>
+  
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_type
+    where status = 1
+  </select>
 </mapper>

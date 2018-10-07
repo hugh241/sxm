@@ -27,7 +27,7 @@ public interface ModuleMapper {
 	 * @param sxmsystemid
 	 * @return
 	 */
-	List<Module> findBySxmsystemid(int sxmsystemid);
+//	List<Module> findBySxmsystemid(int sxmsystemid);
 	/**
 	 * 更具角色id查询该角色系统下的所有菜单，并查询出该角色是否对菜单有权限
 	 * @param id

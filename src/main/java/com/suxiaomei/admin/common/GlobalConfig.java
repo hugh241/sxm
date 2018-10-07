@@ -58,6 +58,15 @@ public class GlobalConfig {
 	 */
 	@Value("${UPLOADPATH_MOBILE}")
 	public String UPLOADPATH_MOBILE;
+	
+	@Value("${LOCALUPLOADPATH_ORIGINAL}")
+	public String LOCALUPLOADPATH_ORIGINAL;
+	
+	@Value("${LOCALUPLOADPATH_PC}")
+	public String LOCALUPLOADPATH_PC;
+	
+	@Value("${LOCALUPLOADPATH_MOBILE}")
+	public String LOCALUPLOADPATH_MOBILE;
 	/**
 	 * 登录有效期
 	 */

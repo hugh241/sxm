@@ -9,8 +9,15 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
+  <resultMap id="ExtendResultMap" type="orderFamilyMemberExtend" extends="BaseResultMap">
+    <result column="ordertype" jdbcType="VARCHAR" property="ordertype" />
+    <result column="familymember" jdbcType="VARCHAR" property="familymember" />
+  </resultMap>
   <sql id="Base_Column_List">
     orderfamilymemberid, ordertypeid, familymemberid, createtime, updatetime, status
+  </sql>
+  <sql id="Extend_Column_List">
+    ofm.*,ot.name ordertype,fm.nickname familymember
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -18,18 +25,6 @@
     from order_family_member
     where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order_family_member
-    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
-    insert into order_family_member (orderfamilymemberid, ordertypeid, 
-      familymemberid, createtime, updatetime, 
-      status)
-    values (#{orderfamilymemberid,jdbcType=INTEGER}, #{ordertypeid,jdbcType=INTEGER}, 
-      #{familymemberid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
     insert into order_family_member
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -103,4 +98,29 @@
       status = #{status,jdbcType=TINYINT}
     where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <select id="findAll" resultMap="ExtendResultMap">
+    select 
+    <include refid="Extend_Column_List" />
+    from order_family_member ofm
+    left join order_type ot on ot.ordertypeid = ofm.ordertypeid
+    left join family_member fm on fm.familymemberid = ofm.familymemberid
+  </select>
+  <select id="findByOrdertypeidAndFamilymemberid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_family_member
+    where ordertypeid = #{ordertypeid,jdbcType=INTEGER} and familymemberid = #{familymemberid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="orderFamilyMember">
+    insert into order_family_member (ordertypeid,familymemberid)
+    values (#{ordertypeid,jdbcType=INTEGER},#{familymemberid,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_family_member
+    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
+  </delete>
 </mapper>

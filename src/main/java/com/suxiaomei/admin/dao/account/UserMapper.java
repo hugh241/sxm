@@ -1,5 +1,7 @@
 package com.suxiaomei.admin.dao.account;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.suxiaomei.admin.entity.account.User;
@@ -41,4 +43,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	int updateStatusByRoleidAndType(@Param("roleid")int roleid,@Param("status")int status);
+	/**
+	 * 根据系统id和账号状态查询
+	 * @param sxmsystemid
+	 * @param status 0已删除 1正常
+	 * @return
+	 */
+	List<User> findNormalUserBySystemidAndTypeAndStatus(@Param("sxmsystemid")int sxmsystemid,@Param("type")int type,@Param("status")Integer status);
 }

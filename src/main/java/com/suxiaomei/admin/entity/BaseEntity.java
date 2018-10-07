@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(value = {"handler"})
 public class BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String createtime;

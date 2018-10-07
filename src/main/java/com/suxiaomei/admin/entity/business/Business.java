@@ -1,12 +1,12 @@
 package com.suxiaomei.admin.entity.business;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 母婴商户
  * @author zl
  */
-public class Business implements Serializable{
+public class Business extends BaseEntity{
 	private int	businessid;
 	private int sxmsystemid = 3;
 	private String fullname = "";//商家全名
@@ -20,9 +20,6 @@ public class Business implements Serializable{
 	private String url = "";//网址
 	private String summary = "";//简介
 	private String accredittime = "0000-00-00";//授权时间
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public int getBusinessid() {
 		return businessid;
@@ -71,24 +68,6 @@ public class Business implements Serializable{
 	}
 	public void setAccredittime(String accredittime) {
 		this.accredittime = accredittime;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 	public int getSxmsystemid() {
 		return sxmsystemid;

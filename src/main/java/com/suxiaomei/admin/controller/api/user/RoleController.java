@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.suxiaomei.admin.common.aop.SystemLog;
 import com.suxiaomei.admin.controller.api.BaseController;
 import com.suxiaomei.admin.entity.account.Role;
+import com.suxiaomei.admin.entity.account.extend.RoleModuleExtend;
 import com.suxiaomei.admin.entity.common.Module;
 import com.suxiaomei.admin.service.account.RoleService;
 import com.suxiaomei.admin.service.common.ModuleService;
@@ -96,5 +97,19 @@ public class RoleController extends BaseController{
 			return ERROR(resultMap);
 		}
 		return SUCCESS(resultMap);
+	}
+	
+	@RequestMapping(value="/impower",method = {RequestMethod.POST})
+	@ResponseBody
+	@SystemLog(module="系统",methods="用户角色-模块授权")
+	public Map<String, Object> impower(@RequestBody RoleModuleExtend roleModule) {
+		Map<String,Object> resultMap = new HashMap<>();
+		try {
+			int flag = roleService.updateImpower(roleModule);
+			return GENERALRETURN(resultMap,flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR(resultMap);
+		}
 	}
 }

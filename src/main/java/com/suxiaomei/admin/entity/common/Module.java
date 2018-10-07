@@ -9,7 +9,6 @@ import com.suxiaomei.admin.entity.BaseEntity;
  * 系统模块
  * @author zl
  */
-@JsonIgnoreProperties(value = {"handler"})
 public class Module extends BaseEntity implements Serializable,Comparable<Module> {
 	private int	moduleid;
 	private int	parentid;

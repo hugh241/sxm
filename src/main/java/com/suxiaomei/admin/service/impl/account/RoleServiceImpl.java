@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.suxiaomei.admin.dao.account.RoleMapper;
+import com.suxiaomei.admin.dao.account.RoleModuleMapper;
 import com.suxiaomei.admin.dao.account.UserMapper;
 import com.suxiaomei.admin.entity.account.Role;
+import com.suxiaomei.admin.entity.account.RoleModule;
 import com.suxiaomei.admin.entity.account.User;
+import com.suxiaomei.admin.entity.account.extend.RoleModuleExtend;
 import com.suxiaomei.admin.service.account.RoleService;
 
 @Service
@@ -20,6 +23,8 @@ public class RoleServiceImpl implements RoleService {
 	private RoleMapper roleDao;
 	@Autowired
 	private UserMapper userDao;
+	@Autowired
+	private RoleModuleMapper roleModuleDao;
 	
 	@Override
 	public List<Role> findNormalRoleByCUser(User cUser) {
@@ -74,4 +79,36 @@ public class RoleServiceImpl implements RoleService {
 		return 1;
 	}
 
+	@Override
+	public int updateImpower(RoleModuleExtend roleModule) {
+		Role role = roleDao.selectByPrimaryKey(roleModule.getRoleid());
+		if(role == null||roleModule.getModuleids()==null||"".equals(roleModule.getModuleids())){
+			return 426;
+		}
+		String[] moduleidArr = roleModule.getModuleids().split(",");
+		List<RoleModule> rmList = roleModuleDao.getByRoleid(role.getRoleid());
+		boolean contain = false;
+		for (int i = 0; i < moduleidArr.length; i++) {
+			int moduleid = Integer.parseInt(moduleidArr[i]);
+			contain = false;
+			if(rmList != null) {
+				for (int j = rmList.size()-1;j >= 0; j--) {
+					if(rmList.get(j).getModuleid() == moduleid) {
+						contain = true;//当前模块与角色已存在关联
+						rmList.remove(j);//移出已存在关联的模块
+					}
+				}
+			}
+			if(!contain) {//不存在关联，则添加关联
+				RoleModule rm = new RoleModule();
+				rm.setModuleid(moduleid);
+				rm.setRoleid(role.getRoleid());
+				roleModuleDao.insert(rm);
+			}
+		}
+		for (int i = 0;rmList != null && i < rmList.size(); i++) {//依然存在关联模块，删除
+			roleModuleDao.deleteRoleModule(roleModule.getRoleid(),rmList.get(i).getModuleid());
+		}
+		return 1;
+	}
 }

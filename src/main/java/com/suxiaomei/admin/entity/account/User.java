@@ -10,7 +10,7 @@ public class User extends BaseEntity {
 	private String password;
 	private String mobile;
 	private String remark;//备注  企业员工账户时：如果需要该员工接收客户，则为1
-	private int type;//当前账户类型
+	private Integer type;//当前账户类型
 	private Role role;//角色
 	private static final long serialVersionUID = 1L;
 	public int getUserid() {
@@ -55,10 +55,10 @@ public class User extends BaseEntity {
 	public void setRoleid(int roleid) {
 		this.roleid = roleid;
 	}
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 	public Role getRole() {

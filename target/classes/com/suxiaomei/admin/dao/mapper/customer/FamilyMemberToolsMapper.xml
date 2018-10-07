@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suxiaomei.admin.dao.customer.FamilyMemberToolsMapper">
-  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+  <resultMap id="BaseResultMap" type="familyMemberTools">
     <id column="familymembertoolsid" jdbcType="INTEGER" property="familymembertoolsid" />
     <result column="familymemberid" jdbcType="INTEGER" property="familymemberid" />
     <result column="toolsid" jdbcType="INTEGER" property="toolsid" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="familyMemberToolsExtend" extends="BaseResultMap">
+    <result column="tool" jdbcType="VARCHAR" property="tool" />
+    <result column="familymember" jdbcType="VARCHAR" property="familymember" />
   </resultMap>
   <sql id="Base_Column_List">
     familymembertoolsid, familymemberid, toolsid, createtime, updatetime, status
@@ -22,14 +26,6 @@
     delete from family_member_tools
     where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
-    insert into family_member_tools (familymembertoolsid, familymemberid, 
-      toolsid, createtime, updatetime, 
-      status)
-    values (#{familymembertoolsid,jdbcType=INTEGER}, #{familymemberid,jdbcType=INTEGER}, 
-      #{toolsid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
     insert into family_member_tools
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -103,4 +99,21 @@
       status = #{status,jdbcType=TINYINT}
     where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
   </update>
+  
+  <select id="findList" resultMap="ExtendResultMap">
+    select fmt.*,fm.nickname familymember,t.name tool 
+    from family_member_tools fmt
+    left join tools t on t.toolsid = fmt.toolsid
+    left join family_member fm on fm.familymemberid = fmt.familymemberid
+  </select>
+  <select id="findByToolsidAndFamilymemberid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from family_member_tools
+    where toolsid = #{toolsid,jdbcType=INTEGER} and familymemberid = #{familymemberid,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="familyMemberTools">
+    insert into family_member_tools (familymemberid,toolsid)
+    values (#{familymemberid,jdbcType=INTEGER},#{toolsid,jdbcType=INTEGER})
+  </insert>
 </mapper>

@@ -1,9 +1,13 @@
-package com.suxiaomei.admin.common.paramer;
+package com.suxiaomei.admin.service.common;
 
-import java.io.Serializable;
+import java.util.List;
 
+import com.suxiaomei.admin.entity.common.OrderFamilyMember;
+import com.suxiaomei.admin.entity.common.OrderType;
+import com.suxiaomei.admin.entity.common.extend.OrderFamilyMemberExtend;
+import com.suxiaomei.admin.entity.customer.FamilyMember;
 /**
- * 用户模块参数接收实体类
+ * 订单类型系统成员管理
  *　　　　　　　 ┏┓       ┏┓+ +
  *　　　　　　　┏┛┻━━━━━━━┛┻┓ + +
  *　　　　　　　┃　　　　　　 ┃
@@ -26,29 +30,40 @@ import java.io.Serializable;
  *　　　　　　　　　 ┃┫┫　 ┃┫┫
  *　　　　　　　　　 ┗┻┛　 ┗┻┛+ + + +
  * @author zl
- * 2018年9月20日 下午2:37:47
+ * 2018年10月7日 下午2:21:23
  */
-public class UserParamer implements Serializable{
-	private static final long serialVersionUID = 1L;
-	private int id;//用户id
-	private String newPassword;//新密码
-	private String oldPassword;//旧密码
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNewPassword() {
-		return newPassword;
-	}
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-	public String getOldPassword() {
-		return oldPassword;
-	}
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
+public interface OrderFamilyMemberService {
+	/**
+	 * 查询订单类型列表
+	 * 1.管理端订单类型成员管理
+	 * @return
+	 */
+	List<OrderType> findOrderTypeList();
+	/**
+	 * 查询所有系统成员列表
+	 * 1.管理端订单类型成员管理
+	 * @return
+	 */
+	List<FamilyMember> findFamilyMemberList();
+	/**
+	 * 查询订单类型系统成员关联列表
+	 * 1.管理端订单类型成员管理
+	 * @return
+	 */
+	List<OrderFamilyMemberExtend> findList();
+	/**
+	 * 添加关联
+	 * 1.管理端订单类型成员管理
+	 * @param orderFamilyMember
+	 * @return
+	 */
+	int add(OrderFamilyMember orderFamilyMember);
+	/**
+	 * 删除关联
+	 * 1.管理端订单类型成员管理
+	 * @param id
+	 * @return
+	 */
+	int delete(int id);
+
 }

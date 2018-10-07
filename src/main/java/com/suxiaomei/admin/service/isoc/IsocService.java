@@ -35,6 +35,7 @@ import com.suxiaomei.admin.util.QueryResult;
 public interface IsocService {
 	/**
 	 * 初始化所有家协的token
+	 * 1.系统启动运行
 	 */
 	void updateAllToken();
 	/**
@@ -53,42 +54,49 @@ public interface IsocService {
 	int add(IsocExtend ie);
 	/**
 	 * 修改家协
+	 * 1.管理后台家协管理列表查询
 	 * @param ie
 	 * @return
 	 */
 	int update(IsocExtend ie);
 	/**
 	 * 启用/停用家协账号
+	 * 1.管理后台家协管理列表查询
 	 * @param id
 	 * @return
 	 */
 	int updateStatus(int id);
 	/**
 	 * 修改家协密码
+	 * 1.管理后台家协管理列表查询
 	 * @param ie
 	 * @return
 	 */
 	int updatePassword(IsocExtend ie);
 	/**
 	 * 根据家协id查询家协配置项
+	 * 1.管理后台家协管理列表查询
 	 * @param isocid
 	 * @return
 	 */
 	List<IsocBusinessDataConfigure> findConfigByIsocid(int isocid);
 	/**
 	 * 新增家协配置项
+	 * 1.管理后台家协管理列表查询
 	 * @param config
 	 * @return
 	 */
 	int addConfig(IsocBusinessDataConfigure config);
 	/**
 	 * 修改家协配置项
+	 * 1.管理后台家协管理列表查询
 	 * @param config
 	 * @return
 	 */
 	int updateConfig(IsocBusinessDataConfigure config);
 	/**
 	 * 删除配置项
+	 * 1.管理后台家协管理列表查询
 	 * @param id
 	 * @return
 	 */

@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.common;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 工具种类
@@ -28,14 +28,11 @@ import java.io.Serializable;
  * @author zl
  * 2018年7月2日 下午1:32:24
  */
-public class Tools implements Serializable{
+public class Tools extends BaseEntity{
 	private int	toolsid;
 	private String name;
 	private int	type;//1体温记录 2睡眠记录 3换尿布记录 4喂奶记录 5早教记录 6外出记录 7人员到访记录 8异常情况记录
 	private String tablename;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public int getToolsid() {
 		return toolsid;
@@ -60,23 +57,5 @@ public class Tools implements Serializable{
 	}
 	public void setTablename(String tablename) {
 		this.tablename = tablename;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }
