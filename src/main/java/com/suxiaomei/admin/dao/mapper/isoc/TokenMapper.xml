@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.TokenMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.Token">
+    <id column="tokenid" jdbcType="INTEGER" property="tokenid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="tokenname" jdbcType="VARCHAR" property="tokenname" />
+    <result column="tokenvalue" jdbcType="VARCHAR" property="tokenvalue" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tokenid, isocid, tokenname, tokenvalue, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from token
+    where tokenid = #{tokenid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from token
+    where tokenid = #{tokenid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.Token">
+    insert into token (tokenid, isocid, tokenname, 
+      tokenvalue, createtime, updatetime, 
+      status)
+    values (#{tokenid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{tokenname,jdbcType=VARCHAR}, 
+      #{tokenvalue,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.Token">
+    update token
+    set isocid = #{isocid,jdbcType=INTEGER},
+      tokenname = #{tokenname,jdbcType=VARCHAR},
+      tokenvalue = #{tokenvalue,jdbcType=VARCHAR}
+    where tokenid = #{tokenid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findByIsocid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from token
+    where isocid = #{isocid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="token">
+    update token
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="tokenname != null">
+        tokenname = #{tokenname,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenvalue != null">
+        tokenvalue = #{tokenvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tokenid = #{tokenid,jdbcType=INTEGER}
+  </update>
+  <insert id="insertSelective" parameterType="token">
+    insert into token
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="tokenname != null">
+        tokenname,
+      </if>
+      <if test="tokenvalue != null">
+        tokenvalue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="tokenname != null">
+        #{tokenname,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenvalue != null">
+        #{tokenvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

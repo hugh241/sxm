@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractDepositOrderMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.ContractDepositOrder">
+    <id column="contractdepositorderid" jdbcType="INTEGER" property="contractdepositorderid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="contractid" jdbcType="INTEGER" property="contractid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="startdate" jdbcType="DATE" property="startdate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="orderstatus" jdbcType="TINYINT" property="orderstatus" />
+    <result column="usestatus" jdbcType="TINYINT" property="usestatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractdepositorderid, ordernum, contractid, employeeid, startdate, enddate, price, 
+    money, orderstatus, usestatus, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_deposit_order
+    where contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_deposit_order
+    where contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.ContractDepositOrder">
+    insert into contract_deposit_order (contractdepositorderid, ordernum, 
+      contractid, employeeid, startdate, 
+      enddate, price, money, 
+      orderstatus, usestatus, createtime, 
+      updatetime, status)
+    values (#{contractdepositorderid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, 
+      #{contractid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{price,jdbcType=DECIMAL}, #{money,jdbcType=DECIMAL}, 
+      #{orderstatus,jdbcType=TINYINT}, #{usestatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.ContractDepositOrder">
+    insert into contract_deposit_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractdepositorderid != null">
+        contractdepositorderid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="contractid != null">
+        contractid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="usestatus != null">
+        usestatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractdepositorderid != null">
+        #{contractdepositorderid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="usestatus != null">
+        #{usestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.ContractDepositOrder">
+    update contract_deposit_order
+    <set>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        contractid = #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        startdate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderstatus != null">
+        orderstatus = #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="usestatus != null">
+        usestatus = #{usestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.ContractDepositOrder">
+    update contract_deposit_order
+    set ordernum = #{ordernum,jdbcType=VARCHAR},
+      contractid = #{contractid,jdbcType=INTEGER},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      startdate = #{startdate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      price = #{price,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      orderstatus = #{orderstatus,jdbcType=TINYINT},
+      usestatus = #{usestatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.Member">
+    <id column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gszh" jdbcType="VARCHAR" property="gszh" />
+    <result column="clsj" jdbcType="DATE" property="clsj" />
+    <result column="xyzh" jdbcType="VARCHAR" property="xyzh" />
+    <result column="jydz" jdbcType="VARCHAR" property="jydz" />
+    <result column="rhsj" jdbcType="DATE" property="rhsj" />
+    <result column="jyxm" jdbcType="VARCHAR" property="jyxm" />
+    <result column="jyfs" jdbcType="VARCHAR" property="jyfs" />
+    <result column="fwdh" jdbcType="VARCHAR" property="fwdh" />
+    <result column="zw" jdbcType="VARCHAR" property="zw" />
+    <result column="czdh" jdbcType="VARCHAR" property="czdh" />
+    <result column="lxry" jdbcType="VARCHAR" property="lxry" />
+    <result column="frdb" jdbcType="VARCHAR" property="frdb" />
+    <result column="xb" jdbcType="VARCHAR" property="xb" />
+    <result column="mz" jdbcType="VARCHAR" property="mz" />
+    <result column="jg" jdbcType="VARCHAR" property="jg" />
+    <result column="cssj" jdbcType="DATE" property="cssj" />
+    <result column="zzmm" jdbcType="VARCHAR" property="zzmm" />
+    <result column="qyzw" jdbcType="VARCHAR" property="qyzw" />
+    <result column="shzw" jdbcType="VARCHAR" property="shzw" />
+    <result column="sfzh" jdbcType="VARCHAR" property="sfzh" />
+    <result column="bgdh" jdbcType="VARCHAR" property="bgdh" />
+    <result column="yddh" jdbcType="VARCHAR" property="yddh" />
+    <result column="zjzzgrs" jdbcType="INTEGER" property="zjzzgrs" />
+    <result column="zjzkhrs" jdbcType="INTEGER" property="zjzkhrs" />
+    <result column="ygzzgrs" jdbcType="INTEGER" property="ygzzgrs" />
+    <result column="ygzkhrs" jdbcType="INTEGER" property="ygzkhrs" />
+    <result column="shstatus" jdbcType="TINYINT" property="shstatus" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    memberid, isocid, businessid, name, gszh, clsj, xyzh, jydz, rhsj, jyxm, jyfs, fwdh, 
+    zw, czdh, lxry, frdb, xb, mz, jg, cssj, zzmm, qyzw, shzw, sfzh, bgdh, yddh, zjzzgrs, 
+    zjzkhrs, ygzzgrs, ygzkhrs, shstatus, result, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where memberid = #{memberid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where memberid = #{memberid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.Member">
+    insert into member (memberid, isocid, businessid, 
+      name, gszh, clsj, xyzh, 
+      jydz, rhsj, jyxm, jyfs, 
+      fwdh, zw, czdh, lxry, 
+      frdb, xb, mz, jg, 
+      cssj, zzmm, qyzw, shzw, 
+      sfzh, bgdh, yddh, zjzzgrs, 
+      zjzkhrs, ygzzgrs, ygzkhrs, 
+      shstatus, result, createtime, 
+      updatetime, status)
+    values (#{memberid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{gszh,jdbcType=VARCHAR}, #{clsj,jdbcType=DATE}, #{xyzh,jdbcType=VARCHAR}, 
+      #{jydz,jdbcType=VARCHAR}, #{rhsj,jdbcType=DATE}, #{jyxm,jdbcType=VARCHAR}, #{jyfs,jdbcType=VARCHAR}, 
+      #{fwdh,jdbcType=VARCHAR}, #{zw,jdbcType=VARCHAR}, #{czdh,jdbcType=VARCHAR}, #{lxry,jdbcType=VARCHAR}, 
+      #{frdb,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{mz,jdbcType=VARCHAR}, #{jg,jdbcType=VARCHAR}, 
+      #{cssj,jdbcType=DATE}, #{zzmm,jdbcType=VARCHAR}, #{qyzw,jdbcType=VARCHAR}, #{shzw,jdbcType=VARCHAR}, 
+      #{sfzh,jdbcType=VARCHAR}, #{bgdh,jdbcType=VARCHAR}, #{yddh,jdbcType=VARCHAR}, #{zjzzgrs,jdbcType=INTEGER}, 
+      #{zjzkhrs,jdbcType=INTEGER}, #{ygzzgrs,jdbcType=INTEGER}, #{ygzkhrs,jdbcType=INTEGER}, 
+      #{shstatus,jdbcType=TINYINT}, #{result,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gszh != null">
+        gszh,
+      </if>
+      <if test="clsj != null">
+        clsj,
+      </if>
+      <if test="xyzh != null">
+        xyzh,
+      </if>
+      <if test="jydz != null">
+        jydz,
+      </if>
+      <if test="rhsj != null">
+        rhsj,
+      </if>
+      <if test="jyxm != null">
+        jyxm,
+      </if>
+      <if test="jyfs != null">
+        jyfs,
+      </if>
+      <if test="fwdh != null">
+        fwdh,
+      </if>
+      <if test="zw != null">
+        zw,
+      </if>
+      <if test="czdh != null">
+        czdh,
+      </if>
+      <if test="lxry != null">
+        lxry,
+      </if>
+      <if test="frdb != null">
+        frdb,
+      </if>
+      <if test="xb != null">
+        xb,
+      </if>
+      <if test="mz != null">
+        mz,
+      </if>
+      <if test="jg != null">
+        jg,
+      </if>
+      <if test="cssj != null">
+        cssj,
+      </if>
+      <if test="zzmm != null">
+        zzmm,
+      </if>
+      <if test="qyzw != null">
+        qyzw,
+      </if>
+      <if test="shzw != null">
+        shzw,
+      </if>
+      <if test="sfzh != null">
+        sfzh,
+      </if>
+      <if test="bgdh != null">
+        bgdh,
+      </if>
+      <if test="yddh != null">
+        yddh,
+      </if>
+      <if test="zjzzgrs != null">
+        zjzzgrs,
+      </if>
+      <if test="zjzkhrs != null">
+        zjzkhrs,
+      </if>
+      <if test="ygzzgrs != null">
+        ygzzgrs,
+      </if>
+      <if test="ygzkhrs != null">
+        ygzkhrs,
+      </if>
+      <if test="shstatus != null">
+        shstatus,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberid != null">
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gszh != null">
+        #{gszh,jdbcType=VARCHAR},
+      </if>
+      <if test="clsj != null">
+        #{clsj,jdbcType=DATE},
+      </if>
+      <if test="xyzh != null">
+        #{xyzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jydz != null">
+        #{jydz,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsj != null">
+        #{rhsj,jdbcType=DATE},
+      </if>
+      <if test="jyxm != null">
+        #{jyxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jyfs != null">
+        #{jyfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fwdh != null">
+        #{fwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null">
+        #{zw,jdbcType=VARCHAR},
+      </if>
+      <if test="czdh != null">
+        #{czdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxry != null">
+        #{lxry,jdbcType=VARCHAR},
+      </if>
+      <if test="frdb != null">
+        #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null">
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null">
+        #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="jg != null">
+        #{jg,jdbcType=VARCHAR},
+      </if>
+      <if test="cssj != null">
+        #{cssj,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null">
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="qyzw != null">
+        #{qyzw,jdbcType=VARCHAR},
+      </if>
+      <if test="shzw != null">
+        #{shzw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null">
+        #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="bgdh != null">
+        #{bgdh,jdbcType=VARCHAR},
+      </if>
+      <if test="yddh != null">
+        #{yddh,jdbcType=VARCHAR},
+      </if>
+      <if test="zjzzgrs != null">
+        #{zjzzgrs,jdbcType=INTEGER},
+      </if>
+      <if test="zjzkhrs != null">
+        #{zjzkhrs,jdbcType=INTEGER},
+      </if>
+      <if test="ygzzgrs != null">
+        #{ygzzgrs,jdbcType=INTEGER},
+      </if>
+      <if test="ygzkhrs != null">
+        #{ygzkhrs,jdbcType=INTEGER},
+      </if>
+      <if test="shstatus != null">
+        #{shstatus,jdbcType=TINYINT},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.Member">
+    update member
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gszh != null">
+        gszh = #{gszh,jdbcType=VARCHAR},
+      </if>
+      <if test="clsj != null">
+        clsj = #{clsj,jdbcType=DATE},
+      </if>
+      <if test="xyzh != null">
+        xyzh = #{xyzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jydz != null">
+        jydz = #{jydz,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsj != null">
+        rhsj = #{rhsj,jdbcType=DATE},
+      </if>
+      <if test="jyxm != null">
+        jyxm = #{jyxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jyfs != null">
+        jyfs = #{jyfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fwdh != null">
+        fwdh = #{fwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null">
+        zw = #{zw,jdbcType=VARCHAR},
+      </if>
+      <if test="czdh != null">
+        czdh = #{czdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxry != null">
+        lxry = #{lxry,jdbcType=VARCHAR},
+      </if>
+      <if test="frdb != null">
+        frdb = #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null">
+        xb = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null">
+        mz = #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="jg != null">
+        jg = #{jg,jdbcType=VARCHAR},
+      </if>
+      <if test="cssj != null">
+        cssj = #{cssj,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null">
+        zzmm = #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="qyzw != null">
+        qyzw = #{qyzw,jdbcType=VARCHAR},
+      </if>
+      <if test="shzw != null">
+        shzw = #{shzw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null">
+        sfzh = #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="bgdh != null">
+        bgdh = #{bgdh,jdbcType=VARCHAR},
+      </if>
+      <if test="yddh != null">
+        yddh = #{yddh,jdbcType=VARCHAR},
+      </if>
+      <if test="zjzzgrs != null">
+        zjzzgrs = #{zjzzgrs,jdbcType=INTEGER},
+      </if>
+      <if test="zjzkhrs != null">
+        zjzkhrs = #{zjzkhrs,jdbcType=INTEGER},
+      </if>
+      <if test="ygzzgrs != null">
+        ygzzgrs = #{ygzzgrs,jdbcType=INTEGER},
+      </if>
+      <if test="ygzkhrs != null">
+        ygzkhrs = #{ygzkhrs,jdbcType=INTEGER},
+      </if>
+      <if test="shstatus != null">
+        shstatus = #{shstatus,jdbcType=TINYINT},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where memberid = #{memberid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.Member">
+    update member
+    set isocid = #{isocid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      gszh = #{gszh,jdbcType=VARCHAR},
+      clsj = #{clsj,jdbcType=DATE},
+      xyzh = #{xyzh,jdbcType=VARCHAR},
+      jydz = #{jydz,jdbcType=VARCHAR},
+      rhsj = #{rhsj,jdbcType=DATE},
+      jyxm = #{jyxm,jdbcType=VARCHAR},
+      jyfs = #{jyfs,jdbcType=VARCHAR},
+      fwdh = #{fwdh,jdbcType=VARCHAR},
+      zw = #{zw,jdbcType=VARCHAR},
+      czdh = #{czdh,jdbcType=VARCHAR},
+      lxry = #{lxry,jdbcType=VARCHAR},
+      frdb = #{frdb,jdbcType=VARCHAR},
+      xb = #{xb,jdbcType=VARCHAR},
+      mz = #{mz,jdbcType=VARCHAR},
+      jg = #{jg,jdbcType=VARCHAR},
+      cssj = #{cssj,jdbcType=DATE},
+      zzmm = #{zzmm,jdbcType=VARCHAR},
+      qyzw = #{qyzw,jdbcType=VARCHAR},
+      shzw = #{shzw,jdbcType=VARCHAR},
+      sfzh = #{sfzh,jdbcType=VARCHAR},
+      bgdh = #{bgdh,jdbcType=VARCHAR},
+      yddh = #{yddh,jdbcType=VARCHAR},
+      zjzzgrs = #{zjzzgrs,jdbcType=INTEGER},
+      zjzkhrs = #{zjzkhrs,jdbcType=INTEGER},
+      ygzzgrs = #{ygzzgrs,jdbcType=INTEGER},
+      ygzkhrs = #{ygzkhrs,jdbcType=INTEGER},
+      shstatus = #{shstatus,jdbcType=TINYINT},
+      result = #{result,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where memberid = #{memberid,jdbcType=INTEGER}
+  </update>
+</mapper>

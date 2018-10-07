@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.account.AccountsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.account.Accounts">
+    <id column="accountsid" jdbcType="INTEGER" property="accountsid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    accountsid, mobile, idcard, unionid, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accounts
+    where accountsid = #{accountsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from accounts
+    where accountsid = #{accountsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.Accounts">
+    insert into accounts (accountsid, mobile, idcard, 
+      unionid, createtime, updatetime, 
+      status)
+    values (#{accountsid,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{unionid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.Accounts">
+    insert into accounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountsid != null">
+        accountsid,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="unionid != null">
+        unionid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountsid != null">
+        #{accountsid,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.account.Accounts">
+    update accounts
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where accountsid = #{accountsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.Accounts">
+    update accounts
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where accountsid = #{accountsid,jdbcType=INTEGER}
+  </update>
+</mapper>

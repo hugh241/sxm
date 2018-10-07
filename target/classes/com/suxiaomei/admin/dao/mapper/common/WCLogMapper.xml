@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.WCLogMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.WCLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="response_data" jdbcType="VARCHAR" property="responseData" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="commite" jdbcType="VARCHAR" property="commite" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, unionid, module, method, response_data, ip, date, commite
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wclog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wclog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.WCLog">
+    insert into wclog (id, unionid, module, 
+      method, response_data, ip, 
+      date, commite)
+    values (#{id,jdbcType=INTEGER}, #{unionid,jdbcType=VARCHAR}, #{module,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{responseData,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{date,jdbcType=VARCHAR}, #{commite,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.WCLog">
+    insert into wclog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="unionid != null">
+        unionid,
+      </if>
+      <if test="module != null">
+        module,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="responseData != null">
+        response_data,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="commite != null">
+        commite,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="responseData != null">
+        #{responseData,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="commite != null">
+        #{commite,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.WCLog">
+    update wclog
+    <set>
+      <if test="unionid != null">
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="responseData != null">
+        response_data = #{responseData,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="commite != null">
+        commite = #{commite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.WCLog">
+    update wclog
+    set unionid = #{unionid,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      response_data = #{responseData,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      commite = #{commite,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

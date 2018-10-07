@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeePhotoMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeePhoto">
+    <id column="employeephotoid" jdbcType="INTEGER" property="employeephotoid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="name" jdbcType="VARCHAR" property="photoname" />
+    <result column="url" jdbcType="VARCHAR" property="photourl" />
+    <result column="short_url" jdbcType="VARCHAR" property="shortUrl" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="auditingstatus" jdbcType="SMALLINT" property="auditingstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeephotoid, employeeid, name, url, short_url, type, auditingstatus, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_photo
+    where employeephotoid = #{employeephotoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_photo
+    where employeephotoid = #{employeephotoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhoto">
+    insert into employee_photo (employeephotoid, employeeid, name, 
+      url, short_url, type, 
+      auditingstatus, createtime, updatetime, 
+      status)
+    values (#{employeephotoid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{shortUrl,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+      #{auditingstatus,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhoto">
+    insert into employee_photo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeephotoid != null">
+        employeephotoid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="shortUrl != null">
+        short_url,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="auditingstatus != null">
+        auditingstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeephotoid != null">
+        #{employeephotoid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="auditingstatus != null">
+        #{auditingstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhoto">
+    update employee_photo
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        short_url = #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="auditingstatus != null">
+        auditingstatus = #{auditingstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeephotoid = #{employeephotoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhoto">
+    update employee_photo
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      short_url = #{shortUrl,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      auditingstatus = #{auditingstatus,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeephotoid = #{employeephotoid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="findByPageList" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+	from employee_photo
+	<where>
+		<if test="photo.employeeid!=null">
+			and employeeid = #{photo.employeeid}
+		</if>
+		<if test="photo.type!=null">
+			and type = #{photo.type}
+		</if>
+		<if test="photo.auditingstatus!=null">
+			and auditingstatus = #{photo.auditingstatus}
+		</if>
+	</where>
+	group by createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from employee_photo
+	<where>
+		<if test="photo.employeeid!=null">
+			and employeeid = #{photo.employeeid}
+		</if>
+		<if test="photo.type!=null">
+			and type = #{photo.type}
+		</if>
+		<if test="photo.auditingstatus!=null">
+			and auditingstatus = #{photo.auditingstatus}
+		</if>
+	</where>
+  </select>
+</mapper>

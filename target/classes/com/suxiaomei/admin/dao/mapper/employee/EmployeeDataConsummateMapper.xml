@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeDataConsummateMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeDataConsummate">
+    <id column="employeedataconsummateid" jdbcType="INTEGER" property="employeedataconsummateid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="headportrait" jdbcType="TINYINT" property="headportrait" />
+    <result column="basicdata" jdbcType="TINYINT" property="basicdata" />
+    <result column="worktype" jdbcType="TINYINT" property="worktype" />
+    <result column="album" jdbcType="TINYINT" property="album" />
+    <result column="certificate" jdbcType="TINYINT" property="certificate" />
+    <result column="train" jdbcType="TINYINT" property="train" />
+    <result column="total" jdbcType="TINYINT" property="total" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeedataconsummateid, employeeid, headportrait, basicdata, worktype, album, certificate, 
+    train, total, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_data_consummate
+    where employeedataconsummateid = #{employeedataconsummateid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_data_consummate
+    where employeedataconsummateid = #{employeedataconsummateid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeDataConsummate">
+    insert into employee_data_consummate (employeedataconsummateid, employeeid, 
+      headportrait, basicdata, worktype, 
+      album, certificate, train, 
+      total, createtime, updatetime, 
+      status)
+    values (#{employeedataconsummateid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{headportrait,jdbcType=TINYINT}, #{basicdata,jdbcType=TINYINT}, #{worktype,jdbcType=TINYINT}, 
+      #{album,jdbcType=TINYINT}, #{certificate,jdbcType=TINYINT}, #{train,jdbcType=TINYINT}, 
+      #{total,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeDataConsummate">
+    insert into employee_data_consummate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeedataconsummateid != null">
+        employeedataconsummateid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="headportrait != null">
+        headportrait,
+      </if>
+      <if test="basicdata != null">
+        basicdata,
+      </if>
+      <if test="worktype != null">
+        worktype,
+      </if>
+      <if test="album != null">
+        album,
+      </if>
+      <if test="certificate != null">
+        certificate,
+      </if>
+      <if test="train != null">
+        train,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeedataconsummateid != null">
+        #{employeedataconsummateid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="headportrait != null">
+        #{headportrait,jdbcType=TINYINT},
+      </if>
+      <if test="basicdata != null">
+        #{basicdata,jdbcType=TINYINT},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="album != null">
+        #{album,jdbcType=TINYINT},
+      </if>
+      <if test="certificate != null">
+        #{certificate,jdbcType=TINYINT},
+      </if>
+      <if test="train != null">
+        #{train,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeDataConsummate">
+    update employee_data_consummate
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="headportrait != null">
+        headportrait = #{headportrait,jdbcType=TINYINT},
+      </if>
+      <if test="basicdata != null">
+        basicdata = #{basicdata,jdbcType=TINYINT},
+      </if>
+      <if test="worktype != null">
+        worktype = #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="album != null">
+        album = #{album,jdbcType=TINYINT},
+      </if>
+      <if test="certificate != null">
+        certificate = #{certificate,jdbcType=TINYINT},
+      </if>
+      <if test="train != null">
+        train = #{train,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeedataconsummateid = #{employeedataconsummateid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeDataConsummate">
+    update employee_data_consummate
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      headportrait = #{headportrait,jdbcType=TINYINT},
+      basicdata = #{basicdata,jdbcType=TINYINT},
+      worktype = #{worktype,jdbcType=TINYINT},
+      album = #{album,jdbcType=TINYINT},
+      certificate = #{certificate,jdbcType=TINYINT},
+      train = #{train,jdbcType=TINYINT},
+      total = #{total,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeedataconsummateid = #{employeedataconsummateid,jdbcType=INTEGER}
+  </update>
+</mapper>

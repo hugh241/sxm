@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessAttachMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessAttach">
+    <id column="businessattachid" jdbcType="INTEGER" property="businessattachid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="checkouttype" jdbcType="TINYINT" property="checkouttype" />
+    <result column="percentage" jdbcType="DECIMAL" property="percentage" />
+    <result column="timestype" jdbcType="TINYINT" property="timestype" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessattachid, businessid, name, checkouttype, percentage, timestype, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_attach
+    where businessattachid = #{businessattachid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_attach
+    where businessattachid = #{businessattachid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessAttach">
+    insert into business_attach (businessattachid, businessid, name, 
+      checkouttype, percentage, timestype, 
+      createtime, updatetime, status
+      )
+    values (#{businessattachid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{checkouttype,jdbcType=TINYINT}, #{percentage,jdbcType=DECIMAL}, #{timestype,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessAttach">
+    insert into business_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessattachid != null">
+        businessattachid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="checkouttype != null">
+        checkouttype,
+      </if>
+      <if test="percentage != null">
+        percentage,
+      </if>
+      <if test="timestype != null">
+        timestype,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessattachid != null">
+        #{businessattachid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="checkouttype != null">
+        #{checkouttype,jdbcType=TINYINT},
+      </if>
+      <if test="percentage != null">
+        #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="timestype != null">
+        #{timestype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessAttach">
+    update business_attach
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="checkouttype != null">
+        checkouttype = #{checkouttype,jdbcType=TINYINT},
+      </if>
+      <if test="percentage != null">
+        percentage = #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="timestype != null">
+        timestype = #{timestype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessattachid = #{businessattachid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessAttach">
+    update business_attach
+    set businessid = #{businessid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      checkouttype = #{checkouttype,jdbcType=TINYINT},
+      percentage = #{percentage,jdbcType=DECIMAL},
+      timestype = #{timestype,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessattachid = #{businessattachid,jdbcType=INTEGER}
+  </update>
+</mapper>

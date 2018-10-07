@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeWorkAddressMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeWorkAddress">
+    <id column="employeeworkaddressid" jdbcType="INTEGER" property="employeeworkaddressid" />
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeworkaddressid, addressid, employeeid, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_work_address
+    where employeeworkaddressid = #{employeeworkaddressid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_work_address
+    where employeeworkaddressid = #{employeeworkaddressid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeWorkAddress">
+    insert into employee_work_address (employeeworkaddressid, addressid, 
+      employeeid, createtime, updatetime, 
+      status)
+    values (#{employeeworkaddressid,jdbcType=INTEGER}, #{addressid,jdbcType=INTEGER}, 
+      #{employeeid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeWorkAddress">
+    insert into employee_work_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeworkaddressid != null">
+        employeeworkaddressid,
+      </if>
+      <if test="addressid != null">
+        addressid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeworkaddressid != null">
+        #{employeeworkaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="addressid != null">
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeWorkAddress">
+    update employee_work_address
+    <set>
+      <if test="addressid != null">
+        addressid = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeworkaddressid = #{employeeworkaddressid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeWorkAddress">
+    update employee_work_address
+    set addressid = #{addressid,jdbcType=INTEGER},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeworkaddressid = #{employeeworkaddressid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeIdentificationDataMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeIdentificationData">
+    <id column="employeeidentificationdataid" jdbcType="INTEGER" property="employeeidentificationdataid" />
+    <result column="employeeidentificationorderid" jdbcType="INTEGER" property="employeeidentificationorderid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeidentificationdataid, employeeidentificationorderid, type, name, content, 
+    url, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_identification_data
+    where employeeidentificationdataid = #{employeeidentificationdataid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_identification_data
+    where employeeidentificationdataid = #{employeeidentificationdataid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationData">
+    insert into employee_identification_data (employeeidentificationdataid, employeeidentificationorderid, 
+      type, name, content, 
+      url, createtime, updatetime, 
+      status)
+    values (#{employeeidentificationdataid,jdbcType=INTEGER}, #{employeeidentificationorderid,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationData">
+    insert into employee_identification_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationdataid != null">
+        employeeidentificationdataid,
+      </if>
+      <if test="employeeidentificationorderid != null">
+        employeeidentificationorderid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationdataid != null">
+        #{employeeidentificationdataid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeidentificationorderid != null">
+        #{employeeidentificationorderid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationData">
+    update employee_identification_data
+    <set>
+      <if test="employeeidentificationorderid != null">
+        employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeidentificationdataid = #{employeeidentificationdataid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationData">
+    update employee_identification_data
+    set employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeidentificationdataid = #{employeeidentificationdataid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractOrderEmployeeAssessmentMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.ContractOrderEmployeeAssessment">
+    <id column="contractorderemployeeassessmentid" jdbcType="INTEGER" property="contractorderemployeeassessmentid" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="contractorderid" jdbcType="INTEGER" property="contractorderid" />
+    <result column="assessmentresult" jdbcType="DOUBLE" property="assessmentresult" />
+    <result column="assessmenttime" jdbcType="TIMESTAMP" property="assessmenttime" />
+    <result column="assessmentstatus" jdbcType="TINYINT" property="assessmentstatus" />
+    <result column="skill" jdbcType="TINYINT" property="skill" />
+    <result column="health" jdbcType="TINYINT" property="health" />
+    <result column="discuss" jdbcType="TINYINT" property="discuss" />
+    <result column="lore" jdbcType="TINYINT" property="lore" />
+    <result column="ethics" jdbcType="TINYINT" property="ethics" />
+    <result column="showstatus" jdbcType="TINYINT" property="showstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractorderemployeeassessmentid, customerid, employeeid, contractorderid, assessmentresult, 
+    assessmenttime, assessmentstatus, skill, health, discuss, lore, ethics, showstatus, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_order_employee_assessment
+    where contractorderemployeeassessmentid = #{contractorderemployeeassessmentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_order_employee_assessment
+    where contractorderemployeeassessmentid = #{contractorderemployeeassessmentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderEmployeeAssessment">
+    insert into contract_order_employee_assessment (contractorderemployeeassessmentid, customerid, 
+      employeeid, contractorderid, assessmentresult, 
+      assessmenttime, assessmentstatus, skill, 
+      health, discuss, lore, 
+      ethics, showstatus, createtime, 
+      updatetime, status)
+    values (#{contractorderemployeeassessmentid,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, 
+      #{employeeid,jdbcType=INTEGER}, #{contractorderid,jdbcType=INTEGER}, #{assessmentresult,jdbcType=DOUBLE}, 
+      #{assessmenttime,jdbcType=TIMESTAMP}, #{assessmentstatus,jdbcType=TINYINT}, #{skill,jdbcType=TINYINT}, 
+      #{health,jdbcType=TINYINT}, #{discuss,jdbcType=TINYINT}, #{lore,jdbcType=TINYINT}, 
+      #{ethics,jdbcType=TINYINT}, #{showstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderEmployeeAssessment">
+    insert into contract_order_employee_assessment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractorderemployeeassessmentid != null">
+        contractorderemployeeassessmentid,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="contractorderid != null">
+        contractorderid,
+      </if>
+      <if test="assessmentresult != null">
+        assessmentresult,
+      </if>
+      <if test="assessmenttime != null">
+        assessmenttime,
+      </if>
+      <if test="assessmentstatus != null">
+        assessmentstatus,
+      </if>
+      <if test="skill != null">
+        skill,
+      </if>
+      <if test="health != null">
+        health,
+      </if>
+      <if test="discuss != null">
+        discuss,
+      </if>
+      <if test="lore != null">
+        lore,
+      </if>
+      <if test="ethics != null">
+        ethics,
+      </if>
+      <if test="showstatus != null">
+        showstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractorderemployeeassessmentid != null">
+        #{contractorderemployeeassessmentid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="contractorderid != null">
+        #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="assessmentresult != null">
+        #{assessmentresult,jdbcType=DOUBLE},
+      </if>
+      <if test="assessmenttime != null">
+        #{assessmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessmentstatus != null">
+        #{assessmentstatus,jdbcType=TINYINT},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=TINYINT},
+      </if>
+      <if test="health != null">
+        #{health,jdbcType=TINYINT},
+      </if>
+      <if test="discuss != null">
+        #{discuss,jdbcType=TINYINT},
+      </if>
+      <if test="lore != null">
+        #{lore,jdbcType=TINYINT},
+      </if>
+      <if test="ethics != null">
+        #{ethics,jdbcType=TINYINT},
+      </if>
+      <if test="showstatus != null">
+        #{showstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderEmployeeAssessment">
+    update contract_order_employee_assessment
+    <set>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="contractorderid != null">
+        contractorderid = #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="assessmentresult != null">
+        assessmentresult = #{assessmentresult,jdbcType=DOUBLE},
+      </if>
+      <if test="assessmenttime != null">
+        assessmenttime = #{assessmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessmentstatus != null">
+        assessmentstatus = #{assessmentstatus,jdbcType=TINYINT},
+      </if>
+      <if test="skill != null">
+        skill = #{skill,jdbcType=TINYINT},
+      </if>
+      <if test="health != null">
+        health = #{health,jdbcType=TINYINT},
+      </if>
+      <if test="discuss != null">
+        discuss = #{discuss,jdbcType=TINYINT},
+      </if>
+      <if test="lore != null">
+        lore = #{lore,jdbcType=TINYINT},
+      </if>
+      <if test="ethics != null">
+        ethics = #{ethics,jdbcType=TINYINT},
+      </if>
+      <if test="showstatus != null">
+        showstatus = #{showstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractorderemployeeassessmentid = #{contractorderemployeeassessmentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderEmployeeAssessment">
+    update contract_order_employee_assessment
+    set customerid = #{customerid,jdbcType=INTEGER},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      contractorderid = #{contractorderid,jdbcType=INTEGER},
+      assessmentresult = #{assessmentresult,jdbcType=DOUBLE},
+      assessmenttime = #{assessmenttime,jdbcType=TIMESTAMP},
+      assessmentstatus = #{assessmentstatus,jdbcType=TINYINT},
+      skill = #{skill,jdbcType=TINYINT},
+      health = #{health,jdbcType=TINYINT},
+      discuss = #{discuss,jdbcType=TINYINT},
+      lore = #{lore,jdbcType=TINYINT},
+      ethics = #{ethics,jdbcType=TINYINT},
+      showstatus = #{showstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractorderemployeeassessmentid = #{contractorderemployeeassessmentid,jdbcType=INTEGER}
+  </update>
+</mapper>

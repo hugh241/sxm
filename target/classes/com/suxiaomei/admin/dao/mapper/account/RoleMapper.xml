@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.account.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.account.Role">
+    <id column="roleid" jdbcType="INTEGER" property="roleid" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="ismanager" jdbcType="INTEGER" property="ismanager" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    roleid, relationid, ismanager, type, name, description, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.Role">
+    insert into role (roleid, relationid, ismanager, 
+      type, name, description, 
+      createtime, updatetime, status
+      )
+    values (#{roleid,jdbcType=INTEGER}, #{relationid,jdbcType=INTEGER}, #{ismanager,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.Role">
+    update role
+    set relationid = #{relationid,jdbcType=INTEGER},
+      ismanager = #{ismanager,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <insert id="insertSelective" parameterType="role" useGeneratedKeys="true" keyProperty="roleid">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="ismanager != null">
+        ismanager,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="ismanager != null">
+        #{ismanager,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="findByRole" parameterType="role" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    <where>
+    	<if test="type != null">
+    		and type = #{type,jdbcType=INTEGER}
+    	</if>
+    	<if test="relationid != null">
+    		and relationid = #{relationid,jdbcType=INTEGER}
+    	</if>
+    	<if test="ismanager != null">
+    		and ismanager = #{ismanager,jdbcType=INTEGER}
+    	</if>
+    	<if test="name != null">
+    		and name = #{name,jdbcType=INTEGER}
+    	</if>
+    	and status = 1
+    </where>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="role">
+    update role
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      status = #{status,jdbcType=INTEGER}
+    </set>
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+</mapper>

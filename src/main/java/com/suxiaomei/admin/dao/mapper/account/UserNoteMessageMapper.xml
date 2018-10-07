@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.account.UserNoteMessageMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.account.UserNoteMessage">
+    <id column="usernotemessageid" jdbcType="INTEGER" property="usernotemessageid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="readstatus" jdbcType="TINYINT" property="readstatus" />
+    <result column="reminddate" jdbcType="DATE" property="reminddate" />
+    <result column="executedate" jdbcType="DATE" property="executedate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    usernotemessageid, userid, type, relationid, title, content, readstatus, reminddate, 
+    executedate, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_note_message
+    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_note_message
+    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.UserNoteMessage">
+    insert into user_note_message (usernotemessageid, userid, type, 
+      relationid, title, content, 
+      readstatus, reminddate, executedate, 
+      createtime, updatetime, status
+      )
+    values (#{usernotemessageid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{relationid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{readstatus,jdbcType=TINYINT}, #{reminddate,jdbcType=DATE}, #{executedate,jdbcType=DATE}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.UserNoteMessage">
+    insert into user_note_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usernotemessageid != null">
+        usernotemessageid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="readstatus != null">
+        readstatus,
+      </if>
+      <if test="reminddate != null">
+        reminddate,
+      </if>
+      <if test="executedate != null">
+        executedate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usernotemessageid != null">
+        #{usernotemessageid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="readstatus != null">
+        #{readstatus,jdbcType=TINYINT},
+      </if>
+      <if test="reminddate != null">
+        #{reminddate,jdbcType=DATE},
+      </if>
+      <if test="executedate != null">
+        #{executedate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.account.UserNoteMessage">
+    update user_note_message
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="readstatus != null">
+        readstatus = #{readstatus,jdbcType=TINYINT},
+      </if>
+      <if test="reminddate != null">
+        reminddate = #{reminddate,jdbcType=DATE},
+      </if>
+      <if test="executedate != null">
+        executedate = #{executedate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.UserNoteMessage">
+    update user_note_message
+    set userid = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      relationid = #{relationid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      readstatus = #{readstatus,jdbcType=TINYINT},
+      reminddate = #{reminddate,jdbcType=DATE},
+      executedate = #{executedate,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
+  </update>
+</mapper>

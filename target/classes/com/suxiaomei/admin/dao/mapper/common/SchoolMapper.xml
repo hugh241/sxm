@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.SchoolMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.School">
+    <id column="schoolid" jdbcType="INTEGER" property="schoolid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="detailedaddress" jdbcType="VARCHAR" property="detailedaddress" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="corporation" jdbcType="VARCHAR" property="corporation" />
+    <result column="license" jdbcType="VARCHAR" property="license" />
+    <result column="dutyparagraph" jdbcType="VARCHAR" property="dutyparagraph" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="accredittime" jdbcType="TIMESTAMP" property="accredittime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    schoolid, name, addressid, detailedaddress, mobile, corporation, license, dutyparagraph, 
+    logo, accredittime, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from school
+    where schoolid = #{schoolid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from school
+    where schoolid = #{schoolid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.School">
+    insert into school (schoolid, name, addressid, 
+      detailedaddress, mobile, corporation, 
+      license, dutyparagraph, logo, 
+      accredittime, createtime, updatetime, 
+      status)
+    values (#{schoolid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{addressid,jdbcType=INTEGER}, 
+      #{detailedaddress,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{corporation,jdbcType=VARCHAR}, 
+      #{license,jdbcType=VARCHAR}, #{dutyparagraph,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{accredittime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.School">
+    insert into school
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schoolid != null">
+        schoolid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="addressid != null">
+        addressid,
+      </if>
+      <if test="detailedaddress != null">
+        detailedaddress,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="corporation != null">
+        corporation,
+      </if>
+      <if test="license != null">
+        license,
+      </if>
+      <if test="dutyparagraph != null">
+        dutyparagraph,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="accredittime != null">
+        accredittime,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schoolid != null">
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null">
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="detailedaddress != null">
+        #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null">
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyparagraph != null">
+        #{dutyparagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="accredittime != null">
+        #{accredittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.School">
+    update school
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null">
+        addressid = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="detailedaddress != null">
+        detailedaddress = #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null">
+        corporation = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyparagraph != null">
+        dutyparagraph = #{dutyparagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="accredittime != null">
+        accredittime = #{accredittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where schoolid = #{schoolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.School">
+    update school
+    set name = #{name,jdbcType=VARCHAR},
+      addressid = #{addressid,jdbcType=INTEGER},
+      detailedaddress = #{detailedaddress,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      corporation = #{corporation,jdbcType=VARCHAR},
+      license = #{license,jdbcType=VARCHAR},
+      dutyparagraph = #{dutyparagraph,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      accredittime = #{accredittime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where schoolid = #{schoolid,jdbcType=INTEGER}
+  </update>
+</mapper>

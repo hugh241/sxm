@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.SxmSystemMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.SxmSystem">
+    <id column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="DictMap" type="com.suxiaomei.admin.response.Dict">
+    <id column="sxmsystemid" jdbcType="INTEGER" property="key" />
+    <result column="name" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    sxmsystemid, name, createtime, updatetime, status
+  </sql>
+  <sql id="Dict_Column_List">
+    sxmsystemid, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sxm_system
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sxm_system
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.SxmSystem">
+    insert into sxm_system (sxmsystemid, name, createtime, 
+      updatetime, status)
+    values (#{sxmsystemid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.SxmSystem">
+    insert into sxm_system
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sxmsystemid != null">
+        sxmsystemid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sxmsystemid != null">
+        #{sxmsystemid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.SxmSystem">
+    update sxm_system
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.SxmSystem">
+    update sxm_system
+    set name = #{name,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="findAllForRedis" resultMap="DictMap">
+    select 
+    <include refid="Dict_Column_List" />
+    from sxm_system
+  </select>
+</mapper>

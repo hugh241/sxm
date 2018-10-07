@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocOrderGoodsMapper">
+  <resultMap id="BaseResultMap" type="isocOrderGoods">
+    <id column="isocordergoodsid" jdbcType="INTEGER" property="isocordergoodsid" />
+    <result column="isocexamineorderid" jdbcType="INTEGER" property="isocexamineorderid" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="unitprice" jdbcType="INTEGER" property="unitprice" />
+    <result column="totalprice" jdbcType="INTEGER" property="totalprice" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocordergoodsid, isocexamineorderid, goodsid, num, unitprice, totalprice, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_order_goods
+    where isocordergoodsid = #{isocordergoodsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_order_goods
+    where isocordergoodsid = #{isocordergoodsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocOrderGoods">
+    insert into isoc_order_goods (isocordergoodsid, isocexamineorderid, 
+      goodsid, num, unitprice, 
+      totalprice, createtime, updatetime, 
+      status)
+    values (#{isocordergoodsid,jdbcType=INTEGER}, #{isocexamineorderid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{unitprice,jdbcType=INTEGER}, 
+      #{totalprice,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocOrderGoods">
+    insert into isoc_order_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocordergoodsid != null">
+        isocordergoodsid,
+      </if>
+      <if test="isocexamineorderid != null">
+        isocexamineorderid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="unitprice != null">
+        unitprice,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocordergoodsid != null">
+        #{isocordergoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="isocexamineorderid != null">
+        #{isocexamineorderid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocOrderGoods">
+    update isoc_order_goods
+    <set>
+      <if test="isocexamineorderid != null">
+        isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null">
+        unitprice = #{unitprice,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isocordergoodsid = #{isocordergoodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocOrderGoods">
+    update isoc_order_goods
+    set isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER},
+      goodsid = #{goodsid,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      unitprice = #{unitprice,jdbcType=INTEGER},
+      totalprice = #{totalprice,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocordergoodsid = #{isocordergoodsid,jdbcType=INTEGER}
+  </update>
+  <select id="findByIsocexamineorderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_order_goods
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </select>
+</mapper>

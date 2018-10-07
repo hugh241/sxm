@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeAppealMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeAppeal">
+    <id column="employeeappealid" jdbcType="INTEGER" property="employeeappealid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="idcardurl" jdbcType="VARCHAR" property="idcardurl" />
+    <result column="certificateurl" jdbcType="VARCHAR" property="certificateurl" />
+    <result column="overstatus" jdbcType="TINYINT" property="overstatus" />
+    <result column="executestatus" jdbcType="TINYINT" property="executestatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeappealid, employeeid, idcardurl, certificateurl, overstatus, executestatus, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_appeal
+    where employeeappealid = #{employeeappealid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_appeal
+    where employeeappealid = #{employeeappealid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAppeal">
+    insert into employee_appeal (employeeappealid, employeeid, idcardurl, 
+      certificateurl, overstatus, executestatus, 
+      createtime, updatetime, status
+      )
+    values (#{employeeappealid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{idcardurl,jdbcType=VARCHAR}, 
+      #{certificateurl,jdbcType=VARCHAR}, #{overstatus,jdbcType=TINYINT}, #{executestatus,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAppeal">
+    insert into employee_appeal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeappealid != null">
+        employeeappealid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="idcardurl != null">
+        idcardurl,
+      </if>
+      <if test="certificateurl != null">
+        certificateurl,
+      </if>
+      <if test="overstatus != null">
+        overstatus,
+      </if>
+      <if test="executestatus != null">
+        executestatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeappealid != null">
+        #{employeeappealid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="idcardurl != null">
+        #{idcardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateurl != null">
+        #{certificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="overstatus != null">
+        #{overstatus,jdbcType=TINYINT},
+      </if>
+      <if test="executestatus != null">
+        #{executestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAppeal">
+    update employee_appeal
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="idcardurl != null">
+        idcardurl = #{idcardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateurl != null">
+        certificateurl = #{certificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="overstatus != null">
+        overstatus = #{overstatus,jdbcType=TINYINT},
+      </if>
+      <if test="executestatus != null">
+        executestatus = #{executestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeappealid = #{employeeappealid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAppeal">
+    update employee_appeal
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      idcardurl = #{idcardurl,jdbcType=VARCHAR},
+      certificateurl = #{certificateurl,jdbcType=VARCHAR},
+      overstatus = #{overstatus,jdbcType=TINYINT},
+      executestatus = #{executestatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeappealid = #{employeeappealid,jdbcType=INTEGER}
+  </update>
+</mapper>

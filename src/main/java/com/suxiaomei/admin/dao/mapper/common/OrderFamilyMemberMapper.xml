@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.OrderFamilyMemberMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.OrderFamilyMember">
+    <id column="orderfamilymemberid" jdbcType="INTEGER" property="orderfamilymemberid" />
+    <result column="ordertypeid" jdbcType="INTEGER" property="ordertypeid" />
+    <result column="familymemberid" jdbcType="INTEGER" property="familymemberid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderfamilymemberid, ordertypeid, familymemberid, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_family_member
+    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_family_member
+    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
+    insert into order_family_member (orderfamilymemberid, ordertypeid, 
+      familymemberid, createtime, updatetime, 
+      status)
+    values (#{orderfamilymemberid,jdbcType=INTEGER}, #{ordertypeid,jdbcType=INTEGER}, 
+      #{familymemberid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
+    insert into order_family_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderfamilymemberid != null">
+        orderfamilymemberid,
+      </if>
+      <if test="ordertypeid != null">
+        ordertypeid,
+      </if>
+      <if test="familymemberid != null">
+        familymemberid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderfamilymemberid != null">
+        #{orderfamilymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="ordertypeid != null">
+        #{ordertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="familymemberid != null">
+        #{familymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
+    update order_family_member
+    <set>
+      <if test="ordertypeid != null">
+        ordertypeid = #{ordertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="familymemberid != null">
+        familymemberid = #{familymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.OrderFamilyMember">
+    update order_family_member
+    set ordertypeid = #{ordertypeid,jdbcType=INTEGER},
+      familymemberid = #{familymemberid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where orderfamilymemberid = #{orderfamilymemberid,jdbcType=INTEGER}
+  </update>
+</mapper>

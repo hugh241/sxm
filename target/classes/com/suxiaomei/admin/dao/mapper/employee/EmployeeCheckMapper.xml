@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeCheckMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    <id column="employeecheckid" jdbcType="INTEGER" property="employeecheckid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="viastatus" jdbcType="TINYINT" property="viastatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    <result column="result" jdbcType="LONGVARCHAR" property="result" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeecheckid, employeeid, idcard, viastatus, createtime, updatetime, status
+  </sql>
+  <sql id="Blob_Column_List">
+    result
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from employee_check
+    where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_check
+    where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    insert into employee_check (employeecheckid, employeeid, idcard, 
+      viastatus, createtime, updatetime, 
+      status, result)
+    values (#{employeecheckid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, 
+      #{viastatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{result,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    insert into employee_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeecheckid != null">
+        employeecheckid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="viastatus != null">
+        viastatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeecheckid != null">
+        #{employeecheckid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="viastatus != null">
+        #{viastatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    update employee_check
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="viastatus != null">
+        viastatus = #{viastatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    update employee_check
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      viastatus = #{viastatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      result = #{result,jdbcType=LONGVARCHAR}
+    where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
+    update employee_check
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      viastatus = #{viastatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
+  </update>
+</mapper>

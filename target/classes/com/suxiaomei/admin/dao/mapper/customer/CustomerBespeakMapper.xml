@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.customer.CustomerBespeakMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.customer.CustomerBespeak">
+    <id column="customerbespeakid" jdbcType="INTEGER" property="customerbespeakid" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="fullname" jdbcType="VARCHAR" property="fullname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="begindate" jdbcType="DATE" property="begindate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="predate" jdbcType="DATE" property="predate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    customerbespeakid, customerid, employeeid, fullname, mobile, begindate, enddate, 
+    predate, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer_bespeak
+    where customerbespeakid = #{customerbespeakid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer_bespeak
+    where customerbespeakid = #{customerbespeakid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.customer.CustomerBespeak">
+    insert into customer_bespeak (customerbespeakid, customerid, employeeid, 
+      fullname, mobile, begindate, 
+      enddate, predate, createtime, 
+      updatetime, status)
+    values (#{customerbespeakid,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{fullname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{begindate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{predate,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.customer.CustomerBespeak">
+    insert into customer_bespeak
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerbespeakid != null">
+        customerbespeakid,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="fullname != null">
+        fullname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="predate != null">
+        predate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerbespeakid != null">
+        #{customerbespeakid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="fullname != null">
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="predate != null">
+        #{predate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.customer.CustomerBespeak">
+    update customer_bespeak
+    <set>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="fullname != null">
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="predate != null">
+        predate = #{predate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where customerbespeakid = #{customerbespeakid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.customer.CustomerBespeak">
+    update customer_bespeak
+    set customerid = #{customerid,jdbcType=INTEGER},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      begindate = #{begindate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      predate = #{predate,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where customerbespeakid = #{customerbespeakid,jdbcType=INTEGER}
+  </update>
+</mapper>

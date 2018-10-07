@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocExamineOrderMapper">
+  <resultMap id="BaseResultMap" type="isocExamineOrder">
+    <id column="isocexamineorderid" jdbcType="INTEGER" property="isocexamineorderid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="totalprice" jdbcType="INTEGER" property="totalprice" />
+    <result column="concessionalprice" jdbcType="INTEGER" property="concessionalprice" />
+    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="orderstatus" jdbcType="TINYINT" property="orderstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="com.suxiaomei.admin.entity.common.extend.IsocGoodsOrder">
+    <id column="isocexamineorderid" jdbcType="INTEGER" property="isocexamineorderid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="totalprice" jdbcType="INTEGER" property="totalprice" />
+    <result column="concessionalprice" jdbcType="INTEGER" property="concessionalprice" />
+    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="orderstatus" jdbcType="TINYINT" property="orderstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+    <collection property="isocOrderGoods" ofType="isocOrderGoods" select="com.suxiaomei.admin.dao.isoc.IsocOrderGoodsMapper.findByIsocexamineorderid" column="isocexamineorderid" ></collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocexamineorderid, isocid, ordernum, totalprice, concessionalprice, paytime, orderstatus, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_examine_order
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_examine_order
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocExamineOrder">
+    insert into isoc_examine_order (isocexamineorderid, isocid, ordernum, 
+      totalprice, concessionalprice, paytime, 
+      orderstatus, createtime, updatetime, 
+      status)
+    values (#{isocexamineorderid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, 
+      #{totalprice,jdbcType=INTEGER}, #{concessionalprice,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{orderstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocExamineOrder">
+    insert into isoc_examine_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocexamineorderid != null">
+        isocexamineorderid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="concessionalprice != null">
+        concessionalprice,
+      </if>
+      <if test="paytime != null">
+        paytime,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocexamineorderid != null">
+        #{isocexamineorderid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=INTEGER},
+      </if>
+      <if test="concessionalprice != null">
+        #{concessionalprice,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null">
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocExamineOrder">
+    update isoc_examine_order
+    set isocid = #{isocid,jdbcType=INTEGER},
+      ordernum = #{ordernum,jdbcType=VARCHAR},
+      totalprice = #{totalprice,jdbcType=INTEGER},
+      concessionalprice = #{concessionalprice,jdbcType=INTEGER},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      orderstatus = #{orderstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	SELECT * FROM (
+		SELECT ieo.*,i.name as isocname FROM isoc_examine_order ieo 
+		left join isoc i on i.isocid = ieo.isocid 
+		<where>
+			<if test="order.isocname!=null and order.isocname != ''">
+				and i.name like concat('%', #{order.isocname}, '%')
+			</if>
+			<if test="order.isocid != null">
+				and ieo.isocid = #{order.isocid}
+			</if>
+			<if test="order.createtime != null and order.createtime != ''">
+				and ieo.createtime = #{order.createtime}
+			</if>
+			and ieo.status = 1
+		</where>
+	) t1
+	ORDER BY orderstatus asc,createtime desc
+	limit #{startNum},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from isoc_examine_order ieo 
+	left join isoc i on i.isocid = ieo.isocid 
+	<where>
+		<if test="order.isocname!=null and order.isocname != ''">
+			and i.name like concat('%', #{order.isocname}, '%')
+		</if>
+		<if test="order.isocid != null">
+			and ieo.isocid = #{order.isocid}
+		</if>
+		<if test="order.createtime != null and order.createtime != ''">
+			and ieo.createtime = #{order.createtime}
+		</if>
+		and ieo.status = 1
+	</where>
+  </select>
+  <update id="updateIsocExamineOrderStatus" parameterType="isocExamineOrder">
+    update isoc_examine_order
+    <set>
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+        orderstatus = #{orderstatus,jdbcType=TINYINT},
+    </set>
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </update>
+</mapper>

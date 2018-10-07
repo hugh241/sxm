@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.Employee">
+    <id column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="marriage" jdbcType="TINYINT" property="marriage" />
+    <result column="height" jdbcType="SMALLINT" property="height" />
+    <result column="weight" jdbcType="SMALLINT" property="weight" />
+    <result column="education" jdbcType="TINYINT" property="education" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="disposition" jdbcType="TINYINT" property="disposition" />
+    <result column="animal" jdbcType="SMALLINT" property="animal" />
+    <result column="constellation" jdbcType="SMALLINT" property="constellation" />
+    <result column="nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="residence" jdbcType="VARCHAR" property="residence" />
+    <result column="health" jdbcType="VARCHAR" property="health" />
+    <result column="differentplaces" jdbcType="TINYINT" property="differentplaces" />
+    <result column="professiondate" jdbcType="DATE" property="professiondate" />
+    <result column="physicaldate" jdbcType="DATE" property="physicaldate" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="com.suxiaomei.admin.entity.employee.extend.EmployeeExd">
+    <id column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="marriage" jdbcType="TINYINT" property="marriage" />
+    <result column="height" jdbcType="SMALLINT" property="height" />
+    <result column="weight" jdbcType="SMALLINT" property="weight" />
+    <result column="education" jdbcType="TINYINT" property="education" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="disposition" jdbcType="TINYINT" property="disposition" />
+    <result column="animal" jdbcType="SMALLINT" property="animal" />
+    <result column="constellation" jdbcType="SMALLINT" property="constellation" />
+    <result column="nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="residence" jdbcType="VARCHAR" property="residence" />
+    <result column="health" jdbcType="VARCHAR" property="health" />
+    <result column="differentplaces" jdbcType="TINYINT" property="differentplaces" />
+    <result column="professiondate" jdbcType="DATE" property="professiondate" />
+    <result column="physicaldate" jdbcType="DATE" property="physicaldate" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="workingmonth" jdbcType="TINYINT" property="workingmonth" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <collection property="positions" ofType="EmployeePositionExtend" select="com.suxiaomei.admin.dao.employee.EmployeePositionMapper.findByEmployeeid" column="employeeid" ></collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeid, name, idcard, sex, nativeplace, birthday, place, mobile, marriage, height, 
+    weight, education, photo, disposition, animal, constellation, nationality, residence, 
+    health, differentplaces, professiondate, physicaldate, introduce, createtime, updatetime, 
+    status
+  </sql>
+  <sql id="alias_Column_List">
+    e.employeeid, e.name, e.idcard, e.sex, e.nativeplace, e.birthday, e.place, e.mobile, e.marriage, e.height, 
+    e.weight, e.education, e.disposition, e.animal, e.constellation, e.nationality, e.residence, 
+    e.health, e.differentplaces, e.professiondate, e.physicaldate, e.introduce, e.createtime, e.updatetime, 
+    e.status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.Employee">
+    insert into employee (employeeid, name, idcard, 
+      sex, nativeplace, birthday, 
+      place, mobile, marriage, 
+      height, weight, education, 
+      photo, disposition, animal, 
+      constellation, nationality, residence, 
+      health, differentplaces, professiondate, 
+      physicaldate, introduce, createtime, 
+      updatetime, status)
+    values (#{employeeid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{nativeplace,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{place,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{marriage,jdbcType=TINYINT}, 
+      #{height,jdbcType=SMALLINT}, #{weight,jdbcType=SMALLINT}, #{education,jdbcType=TINYINT}, 
+      #{photo,jdbcType=VARCHAR}, #{disposition,jdbcType=TINYINT}, #{animal,jdbcType=SMALLINT}, 
+      #{constellation,jdbcType=SMALLINT}, #{nationality,jdbcType=VARCHAR}, #{residence,jdbcType=VARCHAR}, 
+      #{health,jdbcType=VARCHAR}, #{differentplaces,jdbcType=TINYINT}, #{professiondate,jdbcType=DATE}, 
+      #{physicaldate,jdbcType=DATE}, #{introduce,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nativeplace != null">
+        nativeplace,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="disposition != null">
+        disposition,
+      </if>
+      <if test="animal != null">
+        animal,
+      </if>
+      <if test="constellation != null">
+        constellation,
+      </if>
+      <if test="nationality != null">
+        nationality,
+      </if>
+      <if test="residence != null">
+        residence,
+      </if>
+      <if test="health != null">
+        health,
+      </if>
+      <if test="differentplaces != null">
+        differentplaces,
+      </if>
+      <if test="professiondate != null">
+        professiondate,
+      </if>
+      <if test="physicaldate != null">
+        physicaldate,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=TINYINT},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=SMALLINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=SMALLINT},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=TINYINT},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="disposition != null">
+        #{disposition,jdbcType=TINYINT},
+      </if>
+      <if test="animal != null">
+        #{animal,jdbcType=SMALLINT},
+      </if>
+      <if test="constellation != null">
+        #{constellation,jdbcType=SMALLINT},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null">
+        #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="differentplaces != null">
+        #{differentplaces,jdbcType=TINYINT},
+      </if>
+      <if test="professiondate != null">
+        #{professiondate,jdbcType=DATE},
+      </if>
+      <if test="physicaldate != null">
+        #{physicaldate,jdbcType=DATE},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.Employee">
+    update employee
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="nativeplace != null">
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=TINYINT},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=SMALLINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=SMALLINT},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=TINYINT},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="disposition != null">
+        disposition = #{disposition,jdbcType=TINYINT},
+      </if>
+      <if test="animal != null">
+        animal = #{animal,jdbcType=SMALLINT},
+      </if>
+      <if test="constellation != null">
+        constellation = #{constellation,jdbcType=SMALLINT},
+      </if>
+      <if test="nationality != null">
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null">
+        health = #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="differentplaces != null">
+        differentplaces = #{differentplaces,jdbcType=TINYINT},
+      </if>
+      <if test="professiondate != null">
+        professiondate = #{professiondate,jdbcType=DATE},
+      </if>
+      <if test="physicaldate != null">
+        physicaldate = #{physicaldate,jdbcType=DATE},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.Employee">
+    update employee
+    set name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      place = #{place,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=TINYINT},
+      height = #{height,jdbcType=SMALLINT},
+      weight = #{weight,jdbcType=SMALLINT},
+      education = #{education,jdbcType=TINYINT},
+      photo = #{photo,jdbcType=VARCHAR},
+      disposition = #{disposition,jdbcType=TINYINT},
+      animal = #{animal,jdbcType=SMALLINT},
+      constellation = #{constellation,jdbcType=SMALLINT},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      health = #{health,jdbcType=VARCHAR},
+      differentplaces = #{differentplaces,jdbcType=TINYINT},
+      professiondate = #{professiondate,jdbcType=DATE},
+      physicaldate = #{physicaldate,jdbcType=DATE},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	select 
+	<include refid="Base_Column_List" />
+	from employee
+	<where>
+		<if test="employee.name!=null and employee.name != ''">
+			or name like concat('%', #{employee.name}, '%')
+		</if>
+		<if test="employee.mobile!= null and employee.mobile != ''">
+			or mobile like concat('%', #{employee.mobile}, '%')
+		</if>
+		<if test="employee.idcard!= null and employee.idcard != ''">
+			or idcard like concat('%', #{employee.idcard}, '%')
+		</if>
+	</where>
+	group by createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from employee
+	<where>
+		<if test="employee.name!=null and employee.name != ''">
+			or name like concat('%', #{employee.name}, '%')
+		</if>
+		<if test="employee.mobile!= null and employee.mobile != ''">
+			or mobile like concat('%', #{employee.mobile}, '%')
+		</if>
+		<if test="employee.idcard!= null and employee.idcard != ''">
+			or idcard like concat('%', #{employee.idcard}, '%')
+		</if>
+	</where>
+  </select>
+  <select id="findDetailById" resultMap="ExtendResultMap">
+	select 
+	<include refid="alias_Column_List" />,ep.url photo, 
+	TIMESTAMPDIFF(MONTH,ee.workinglife,now()) workingmonth,
+	TIMESTAMPDIFF(YEAR,e.birthday,now()) age
+	from employee e
+	left join employee_photo ep on (ep.employeeid = e.employeeid and ep.type = 0)
+	left join employee_extend ee on ee.employeeid = e.employeeid
+	where e.employeeid = #{employeeid,jdbcType=INTEGER}
+	group by e.employeeid
+  </select>
+</mapper>

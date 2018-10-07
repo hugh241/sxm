@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.customer.FamilyMemberToolsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+    <id column="familymembertoolsid" jdbcType="INTEGER" property="familymembertoolsid" />
+    <result column="familymemberid" jdbcType="INTEGER" property="familymemberid" />
+    <result column="toolsid" jdbcType="INTEGER" property="toolsid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    familymembertoolsid, familymemberid, toolsid, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from family_member_tools
+    where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from family_member_tools
+    where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+    insert into family_member_tools (familymembertoolsid, familymemberid, 
+      toolsid, createtime, updatetime, 
+      status)
+    values (#{familymembertoolsid,jdbcType=INTEGER}, #{familymemberid,jdbcType=INTEGER}, 
+      #{toolsid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+    insert into family_member_tools
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="familymembertoolsid != null">
+        familymembertoolsid,
+      </if>
+      <if test="familymemberid != null">
+        familymemberid,
+      </if>
+      <if test="toolsid != null">
+        toolsid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="familymembertoolsid != null">
+        #{familymembertoolsid,jdbcType=INTEGER},
+      </if>
+      <if test="familymemberid != null">
+        #{familymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="toolsid != null">
+        #{toolsid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+    update family_member_tools
+    <set>
+      <if test="familymemberid != null">
+        familymemberid = #{familymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="toolsid != null">
+        toolsid = #{toolsid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.customer.FamilyMemberTools">
+    update family_member_tools
+    set familymemberid = #{familymemberid,jdbcType=INTEGER},
+      toolsid = #{toolsid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where familymembertoolsid = #{familymembertoolsid,jdbcType=INTEGER}
+  </update>
+</mapper>

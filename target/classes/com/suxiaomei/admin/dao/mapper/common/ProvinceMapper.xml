@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.ProvinceMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.Province">
+    <id column="provinceid" jdbcType="INTEGER" property="provinceid" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <collection property="cityList" ofType="city" select="com.suxiaomei.admin.dao.common.CityMapper.findByProvinceid" column="provinceid" ></collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    provinceid, province
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where provinceid = #{provinceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from province
+    where provinceid = #{provinceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.Province">
+    insert into province (provinceid, province)
+    values (#{provinceid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.Province">
+    insert into province
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="provinceid != null">
+        provinceid,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.Province">
+    update province
+    <set>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where provinceid = #{provinceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.Province">
+    update province
+    set province = #{province,jdbcType=VARCHAR}
+    where provinceid = #{provinceid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from province
+  </select>
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocMapper">
+  <resultMap id="BaseResultMap" type="isoc">
+    <id column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="caddress" jdbcType="VARCHAR" property="caddress" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="appsecret" jdbcType="VARCHAR" property="appsecret" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="isocExtend">
+    <id column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="caddress" jdbcType="VARCHAR" property="caddress" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="appsecret" jdbcType="VARCHAR" property="appsecret" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="provinceid" jdbcType="TINYINT" property="provinceid" />
+    <result column="cityid" jdbcType="TINYINT" property="cityid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocid, sxmsystemid, addressid, name, mobile, logo, caddress, email, introduce, appid, 
+    appsecret, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc
+    where isocid = #{isocid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc
+    where isocid = #{isocid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.Isoc">
+    insert into isoc (isocid, sxmsystemid, addressid, 
+      name, mobile, logo, 
+      caddress, email, introduce, 
+      appid, appsecret, createtime, 
+      updatetime, status)
+    values (#{isocid,jdbcType=INTEGER}, #{sxmsystemid,jdbcType=INTEGER}, #{addressid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{caddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
+      #{appid,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.Isoc">
+    update isoc
+    set sxmsystemid = #{sxmsystemid,jdbcType=INTEGER},
+      addressid = #{addressid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      caddress = #{caddress,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      appid = #{appid,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocid = #{isocid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  <select id="selectWhoHasAppidAndAppSecrect" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc
+    where appid is not null and appsecret is not null and appid != '' and appsecret != ''
+  </select>
+  
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	select i.*,u.name username,a.provinceid,a.cityid,concat(p.province,IFNULL(c.city,'')) address
+	from isoc i
+	left join role r on (r.relationid = i.isocid and r.type = 5)
+	left join user u on u.roleid = r.roleid
+	left join address a on a.addressid = i.addressid
+	left join province p on p.provinceid = a.provinceid
+	left join city c on c.cityid = a.cityid
+	<where>
+		<if test="isoc.name!=null and isoc.name != ''">
+			and i.name like concat('%', #{isoc.name}, '%')
+		</if>
+		<if test="isoc.status!=-1">
+			and i.status = #{isoc.status}
+		</if>
+	</where>
+	group by i.isocid
+	limit #{pageNo},#{pageSize}
+  </select>
+  
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from isoc
+	<where>
+		<if test="isoc.name!=null and isoc.name != ''">
+			and name like concat('%', #{isoc.name}, '%')
+		</if>
+		<if test="isoc.status!=-1">
+			and status = #{isoc.status}
+		</if>
+	</where>
+  </select>
+  
+  <select id="findByName" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc
+    where name = concat('',#{name,jdbcType=VARCHAR},'')
+    limit 0,1
+  </select>
+  <select id="findByAddressid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc
+    where addressid = #{addressid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  
+  <insert id="insertSelective" parameterType="isoc" useGeneratedKeys="true" keyProperty="isocid">
+    insert into isoc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sxmsystemid != null">
+        sxmsystemid,
+      </if>
+      <if test="addressid != null">
+        addressid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="caddress != null">
+        caddress,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="appsecret != null">
+        appsecret,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sxmsystemid != null">
+        #{sxmsystemid,jdbcType=INTEGER},
+      </if>
+      <if test="addressid != null">
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null">
+        #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null">
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="isoc">
+    update isoc
+    <set>
+      <if test="sxmsystemid != null">
+        sxmsystemid = #{sxmsystemid,jdbcType=INTEGER},
+      </if>
+      <if test="addressid != null">
+        addressid = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null">
+        caddress = #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null">
+        appsecret = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isocid = #{isocid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocLogMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocLog">
+    <id column="isoclogid" jdbcType="INTEGER" property="isoclogid" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="commite" jdbcType="VARCHAR" property="commite" />
+    <result column="response_date" jdbcType="INTEGER" property="responseDate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isoclogid, date, ip, remark, commite, response_date, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_log
+    where isoclogid = #{isoclogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_log
+    where isoclogid = #{isoclogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
+    insert into isoc_log (isoclogid, date, ip, 
+      remark, commite, response_date, 
+      createtime, updatetime, status
+      )
+    values (#{isoclogid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{commite,jdbcType=VARCHAR}, #{responseDate,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
+    insert into isoc_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isoclogid != null">
+        isoclogid,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="commite != null">
+        commite,
+      </if>
+      <if test="responseDate != null">
+        response_date,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isoclogid != null">
+        #{isoclogid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="commite != null">
+        #{commite,jdbcType=VARCHAR},
+      </if>
+      <if test="responseDate != null">
+        #{responseDate,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
+    update isoc_log
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="commite != null">
+        commite = #{commite,jdbcType=VARCHAR},
+      </if>
+      <if test="responseDate != null">
+        response_date = #{responseDate,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isoclogid = #{isoclogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
+    update isoc_log
+    set date = #{date,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      commite = #{commite,jdbcType=VARCHAR},
+      response_date = #{responseDate,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isoclogid = #{isoclogid,jdbcType=INTEGER}
+  </update>
+</mapper>

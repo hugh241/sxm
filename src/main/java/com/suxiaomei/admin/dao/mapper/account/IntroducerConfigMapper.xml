@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.account.IntroducerConfigMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.account.IntroducerConfig">
+    <id column="introducerconfigid" jdbcType="INTEGER" property="introducerconfigid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="tcts" jdbcType="INTEGER" property="tcts" />
+    <result column="zjstcts" jdbcType="INTEGER" property="zjstcts" />
+    <result column="icdeploy" jdbcType="TINYINT" property="icdeploy" />
+    <result column="ictype" jdbcType="TINYINT" property="ictype" />
+    <result column="icquota" jdbcType="DECIMAL" property="icquota" />
+    <result column="iedeploy" jdbcType="TINYINT" property="iedeploy" />
+    <result column="ietype" jdbcType="TINYINT" property="ietype" />
+    <result column="iequota" jdbcType="DECIMAL" property="iequota" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    introducerconfigid, type, relationid, tcts, zjstcts, icdeploy, ictype, icquota, iedeploy, 
+    ietype, iequota, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from introducer_config
+    where introducerconfigid = #{introducerconfigid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from introducer_config
+    where introducerconfigid = #{introducerconfigid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.IntroducerConfig">
+    insert into introducer_config (introducerconfigid, type, relationid, 
+      tcts, zjstcts, icdeploy, 
+      ictype, icquota, iedeploy, 
+      ietype, iequota, createtime, 
+      updatetime, status)
+    values (#{introducerconfigid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{relationid,jdbcType=INTEGER}, 
+      #{tcts,jdbcType=INTEGER}, #{zjstcts,jdbcType=INTEGER}, #{icdeploy,jdbcType=TINYINT}, 
+      #{ictype,jdbcType=TINYINT}, #{icquota,jdbcType=DECIMAL}, #{iedeploy,jdbcType=TINYINT}, 
+      #{ietype,jdbcType=TINYINT}, #{iequota,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.IntroducerConfig">
+    insert into introducer_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="introducerconfigid != null">
+        introducerconfigid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="tcts != null">
+        tcts,
+      </if>
+      <if test="zjstcts != null">
+        zjstcts,
+      </if>
+      <if test="icdeploy != null">
+        icdeploy,
+      </if>
+      <if test="ictype != null">
+        ictype,
+      </if>
+      <if test="icquota != null">
+        icquota,
+      </if>
+      <if test="iedeploy != null">
+        iedeploy,
+      </if>
+      <if test="ietype != null">
+        ietype,
+      </if>
+      <if test="iequota != null">
+        iequota,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="introducerconfigid != null">
+        #{introducerconfigid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="tcts != null">
+        #{tcts,jdbcType=INTEGER},
+      </if>
+      <if test="zjstcts != null">
+        #{zjstcts,jdbcType=INTEGER},
+      </if>
+      <if test="icdeploy != null">
+        #{icdeploy,jdbcType=TINYINT},
+      </if>
+      <if test="ictype != null">
+        #{ictype,jdbcType=TINYINT},
+      </if>
+      <if test="icquota != null">
+        #{icquota,jdbcType=DECIMAL},
+      </if>
+      <if test="iedeploy != null">
+        #{iedeploy,jdbcType=TINYINT},
+      </if>
+      <if test="ietype != null">
+        #{ietype,jdbcType=TINYINT},
+      </if>
+      <if test="iequota != null">
+        #{iequota,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.account.IntroducerConfig">
+    update introducer_config
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="tcts != null">
+        tcts = #{tcts,jdbcType=INTEGER},
+      </if>
+      <if test="zjstcts != null">
+        zjstcts = #{zjstcts,jdbcType=INTEGER},
+      </if>
+      <if test="icdeploy != null">
+        icdeploy = #{icdeploy,jdbcType=TINYINT},
+      </if>
+      <if test="ictype != null">
+        ictype = #{ictype,jdbcType=TINYINT},
+      </if>
+      <if test="icquota != null">
+        icquota = #{icquota,jdbcType=DECIMAL},
+      </if>
+      <if test="iedeploy != null">
+        iedeploy = #{iedeploy,jdbcType=TINYINT},
+      </if>
+      <if test="ietype != null">
+        ietype = #{ietype,jdbcType=TINYINT},
+      </if>
+      <if test="iequota != null">
+        iequota = #{iequota,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where introducerconfigid = #{introducerconfigid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.IntroducerConfig">
+    update introducer_config
+    set type = #{type,jdbcType=TINYINT},
+      relationid = #{relationid,jdbcType=INTEGER},
+      tcts = #{tcts,jdbcType=INTEGER},
+      zjstcts = #{zjstcts,jdbcType=INTEGER},
+      icdeploy = #{icdeploy,jdbcType=TINYINT},
+      ictype = #{ictype,jdbcType=TINYINT},
+      icquota = #{icquota,jdbcType=DECIMAL},
+      iedeploy = #{iedeploy,jdbcType=TINYINT},
+      ietype = #{ietype,jdbcType=TINYINT},
+      iequota = #{iequota,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where introducerconfigid = #{introducerconfigid,jdbcType=INTEGER}
+  </update>
+</mapper>

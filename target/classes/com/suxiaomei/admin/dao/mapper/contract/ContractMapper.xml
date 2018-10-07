@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.Contract">
+    <id column="contractid" jdbcType="INTEGER" property="contractid" />
+    <result column="sellchancescheduleid" jdbcType="INTEGER" property="sellchancescheduleid" />
+    <result column="signdate" jdbcType="DATE" property="signdate" />
+    <result column="contractnum" jdbcType="VARCHAR" property="contractnum" />
+    <result column="begindate" jdbcType="DATE" property="begindate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="contractstatus" jdbcType="TINYINT" property="contractstatus" />
+    <result column="typestr" jdbcType="VARCHAR" property="typestr" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractid, sellchancescheduleid, signdate, contractnum, begindate, enddate, name, 
+    mobile, address, idcard, contractstatus, typestr, remark, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    where contractid = #{contractid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract
+    where contractid = #{contractid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.Contract">
+    insert into contract (contractid, sellchancescheduleid, 
+      signdate, contractnum, begindate, 
+      enddate, name, mobile, 
+      address, idcard, contractstatus, 
+      typestr, remark, createtime, 
+      updatetime, status)
+    values (#{contractid,jdbcType=INTEGER}, #{sellchancescheduleid,jdbcType=INTEGER}, 
+      #{signdate,jdbcType=DATE}, #{contractnum,jdbcType=VARCHAR}, #{begindate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{contractstatus,jdbcType=TINYINT}, 
+      #{typestr,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.Contract">
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        contractid,
+      </if>
+      <if test="sellchancescheduleid != null">
+        sellchancescheduleid,
+      </if>
+      <if test="signdate != null">
+        signdate,
+      </if>
+      <if test="contractnum != null">
+        contractnum,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="contractstatus != null">
+        contractstatus,
+      </if>
+      <if test="typestr != null">
+        typestr,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="sellchancescheduleid != null">
+        #{sellchancescheduleid,jdbcType=INTEGER},
+      </if>
+      <if test="signdate != null">
+        #{signdate,jdbcType=DATE},
+      </if>
+      <if test="contractnum != null">
+        #{contractnum,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstatus != null">
+        #{contractstatus,jdbcType=TINYINT},
+      </if>
+      <if test="typestr != null">
+        #{typestr,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.Contract">
+    update contract
+    <set>
+      <if test="sellchancescheduleid != null">
+        sellchancescheduleid = #{sellchancescheduleid,jdbcType=INTEGER},
+      </if>
+      <if test="signdate != null">
+        signdate = #{signdate,jdbcType=DATE},
+      </if>
+      <if test="contractnum != null">
+        contractnum = #{contractnum,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstatus != null">
+        contractstatus = #{contractstatus,jdbcType=TINYINT},
+      </if>
+      <if test="typestr != null">
+        typestr = #{typestr,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractid = #{contractid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.Contract">
+    update contract
+    set sellchancescheduleid = #{sellchancescheduleid,jdbcType=INTEGER},
+      signdate = #{signdate,jdbcType=DATE},
+      contractnum = #{contractnum,jdbcType=VARCHAR},
+      begindate = #{begindate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      contractstatus = #{contractstatus,jdbcType=TINYINT},
+      typestr = #{typestr,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractid = #{contractid,jdbcType=INTEGER}
+  </update>
+</mapper>

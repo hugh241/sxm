@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractOrderDepositMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.ContractOrderDeposit">
+    <id column="contractorderdepositid" jdbcType="INTEGER" property="contractorderdepositid" />
+    <result column="contractorderid" jdbcType="INTEGER" property="contractorderid" />
+    <result column="contractdepositorderid" jdbcType="INTEGER" property="contractdepositorderid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractorderdepositid, contractorderid, contractdepositorderid, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_order_deposit
+    where contractorderdepositid = #{contractorderdepositid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_order_deposit
+    where contractorderdepositid = #{contractorderdepositid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderDeposit">
+    insert into contract_order_deposit (contractorderdepositid, contractorderid, 
+      contractdepositorderid, createtime, updatetime, 
+      status)
+    values (#{contractorderdepositid,jdbcType=INTEGER}, #{contractorderid,jdbcType=INTEGER}, 
+      #{contractdepositorderid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderDeposit">
+    insert into contract_order_deposit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractorderdepositid != null">
+        contractorderdepositid,
+      </if>
+      <if test="contractorderid != null">
+        contractorderid,
+      </if>
+      <if test="contractdepositorderid != null">
+        contractdepositorderid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractorderdepositid != null">
+        #{contractorderdepositid,jdbcType=INTEGER},
+      </if>
+      <if test="contractorderid != null">
+        #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="contractdepositorderid != null">
+        #{contractdepositorderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderDeposit">
+    update contract_order_deposit
+    <set>
+      <if test="contractorderid != null">
+        contractorderid = #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="contractdepositorderid != null">
+        contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractorderdepositid = #{contractorderdepositid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderDeposit">
+    update contract_order_deposit
+    set contractorderid = #{contractorderid,jdbcType=INTEGER},
+      contractdepositorderid = #{contractdepositorderid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractorderdepositid = #{contractorderdepositid,jdbcType=INTEGER}
+  </update>
+</mapper>

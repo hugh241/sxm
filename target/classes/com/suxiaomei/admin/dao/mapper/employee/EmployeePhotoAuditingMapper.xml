@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeePhotoAuditingMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeePhotoAuditing">
+    <id column="employeephotoauditingid" jdbcType="INTEGER" property="employeephotoauditingid" />
+    <result column="employeephotoid" jdbcType="INTEGER" property="employeephotoid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="result" jdbcType="SMALLINT" property="result" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeephotoauditingid, employeephotoid, content, result, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_photo_auditing
+    where employeephotoauditingid = #{employeephotoauditingid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_photo_auditing
+    where employeephotoauditingid = #{employeephotoauditingid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhotoAuditing">
+    insert into employee_photo_auditing (employeephotoauditingid, employeephotoid, 
+      content, result, createtime, 
+      updatetime, status)
+    values (#{employeephotoauditingid,jdbcType=INTEGER}, #{employeephotoid,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{result,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhotoAuditing">
+    insert into employee_photo_auditing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeephotoauditingid != null">
+        employeephotoauditingid,
+      </if>
+      <if test="employeephotoid != null">
+        employeephotoid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeephotoauditingid != null">
+        #{employeephotoauditingid,jdbcType=INTEGER},
+      </if>
+      <if test="employeephotoid != null">
+        #{employeephotoid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhotoAuditing">
+    update employee_photo_auditing
+    <set>
+      <if test="employeephotoid != null">
+        employeephotoid = #{employeephotoid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeephotoauditingid = #{employeephotoauditingid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeePhotoAuditing">
+    update employee_photo_auditing
+    set employeephotoid = #{employeephotoid,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      result = #{result,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeephotoauditingid = #{employeephotoauditingid,jdbcType=INTEGER}
+  </update>
+</mapper>

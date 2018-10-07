@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.Goods">
+    <id column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="positionid" jdbcType="INTEGER" property="positionid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="DictMap" type="com.suxiaomei.admin.response.Dict">
+    <id column="goodsid" jdbcType="INTEGER" property="key" />
+    <result column="name" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    goodsid, positionid, name, price, num, introduce, createtime, updatetime, status
+  </sql>
+  <sql id="Dict_Column_List">
+    goodsid, name
+  </sql>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionid != null">
+        positionid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="positionid != null">
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </delete>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.Goods">
+    update goods
+    set positionid = #{positionid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </select>
+  <select id="findAllUP" resultMap="DictMap">
+    select 
+    <include refid="Dict_Column_List" />
+    from goods
+    where status = 1
+  </select>
+  <select id="findAllByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="status != null">
+   	  where status = #{status,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="findByPositionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods where positionid = #{positionid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="goods">
+    insert into goods (positionid, name,price, introduce)
+    values (#{positionid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="goods">
+    update goods
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateGoodsStatus" parameterType="goods">
+    update goods set status = #{status,jdbcType=INTEGER}
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+</mapper>

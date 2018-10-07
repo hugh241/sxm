@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeSkillMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeSkill">
+    <id column="employeeskillid" jdbcType="INTEGER" property="employeeskillid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="skillnum" jdbcType="SMALLINT" property="skillnum" />
+    <result column="level" jdbcType="SMALLINT" property="level" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="learneddate" jdbcType="DATE" property="learneddate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeskillid, employeeid, type, skillnum, level, createtime, updatetime, status, 
+    learneddate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_skill
+    where employeeskillid = #{employeeskillid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_skill
+    where employeeskillid = #{employeeskillid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeSkill">
+    insert into employee_skill (employeeskillid, employeeid, type, 
+      skillnum, level, createtime, 
+      updatetime, status, learneddate
+      )
+    values (#{employeeskillid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, 
+      #{skillnum,jdbcType=SMALLINT}, #{level,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{learneddate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeSkill">
+    insert into employee_skill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeskillid != null">
+        employeeskillid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="skillnum != null">
+        skillnum,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="learneddate != null">
+        learneddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeskillid != null">
+        #{employeeskillid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="skillnum != null">
+        #{skillnum,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="learneddate != null">
+        #{learneddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeSkill">
+    update employee_skill
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="skillnum != null">
+        skillnum = #{skillnum,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="learneddate != null">
+        learneddate = #{learneddate,jdbcType=DATE},
+      </if>
+    </set>
+    where employeeskillid = #{employeeskillid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeSkill">
+    update employee_skill
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      type = #{type,jdbcType=SMALLINT},
+      skillnum = #{skillnum,jdbcType=SMALLINT},
+      level = #{level,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      learneddate = #{learneddate,jdbcType=DATE}
+    where employeeskillid = #{employeeskillid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.customer.CustomerDuesMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.customer.CustomerDues">
+    <id column="customerduesid" jdbcType="INTEGER" property="customerduesid" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="begindate" jdbcType="DATE" property="begindate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="dues" jdbcType="INTEGER" property="dues" />
+    <result column="auditstatus" jdbcType="TINYINT" property="auditstatus" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="autitor" jdbcType="INTEGER" property="autitor" />
+    <result column="confirmtime" jdbcType="TIMESTAMP" property="confirmtime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    customerduesid, customerid, begindate, enddate, dues, auditstatus, creator, autitor, 
+    confirmtime, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer_dues
+    where customerduesid = #{customerduesid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer_dues
+    where customerduesid = #{customerduesid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.customer.CustomerDues">
+    insert into customer_dues (customerduesid, customerid, begindate, 
+      enddate, dues, auditstatus, 
+      creator, autitor, confirmtime, 
+      createtime, updatetime, status
+      )
+    values (#{customerduesid,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, #{begindate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{dues,jdbcType=INTEGER}, #{auditstatus,jdbcType=TINYINT}, 
+      #{creator,jdbcType=INTEGER}, #{autitor,jdbcType=INTEGER}, #{confirmtime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.customer.CustomerDues">
+    insert into customer_dues
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerduesid != null">
+        customerduesid,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="dues != null">
+        dues,
+      </if>
+      <if test="auditstatus != null">
+        auditstatus,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="autitor != null">
+        autitor,
+      </if>
+      <if test="confirmtime != null">
+        confirmtime,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerduesid != null">
+        #{customerduesid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="dues != null">
+        #{dues,jdbcType=INTEGER},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="autitor != null">
+        #{autitor,jdbcType=INTEGER},
+      </if>
+      <if test="confirmtime != null">
+        #{confirmtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.customer.CustomerDues">
+    update customer_dues
+    <set>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="dues != null">
+        dues = #{dues,jdbcType=INTEGER},
+      </if>
+      <if test="auditstatus != null">
+        auditstatus = #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="autitor != null">
+        autitor = #{autitor,jdbcType=INTEGER},
+      </if>
+      <if test="confirmtime != null">
+        confirmtime = #{confirmtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where customerduesid = #{customerduesid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.customer.CustomerDues">
+    update customer_dues
+    set customerid = #{customerid,jdbcType=INTEGER},
+      begindate = #{begindate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      dues = #{dues,jdbcType=INTEGER},
+      auditstatus = #{auditstatus,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=INTEGER},
+      autitor = #{autitor,jdbcType=INTEGER},
+      confirmtime = #{confirmtime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where customerduesid = #{customerduesid,jdbcType=INTEGER}
+  </update>
+</mapper>

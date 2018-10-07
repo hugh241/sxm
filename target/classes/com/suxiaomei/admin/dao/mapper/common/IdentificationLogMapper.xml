@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.IdentificationLogMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.IdentificationLog">
+    <id column="identificationlogid" jdbcType="INTEGER" property="identificationlogid" />
+    <result column="employeepositionid" jdbcType="INTEGER" property="employeepositionid" />
+    <result column="worktype" jdbcType="TINYINT" property="worktype" />
+    <result column="operationtime" jdbcType="DATE" property="operationtime" />
+    <result column="operationcontent" jdbcType="VARCHAR" property="operationcontent" />
+    <result column="operationremark" jdbcType="VARCHAR" property="operationremark" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    identificationlogid, employeepositionid, worktype, operationtime, operationcontent, 
+    operationremark, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from identification_log
+    where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from identification_log
+    where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
+    insert into identification_log (identificationlogid, employeepositionid, 
+      worktype, operationtime, operationcontent, 
+      operationremark, createtime, updatetime, 
+      status)
+    values (#{identificationlogid,jdbcType=INTEGER}, #{employeepositionid,jdbcType=INTEGER}, 
+      #{worktype,jdbcType=TINYINT}, #{operationtime,jdbcType=DATE}, #{operationcontent,jdbcType=VARCHAR}, 
+      #{operationremark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
+    insert into identification_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="identificationlogid != null">
+        identificationlogid,
+      </if>
+      <if test="employeepositionid != null">
+        employeepositionid,
+      </if>
+      <if test="worktype != null">
+        worktype,
+      </if>
+      <if test="operationtime != null">
+        operationtime,
+      </if>
+      <if test="operationcontent != null">
+        operationcontent,
+      </if>
+      <if test="operationremark != null">
+        operationremark,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="identificationlogid != null">
+        #{identificationlogid,jdbcType=INTEGER},
+      </if>
+      <if test="employeepositionid != null">
+        #{employeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=DATE},
+      </if>
+      <if test="operationcontent != null">
+        #{operationcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="operationremark != null">
+        #{operationremark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
+    update identification_log
+    <set>
+      <if test="employeepositionid != null">
+        employeepositionid = #{employeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        worktype = #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="operationtime != null">
+        operationtime = #{operationtime,jdbcType=DATE},
+      </if>
+      <if test="operationcontent != null">
+        operationcontent = #{operationcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="operationremark != null">
+        operationremark = #{operationremark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
+    update identification_log
+    set employeepositionid = #{employeepositionid,jdbcType=INTEGER},
+      worktype = #{worktype,jdbcType=TINYINT},
+      operationtime = #{operationtime,jdbcType=DATE},
+      operationcontent = #{operationcontent,jdbcType=VARCHAR},
+      operationremark = #{operationremark,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
+  </update>
+</mapper>

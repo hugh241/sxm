@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeFamilyMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeFamily">
+    <id column="employeefamilyid" jdbcType="INTEGER" property="employeefamilyid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="relation" jdbcType="SMALLINT" property="relation" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="education" jdbcType="SMALLINT" property="education" />
+    <result column="work" jdbcType="VARCHAR" property="work" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeefamilyid, employeeid, relation, name, birthday, education, work, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_family
+    where employeefamilyid = #{employeefamilyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_family
+    where employeefamilyid = #{employeefamilyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeFamily">
+    insert into employee_family (employeefamilyid, employeeid, relation, 
+      name, birthday, education, 
+      work, createtime, updatetime, 
+      status)
+    values (#{employeefamilyid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{relation,jdbcType=SMALLINT}, 
+      #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{education,jdbcType=SMALLINT}, 
+      #{work,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeFamily">
+    insert into employee_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeefamilyid != null">
+        employeefamilyid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="relation != null">
+        relation,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="work != null">
+        work,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeefamilyid != null">
+        #{employeefamilyid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="relation != null">
+        #{relation,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=SMALLINT},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeFamily">
+    update employee_family
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="relation != null">
+        relation = #{relation,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=SMALLINT},
+      </if>
+      <if test="work != null">
+        work = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeefamilyid = #{employeefamilyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeFamily">
+    update employee_family
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      relation = #{relation,jdbcType=SMALLINT},
+      name = #{name,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      education = #{education,jdbcType=SMALLINT},
+      work = #{work,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeefamilyid = #{employeefamilyid,jdbcType=INTEGER}
+  </update>
+</mapper>

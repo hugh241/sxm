@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessWorkGroupUsersMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessWorkGroupUsers">
+    <id column="businessworkgroupusersid" jdbcType="INTEGER" property="businessworkgroupusersid" />
+    <result column="businessparamsid" jdbcType="INTEGER" property="businessparamsid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessworkgroupusersid, businessparamsid, userid, type, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_work_group_users
+    where businessworkgroupusersid = #{businessworkgroupusersid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_work_group_users
+    where businessworkgroupusersid = #{businessworkgroupusersid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessWorkGroupUsers">
+    insert into business_work_group_users (businessworkgroupusersid, businessparamsid, 
+      userid, type, createtime, 
+      updatetime, status)
+    values (#{businessworkgroupusersid,jdbcType=INTEGER}, #{businessparamsid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessWorkGroupUsers">
+    insert into business_work_group_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessworkgroupusersid != null">
+        businessworkgroupusersid,
+      </if>
+      <if test="businessparamsid != null">
+        businessparamsid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessworkgroupusersid != null">
+        #{businessworkgroupusersid,jdbcType=INTEGER},
+      </if>
+      <if test="businessparamsid != null">
+        #{businessparamsid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessWorkGroupUsers">
+    update business_work_group_users
+    <set>
+      <if test="businessparamsid != null">
+        businessparamsid = #{businessparamsid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessworkgroupusersid = #{businessworkgroupusersid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessWorkGroupUsers">
+    update business_work_group_users
+    set businessparamsid = #{businessparamsid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessworkgroupusersid = #{businessworkgroupusersid,jdbcType=INTEGER}
+  </update>
+</mapper>

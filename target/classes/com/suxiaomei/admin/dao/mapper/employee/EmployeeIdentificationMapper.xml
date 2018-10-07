@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeIdentificationMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
+    <id column="employeeidentificationid" jdbcType="INTEGER" property="employeeidentificationid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="employeeidentificationorderid" jdbcType="INTEGER" property="employeeidentificationorderid" />
+    <result column="worktype" jdbcType="TINYINT" property="worktype" />
+    <result column="adopttime" jdbcType="TIMESTAMP" property="adopttime" />
+    <result column="begindate" jdbcType="TIMESTAMP" property="begindate" />
+    <result column="enddate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="com.suxiaomei.admin.entity.employee.extend.EmployeeIdentificationExtend">
+    <id column="employeeidentificationid" jdbcType="INTEGER" property="employeeidentificationid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="employeeidentificationorderid" jdbcType="INTEGER" property="employeeidentificationorderid" />
+    <result column="worktype" jdbcType="TINYINT" property="worktype" />
+    <result column="adopttime" jdbcType="TIMESTAMP" property="adopttime" />
+    <result column="begindate" jdbcType="TIMESTAMP" property="begindate" />
+    <result column="enddate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeidentificationid, employeeid, isocid, employeeidentificationorderid, worktype, 
+    adopttime, begindate, enddate, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_identification
+    where employeeidentificationid = #{employeeidentificationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_identification
+    where employeeidentificationid = #{employeeidentificationid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
+    insert into employee_identification (employeeidentificationid, employeeid, 
+      isocid, employeeidentificationorderid, 
+      worktype, adopttime, begindate, 
+      enddate, createtime, updatetime, 
+      status)
+    values (#{employeeidentificationid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{isocid,jdbcType=INTEGER}, #{employeeidentificationorderid,jdbcType=INTEGER}, 
+      #{worktype,jdbcType=TINYINT}, #{adopttime,jdbcType=TIMESTAMP}, #{begindate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
+    insert into employee_identification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationid != null">
+        employeeidentificationid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="employeeidentificationorderid != null">
+        employeeidentificationorderid,
+      </if>
+      <if test="worktype != null">
+        worktype,
+      </if>
+      <if test="adopttime != null">
+        adopttime,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationid != null">
+        #{employeeidentificationid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeidentificationorderid != null">
+        #{employeeidentificationorderid,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="adopttime != null">
+        #{adopttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
+    update employee_identification
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeidentificationorderid != null">
+        employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        worktype = #{worktype,jdbcType=TINYINT},
+      </if>
+      <if test="adopttime != null">
+        adopttime = #{adopttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeidentificationid = #{employeeidentificationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
+    update employee_identification
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      isocid = #{isocid,jdbcType=INTEGER},
+      employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER},
+      worktype = #{worktype,jdbcType=TINYINT},
+      adopttime = #{adopttime,jdbcType=TIMESTAMP},
+      begindate = #{begindate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeidentificationid = #{employeeidentificationid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findByEmployeeidAndWorktype" resultMap="ExtendResultMap">
+    select 
+    ei.*,i.name isocname
+    from employee_identification ei
+    left join isoc i on i.isocid = ei.isocid
+    where ei.employeeid = #{employeeid,jdbcType=INTEGER}
+    and ei.worktype = (select goodsid from goods where positionid = #{worktype,jdbcType=INTEGER} limit 0,1)
+  </select>
+  <select id="findNewestByEmployeeidAndWorktype" resultMap="ExtendResultMap">
+    select 
+    ei.*,i.name isocname
+    from employee_identification ei
+    left join isoc i on i.isocid = ei.isocid
+    where ei.employeeid = #{employeeid,jdbcType=INTEGER} 
+    and ei.worktype = (select goodsid from goods where positionid = #{worktype,jdbcType=INTEGER} limit 0,1)
+    and ei.enddate > now()
+    order by ei.enddate desc limit 0,1
+  </select>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessGoods">
+    <id column="businessgoodsid" jdbcType="INTEGER" property="businessgoodsid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="isocgoodsid" jdbcType="INTEGER" property="isocgoodsid" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="consume" jdbcType="INTEGER" property="consume" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessgoodsid, businessid, isocgoodsid, total, consume, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_goods
+    where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_goods
+    where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
+    insert into business_goods (businessgoodsid, businessid, isocgoodsid, 
+      total, consume, createtime, 
+      updatetime, status)
+    values (#{businessgoodsid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{isocgoodsid,jdbcType=INTEGER}, 
+      #{total,jdbcType=INTEGER}, #{consume,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
+    insert into business_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessgoodsid != null">
+        businessgoodsid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="isocgoodsid != null">
+        isocgoodsid,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="consume != null">
+        consume,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessgoodsid != null">
+        #{businessgoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="isocgoodsid != null">
+        #{isocgoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="consume != null">
+        #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
+    update business_goods
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="isocgoodsid != null">
+        isocgoodsid = #{isocgoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="consume != null">
+        consume = #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
+    update business_goods
+    set businessid = #{businessid,jdbcType=INTEGER},
+      isocgoodsid = #{isocgoodsid,jdbcType=INTEGER},
+      total = #{total,jdbcType=INTEGER},
+      consume = #{consume,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
+  </update>
+</mapper>

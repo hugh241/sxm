@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.DictionaryValueMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.DictionaryValue">
+    <id column="dictionaryvalueid" jdbcType="INTEGER" property="dictionaryvalueid" />
+    <result column="dictionaryid" jdbcType="INTEGER" property="dictionaryid" />
+    <result column="dictionaryvalue" jdbcType="VARCHAR" property="dictionaryvalue" />
+    <result column="savevalue" jdbcType="SMALLINT" property="savevalue" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="DictResultMap" type="com.suxiaomei.admin.response.Dict">
+    <result column="savevalue" jdbcType="SMALLINT" property="key" />
+    <result column="dictionaryvalue" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dictionaryvalueid, dictionaryid, dictionaryvalue, savevalue, status
+  </sql>
+  <sql id="Dict_Column_List">
+    savevalue, dictionaryvalue
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary_value
+    where dictionaryvalueid = #{dictionaryvalueid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dictionary_value
+    where dictionaryvalueid = #{dictionaryvalueid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.DictionaryValue">
+    insert into dictionary_value (dictionaryvalueid, dictionaryid, 
+      dictionaryvalue, savevalue, status
+      )
+    values (#{dictionaryvalueid,jdbcType=INTEGER}, #{dictionaryid,jdbcType=INTEGER}, 
+      #{dictionaryvalue,jdbcType=VARCHAR}, #{savevalue,jdbcType=SMALLINT}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.DictionaryValue">
+    insert into dictionary_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictionaryvalueid != null">
+        dictionaryvalueid,
+      </if>
+      <if test="dictionaryid != null">
+        dictionaryid,
+      </if>
+      <if test="dictionaryvalue != null">
+        dictionaryvalue,
+      </if>
+      <if test="savevalue != null">
+        savevalue,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictionaryvalueid != null">
+        #{dictionaryvalueid,jdbcType=INTEGER},
+      </if>
+      <if test="dictionaryid != null">
+        #{dictionaryid,jdbcType=INTEGER},
+      </if>
+      <if test="dictionaryvalue != null">
+        #{dictionaryvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="savevalue != null">
+        #{savevalue,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.DictionaryValue">
+    update dictionary_value
+    <set>
+      <if test="dictionaryid != null">
+        dictionaryid = #{dictionaryid,jdbcType=INTEGER},
+      </if>
+      <if test="dictionaryvalue != null">
+        dictionaryvalue = #{dictionaryvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="savevalue != null">
+        savevalue = #{savevalue,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where dictionaryvalueid = #{dictionaryvalueid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.DictionaryValue">
+    update dictionary_value
+    set dictionaryid = #{dictionaryid,jdbcType=INTEGER},
+      dictionaryvalue = #{dictionaryvalue,jdbcType=VARCHAR},
+      savevalue = #{savevalue,jdbcType=SMALLINT},
+      status = #{status,jdbcType=TINYINT}
+    where dictionaryvalueid = #{dictionaryvalueid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="getDictByDictionaryid" parameterType="java.lang.Integer" resultMap="DictResultMap">
+    select 
+    <include refid="Dict_Column_List" />
+    from dictionary_value
+    where dictionaryid = #{dictionaryid,jdbcType=INTEGER}
+  </select>
+</mapper>

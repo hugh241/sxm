@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+    <id column="isocbusinessorderid" jdbcType="INTEGER" property="isocbusinessorderid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="begindate" jdbcType="DATE" property="begindate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="auditstatus" jdbcType="TINYINT" property="auditstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocbusinessorderid, isocid, businessid, level, begindate, enddate, result, auditstatus, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_business_order
+    where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_business_order
+    where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+    insert into isoc_business_order (isocbusinessorderid, isocid, businessid, 
+      level, begindate, enddate, 
+      result, auditstatus, createtime, 
+      updatetime, status)
+    values (#{isocbusinessorderid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{level,jdbcType=VARCHAR}, #{begindate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, 
+      #{result,jdbcType=VARCHAR}, #{auditstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+    insert into isoc_business_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocbusinessorderid != null">
+        isocbusinessorderid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="auditstatus != null">
+        auditstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocbusinessorderid != null">
+        #{isocbusinessorderid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+    update isoc_business_order
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        auditstatus = #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+    update isoc_business_order
+    set isocid = #{isocid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      begindate = #{begindate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      result = #{result,jdbcType=VARCHAR},
+      auditstatus = #{auditstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
+  </update>
+</mapper>

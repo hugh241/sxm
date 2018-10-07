@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.CityFamilyMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.common.CityFamily">
+    <id column="cityfamilyid" jdbcType="INTEGER" property="cityfamilyid" />
+    <result column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="detailedaddress" jdbcType="VARCHAR" property="detailedaddress" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="bedtotal" jdbcType="TINYINT" property="bedtotal" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cityfamilyid, sxmsystemid, addressid, detailedaddress, longitude, latitude, mobile, 
+    director, createdate, summary, bedtotal, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from city_family
+    where cityfamilyid = #{cityfamilyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from city_family
+    where cityfamilyid = #{cityfamilyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.CityFamily">
+    insert into city_family (cityfamilyid, sxmsystemid, addressid, 
+      detailedaddress, longitude, latitude, 
+      mobile, director, createdate, 
+      summary, bedtotal, createtime, 
+      updatetime, status)
+    values (#{cityfamilyid,jdbcType=INTEGER}, #{sxmsystemid,jdbcType=INTEGER}, #{addressid,jdbcType=INTEGER}, 
+      #{detailedaddress,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, 
+      #{summary,jdbcType=VARCHAR}, #{bedtotal,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.CityFamily">
+    insert into city_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cityfamilyid != null">
+        cityfamilyid,
+      </if>
+      <if test="sxmsystemid != null">
+        sxmsystemid,
+      </if>
+      <if test="addressid != null">
+        addressid,
+      </if>
+      <if test="detailedaddress != null">
+        detailedaddress,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="director != null">
+        director,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="bedtotal != null">
+        bedtotal,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cityfamilyid != null">
+        #{cityfamilyid,jdbcType=INTEGER},
+      </if>
+      <if test="sxmsystemid != null">
+        #{sxmsystemid,jdbcType=INTEGER},
+      </if>
+      <if test="addressid != null">
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="detailedaddress != null">
+        #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="bedtotal != null">
+        #{bedtotal,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.common.CityFamily">
+    update city_family
+    <set>
+      <if test="sxmsystemid != null">
+        sxmsystemid = #{sxmsystemid,jdbcType=INTEGER},
+      </if>
+      <if test="addressid != null">
+        addressid = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="detailedaddress != null">
+        detailedaddress = #{detailedaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="bedtotal != null">
+        bedtotal = #{bedtotal,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where cityfamilyid = #{cityfamilyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.common.CityFamily">
+    update city_family
+    set sxmsystemid = #{sxmsystemid,jdbcType=INTEGER},
+      addressid = #{addressid,jdbcType=INTEGER},
+      detailedaddress = #{detailedaddress,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      summary = #{summary,jdbcType=VARCHAR},
+      bedtotal = #{bedtotal,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where cityfamilyid = #{cityfamilyid,jdbcType=INTEGER}
+  </update>
+</mapper>

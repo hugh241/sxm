@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderDataMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderData">
+    <id column="isocbusinessorderdataid" jdbcType="INTEGER" property="isocbusinessorderdataid" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="auditstatus" jdbcType="TINYINT" property="auditstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocbusinessorderdataid, relationid, type, name, auditstatus, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_business_order_data
+    where isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_business_order_data
+    where isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderData">
+    insert into isoc_business_order_data (isocbusinessorderdataid, relationid, 
+      type, name, auditstatus, 
+      createtime, updatetime, status
+      )
+    values (#{isocbusinessorderdataid,jdbcType=INTEGER}, #{relationid,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{auditstatus,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderData">
+    insert into isoc_business_order_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocbusinessorderdataid != null">
+        isocbusinessorderdataid,
+      </if>
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="auditstatus != null">
+        auditstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocbusinessorderdataid != null">
+        #{isocbusinessorderdataid,jdbcType=INTEGER},
+      </if>
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderData">
+    update isoc_business_order_data
+    <set>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        auditstatus = #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderData">
+    update isoc_business_order_data
+    set relationid = #{relationid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      auditstatus = #{auditstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </update>
+</mapper>

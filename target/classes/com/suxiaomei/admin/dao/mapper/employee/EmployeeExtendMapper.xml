@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeExtendMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeExtend">
+    <id column="employeeextendid" jdbcType="INTEGER" property="employeeextendid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="workinglife" jdbcType="DATE" property="workinglife" />
+    <result column="servicenum" jdbcType="SMALLINT" property="servicenum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeextendid, employeeid, workinglife, servicenum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_extend
+    where employeeextendid = #{employeeextendid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_extend
+    where employeeextendid = #{employeeextendid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeExtend">
+    insert into employee_extend (employeeextendid, employeeid, workinglife, 
+      servicenum)
+    values (#{employeeextendid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{workinglife,jdbcType=DATE}, 
+      #{servicenum,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeExtend">
+    insert into employee_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeextendid != null">
+        employeeextendid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="workinglife != null">
+        workinglife,
+      </if>
+      <if test="servicenum != null">
+        servicenum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeextendid != null">
+        #{employeeextendid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="workinglife != null">
+        #{workinglife,jdbcType=DATE},
+      </if>
+      <if test="servicenum != null">
+        #{servicenum,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeExtend">
+    update employee_extend
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="workinglife != null">
+        workinglife = #{workinglife,jdbcType=DATE},
+      </if>
+      <if test="servicenum != null">
+        servicenum = #{servicenum,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where employeeextendid = #{employeeextendid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeExtend">
+    update employee_extend
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      workinglife = #{workinglife,jdbcType=DATE},
+      servicenum = #{servicenum,jdbcType=SMALLINT}
+    where employeeextendid = #{employeeextendid,jdbcType=INTEGER}
+  </update>
+</mapper>

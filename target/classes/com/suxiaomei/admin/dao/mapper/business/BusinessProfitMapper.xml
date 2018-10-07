@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessProfitMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessProfit">
+    <id column="businessprofitid" jdbcType="INTEGER" property="businessprofitid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="accountitemid" jdbcType="INTEGER" property="accountitemid" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="sourcetype" jdbcType="TINYINT" property="sourcetype" />
+    <result column="recorddate" jdbcType="TIMESTAMP" property="recorddate" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="quantity" jdbcType="DECIMAL" property="quantity" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="paymentstype" jdbcType="TINYINT" property="paymentstype" />
+    <result column="salesman" jdbcType="VARCHAR" property="salesman" />
+    <result column="serialnumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessprofitid, businessid, accountitemid, relationid, sourcetype, recorddate, 
+    type, quantity, reason, paymentstype, salesman, serialnumber, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_profit
+    where businessprofitid = #{businessprofitid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_profit
+    where businessprofitid = #{businessprofitid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessProfit">
+    insert into business_profit (businessprofitid, businessid, accountitemid, 
+      relationid, sourcetype, recorddate, 
+      type, quantity, reason, 
+      paymentstype, salesman, serialnumber, 
+      createtime, updatetime, status
+      )
+    values (#{businessprofitid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{accountitemid,jdbcType=INTEGER}, 
+      #{relationid,jdbcType=INTEGER}, #{sourcetype,jdbcType=TINYINT}, #{recorddate,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=TINYINT}, #{quantity,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}, 
+      #{paymentstype,jdbcType=TINYINT}, #{salesman,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessProfit">
+    insert into business_profit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessprofitid != null">
+        businessprofitid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="accountitemid != null">
+        accountitemid,
+      </if>
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="sourcetype != null">
+        sourcetype,
+      </if>
+      <if test="recorddate != null">
+        recorddate,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="paymentstype != null">
+        paymentstype,
+      </if>
+      <if test="salesman != null">
+        salesman,
+      </if>
+      <if test="serialnumber != null">
+        serialnumber,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessprofitid != null">
+        #{businessprofitid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="accountitemid != null">
+        #{accountitemid,jdbcType=INTEGER},
+      </if>
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=TINYINT},
+      </if>
+      <if test="recorddate != null">
+        #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentstype != null">
+        #{paymentstype,jdbcType=TINYINT},
+      </if>
+      <if test="salesman != null">
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessProfit">
+    update business_profit
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="accountitemid != null">
+        accountitemid = #{accountitemid,jdbcType=INTEGER},
+      </if>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="sourcetype != null">
+        sourcetype = #{sourcetype,jdbcType=TINYINT},
+      </if>
+      <if test="recorddate != null">
+        recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentstype != null">
+        paymentstype = #{paymentstype,jdbcType=TINYINT},
+      </if>
+      <if test="salesman != null">
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null">
+        serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessprofitid = #{businessprofitid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessProfit">
+    update business_profit
+    set businessid = #{businessid,jdbcType=INTEGER},
+      accountitemid = #{accountitemid,jdbcType=INTEGER},
+      relationid = #{relationid,jdbcType=INTEGER},
+      sourcetype = #{sourcetype,jdbcType=TINYINT},
+      recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
+      quantity = #{quantity,jdbcType=DECIMAL},
+      reason = #{reason,jdbcType=VARCHAR},
+      paymentstype = #{paymentstype,jdbcType=TINYINT},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessprofitid = #{businessprofitid,jdbcType=INTEGER}
+  </update>
+</mapper>

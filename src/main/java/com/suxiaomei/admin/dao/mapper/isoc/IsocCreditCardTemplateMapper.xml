@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocCreditCardTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    <id column="isoccreditcardtemplateid" jdbcType="INTEGER" property="isoccreditcardtemplateid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="hasname" jdbcType="TINYINT" property="hasname" />
+    <result column="namepositiontype" jdbcType="TINYINT" property="namepositiontype" />
+    <result column="nametop" jdbcType="SMALLINT" property="nametop" />
+    <result column="nameleft" jdbcType="SMALLINT" property="nameleft" />
+    <result column="namefontfamily" jdbcType="VARCHAR" property="namefontfamily" />
+    <result column="namefontsize" jdbcType="TINYINT" property="namefontsize" />
+    <result column="namecolor" jdbcType="VARCHAR" property="namecolor" />
+    <result column="hashead" jdbcType="TINYINT" property="hashead" />
+    <result column="headpositiontype" jdbcType="TINYINT" property="headpositiontype" />
+    <result column="headwidth" jdbcType="SMALLINT" property="headwidth" />
+    <result column="headheight" jdbcType="SMALLINT" property="headheight" />
+    <result column="headtop" jdbcType="SMALLINT" property="headtop" />
+    <result column="headleft" jdbcType="SMALLINT" property="headleft" />
+    <result column="hasqrcode" jdbcType="TINYINT" property="hasqrcode" />
+    <result column="qrcodepositiontype" jdbcType="TINYINT" property="qrcodepositiontype" />
+    <result column="qrcodewidth" jdbcType="SMALLINT" property="qrcodewidth" />
+    <result column="qrcodeheight" jdbcType="SMALLINT" property="qrcodeheight" />
+    <result column="qrcodetop" jdbcType="SMALLINT" property="qrcodetop" />
+    <result column="qrcodeleft" jdbcType="SMALLINT" property="qrcodeleft" />
+    <result column="usestatus" jdbcType="TINYINT" property="usestatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isoccreditcardtemplateid, isocid, type, name, url, hasname, namepositiontype, nametop, 
+    nameleft, namefontfamily, namefontsize, namecolor, hashead, headpositiontype, headwidth, 
+    headheight, headtop, headleft, hasqrcode, qrcodepositiontype, qrcodewidth, qrcodeheight, 
+    qrcodetop, qrcodeleft, usestatus, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_credit_card_template
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_credit_card_template
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    insert into isoc_credit_card_template (isoccreditcardtemplateid, isocid, 
+      type, name, url, hasname, 
+      namepositiontype, nametop, nameleft, 
+      namefontfamily, namefontsize, namecolor, 
+      hashead, headpositiontype, headwidth, 
+      headheight, headtop, headleft, 
+      hasqrcode, qrcodepositiontype, qrcodewidth, 
+      qrcodeheight, qrcodetop, qrcodeleft, 
+      usestatus, createtime, updatetime, 
+      status)
+    values (#{isoccreditcardtemplateid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{hasname,jdbcType=TINYINT}, 
+      #{namepositiontype,jdbcType=TINYINT}, #{nametop,jdbcType=SMALLINT}, #{nameleft,jdbcType=SMALLINT}, 
+      #{namefontfamily,jdbcType=VARCHAR}, #{namefontsize,jdbcType=TINYINT}, #{namecolor,jdbcType=VARCHAR}, 
+      #{hashead,jdbcType=TINYINT}, #{headpositiontype,jdbcType=TINYINT}, #{headwidth,jdbcType=SMALLINT}, 
+      #{headheight,jdbcType=SMALLINT}, #{headtop,jdbcType=SMALLINT}, #{headleft,jdbcType=SMALLINT}, 
+      #{hasqrcode,jdbcType=TINYINT}, #{qrcodepositiontype,jdbcType=TINYINT}, #{qrcodewidth,jdbcType=SMALLINT}, 
+      #{qrcodeheight,jdbcType=SMALLINT}, #{qrcodetop,jdbcType=SMALLINT}, #{qrcodeleft,jdbcType=SMALLINT}, 
+      #{usestatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    insert into isoc_credit_card_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isoccreditcardtemplateid != null">
+        isoccreditcardtemplateid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="hasname != null">
+        hasname,
+      </if>
+      <if test="namepositiontype != null">
+        namepositiontype,
+      </if>
+      <if test="nametop != null">
+        nametop,
+      </if>
+      <if test="nameleft != null">
+        nameleft,
+      </if>
+      <if test="namefontfamily != null">
+        namefontfamily,
+      </if>
+      <if test="namefontsize != null">
+        namefontsize,
+      </if>
+      <if test="namecolor != null">
+        namecolor,
+      </if>
+      <if test="hashead != null">
+        hashead,
+      </if>
+      <if test="headpositiontype != null">
+        headpositiontype,
+      </if>
+      <if test="headwidth != null">
+        headwidth,
+      </if>
+      <if test="headheight != null">
+        headheight,
+      </if>
+      <if test="headtop != null">
+        headtop,
+      </if>
+      <if test="headleft != null">
+        headleft,
+      </if>
+      <if test="hasqrcode != null">
+        hasqrcode,
+      </if>
+      <if test="qrcodepositiontype != null">
+        qrcodepositiontype,
+      </if>
+      <if test="qrcodewidth != null">
+        qrcodewidth,
+      </if>
+      <if test="qrcodeheight != null">
+        qrcodeheight,
+      </if>
+      <if test="qrcodetop != null">
+        qrcodetop,
+      </if>
+      <if test="qrcodeleft != null">
+        qrcodeleft,
+      </if>
+      <if test="usestatus != null">
+        usestatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isoccreditcardtemplateid != null">
+        #{isoccreditcardtemplateid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="hasname != null">
+        #{hasname,jdbcType=TINYINT},
+      </if>
+      <if test="namepositiontype != null">
+        #{namepositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="nametop != null">
+        #{nametop,jdbcType=SMALLINT},
+      </if>
+      <if test="nameleft != null">
+        #{nameleft,jdbcType=SMALLINT},
+      </if>
+      <if test="namefontfamily != null">
+        #{namefontfamily,jdbcType=VARCHAR},
+      </if>
+      <if test="namefontsize != null">
+        #{namefontsize,jdbcType=TINYINT},
+      </if>
+      <if test="namecolor != null">
+        #{namecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="hashead != null">
+        #{hashead,jdbcType=TINYINT},
+      </if>
+      <if test="headpositiontype != null">
+        #{headpositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="headwidth != null">
+        #{headwidth,jdbcType=SMALLINT},
+      </if>
+      <if test="headheight != null">
+        #{headheight,jdbcType=SMALLINT},
+      </if>
+      <if test="headtop != null">
+        #{headtop,jdbcType=SMALLINT},
+      </if>
+      <if test="headleft != null">
+        #{headleft,jdbcType=SMALLINT},
+      </if>
+      <if test="hasqrcode != null">
+        #{hasqrcode,jdbcType=TINYINT},
+      </if>
+      <if test="qrcodepositiontype != null">
+        #{qrcodepositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="qrcodewidth != null">
+        #{qrcodewidth,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodeheight != null">
+        #{qrcodeheight,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodetop != null">
+        #{qrcodetop,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodeleft != null">
+        #{qrcodeleft,jdbcType=SMALLINT},
+      </if>
+      <if test="usestatus != null">
+        #{usestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    update isoc_credit_card_template
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="hasname != null">
+        hasname = #{hasname,jdbcType=TINYINT},
+      </if>
+      <if test="namepositiontype != null">
+        namepositiontype = #{namepositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="nametop != null">
+        nametop = #{nametop,jdbcType=SMALLINT},
+      </if>
+      <if test="nameleft != null">
+        nameleft = #{nameleft,jdbcType=SMALLINT},
+      </if>
+      <if test="namefontfamily != null">
+        namefontfamily = #{namefontfamily,jdbcType=VARCHAR},
+      </if>
+      <if test="namefontsize != null">
+        namefontsize = #{namefontsize,jdbcType=TINYINT},
+      </if>
+      <if test="namecolor != null">
+        namecolor = #{namecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="hashead != null">
+        hashead = #{hashead,jdbcType=TINYINT},
+      </if>
+      <if test="headpositiontype != null">
+        headpositiontype = #{headpositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="headwidth != null">
+        headwidth = #{headwidth,jdbcType=SMALLINT},
+      </if>
+      <if test="headheight != null">
+        headheight = #{headheight,jdbcType=SMALLINT},
+      </if>
+      <if test="headtop != null">
+        headtop = #{headtop,jdbcType=SMALLINT},
+      </if>
+      <if test="headleft != null">
+        headleft = #{headleft,jdbcType=SMALLINT},
+      </if>
+      <if test="hasqrcode != null">
+        hasqrcode = #{hasqrcode,jdbcType=TINYINT},
+      </if>
+      <if test="qrcodepositiontype != null">
+        qrcodepositiontype = #{qrcodepositiontype,jdbcType=TINYINT},
+      </if>
+      <if test="qrcodewidth != null">
+        qrcodewidth = #{qrcodewidth,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodeheight != null">
+        qrcodeheight = #{qrcodeheight,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodetop != null">
+        qrcodetop = #{qrcodetop,jdbcType=SMALLINT},
+      </if>
+      <if test="qrcodeleft != null">
+        qrcodeleft = #{qrcodeleft,jdbcType=SMALLINT},
+      </if>
+      <if test="usestatus != null">
+        usestatus = #{usestatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    update isoc_credit_card_template
+    set isocid = #{isocid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      hasname = #{hasname,jdbcType=TINYINT},
+      namepositiontype = #{namepositiontype,jdbcType=TINYINT},
+      nametop = #{nametop,jdbcType=SMALLINT},
+      nameleft = #{nameleft,jdbcType=SMALLINT},
+      namefontfamily = #{namefontfamily,jdbcType=VARCHAR},
+      namefontsize = #{namefontsize,jdbcType=TINYINT},
+      namecolor = #{namecolor,jdbcType=VARCHAR},
+      hashead = #{hashead,jdbcType=TINYINT},
+      headpositiontype = #{headpositiontype,jdbcType=TINYINT},
+      headwidth = #{headwidth,jdbcType=SMALLINT},
+      headheight = #{headheight,jdbcType=SMALLINT},
+      headtop = #{headtop,jdbcType=SMALLINT},
+      headleft = #{headleft,jdbcType=SMALLINT},
+      hasqrcode = #{hasqrcode,jdbcType=TINYINT},
+      qrcodepositiontype = #{qrcodepositiontype,jdbcType=TINYINT},
+      qrcodewidth = #{qrcodewidth,jdbcType=SMALLINT},
+      qrcodeheight = #{qrcodeheight,jdbcType=SMALLINT},
+      qrcodetop = #{qrcodetop,jdbcType=SMALLINT},
+      qrcodeleft = #{qrcodeleft,jdbcType=SMALLINT},
+      usestatus = #{usestatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </update>
+</mapper>

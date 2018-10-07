@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeAccountsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeAccounts">
+    <id column="employeeaccountsid" jdbcType="INTEGER" property="employeeaccountsid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="accountsid" jdbcType="INTEGER" property="accountsid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeaccountsid, employeeid, accountsid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_accounts
+    where employeeaccountsid = #{employeeaccountsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_accounts
+    where employeeaccountsid = #{employeeaccountsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAccounts">
+    insert into employee_accounts (employeeaccountsid, employeeid, accountsid
+      )
+    values (#{employeeaccountsid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{accountsid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAccounts">
+    insert into employee_accounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeaccountsid != null">
+        employeeaccountsid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="accountsid != null">
+        accountsid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeaccountsid != null">
+        #{employeeaccountsid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="accountsid != null">
+        #{accountsid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAccounts">
+    update employee_accounts
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="accountsid != null">
+        accountsid = #{accountsid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where employeeaccountsid = #{employeeaccountsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeAccounts">
+    update employee_accounts
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      accountsid = #{accountsid,jdbcType=INTEGER}
+    where employeeaccountsid = #{employeeaccountsid,jdbcType=INTEGER}
+  </update>
+</mapper>

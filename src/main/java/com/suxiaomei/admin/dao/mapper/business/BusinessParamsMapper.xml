@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessParamsMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessParams">
+    <id column="businessparamsid" jdbcType="INTEGER" property="businessparamsid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="isdefault" jdbcType="TINYINT" property="isdefault" />
+    <result column="vkey" jdbcType="VARCHAR" property="vkey" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessparamsid, businessid, type, name, isdefault, vkey, value, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_params
+    where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_params
+    where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
+    insert into business_params (businessparamsid, businessid, type, 
+      name, isdefault, vkey, 
+      value, createtime, updatetime, 
+      status)
+    values (#{businessparamsid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{isdefault,jdbcType=TINYINT}, #{vkey,jdbcType=VARCHAR}, 
+      #{value,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
+    insert into business_params
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessparamsid != null">
+        businessparamsid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="isdefault != null">
+        isdefault,
+      </if>
+      <if test="vkey != null">
+        vkey,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessparamsid != null">
+        #{businessparamsid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isdefault != null">
+        #{isdefault,jdbcType=TINYINT},
+      </if>
+      <if test="vkey != null">
+        #{vkey,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
+    update business_params
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isdefault != null">
+        isdefault = #{isdefault,jdbcType=TINYINT},
+      </if>
+      <if test="vkey != null">
+        vkey = #{vkey,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
+    update business_params
+    set businessid = #{businessid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      isdefault = #{isdefault,jdbcType=TINYINT},
+      vkey = #{vkey,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
+  </update>
+</mapper>

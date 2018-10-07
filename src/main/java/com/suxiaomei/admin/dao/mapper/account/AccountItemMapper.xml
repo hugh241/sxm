@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.account.AccountItemMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.account.AccountItem">
+    <id column="accountitemid" jdbcType="INTEGER" property="accountitemid" />
+    <result column="accountid" jdbcType="INTEGER" property="accountid" />
+    <result column="serialnumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="relationid" jdbcType="INTEGER" property="relationid" />
+    <result column="quantity" jdbcType="DECIMAL" property="quantity" />
+    <result column="recorddate" jdbcType="TIMESTAMP" property="recorddate" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="salesman" jdbcType="VARCHAR" property="salesman" />
+    <result column="balanceflag" jdbcType="BIT" property="balanceflag" />
+    <result column="balancetime" jdbcType="TIMESTAMP" property="balancetime" />
+    <result column="auditstatus" jdbcType="TINYINT" property="auditstatus" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="auditor" jdbcType="INTEGER" property="auditor" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    accountitemid, accountid, serialnumber, type, relationid, quantity, recorddate, reason, 
+    salesman, balanceflag, balancetime, auditstatus, creator, auditor, remark, result, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_item
+    where accountitemid = #{accountitemid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_item
+    where accountitemid = #{accountitemid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.AccountItem">
+    insert into account_item (accountitemid, accountid, serialnumber, 
+      type, relationid, quantity, 
+      recorddate, reason, salesman, 
+      balanceflag, balancetime, auditstatus, 
+      creator, auditor, remark, 
+      result, createtime, updatetime, 
+      status)
+    values (#{accountitemid,jdbcType=INTEGER}, #{accountid,jdbcType=INTEGER}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{relationid,jdbcType=INTEGER}, #{quantity,jdbcType=DECIMAL}, 
+      #{recorddate,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, #{salesman,jdbcType=VARCHAR}, 
+      #{balanceflag,jdbcType=BIT}, #{balancetime,jdbcType=TIMESTAMP}, #{auditstatus,jdbcType=TINYINT}, 
+      #{creator,jdbcType=INTEGER}, #{auditor,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.AccountItem">
+    insert into account_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountitemid != null">
+        accountitemid,
+      </if>
+      <if test="accountid != null">
+        accountid,
+      </if>
+      <if test="serialnumber != null">
+        serialnumber,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="recorddate != null">
+        recorddate,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="salesman != null">
+        salesman,
+      </if>
+      <if test="balanceflag != null">
+        balanceflag,
+      </if>
+      <if test="balancetime != null">
+        balancetime,
+      </if>
+      <if test="auditstatus != null">
+        auditstatus,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="auditor != null">
+        auditor,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountitemid != null">
+        #{accountitemid,jdbcType=INTEGER},
+      </if>
+      <if test="accountid != null">
+        #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="recorddate != null">
+        #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null">
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceflag != null">
+        #{balanceflag,jdbcType=BIT},
+      </if>
+      <if test="balancetime != null">
+        #{balancetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.account.AccountItem">
+    update account_item
+    <set>
+      <if test="accountid != null">
+        accountid = #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="serialnumber != null">
+        serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=DECIMAL},
+      </if>
+      <if test="recorddate != null">
+        recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null">
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceflag != null">
+        balanceflag = #{balanceflag,jdbcType=BIT},
+      </if>
+      <if test="balancetime != null">
+        balancetime = #{balancetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditstatus != null">
+        auditstatus = #{auditstatus,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="auditor != null">
+        auditor = #{auditor,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where accountitemid = #{accountitemid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.AccountItem">
+    update account_item
+    set accountid = #{accountid,jdbcType=INTEGER},
+      serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      relationid = #{relationid,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=DECIMAL},
+      recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      reason = #{reason,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      balanceflag = #{balanceflag,jdbcType=BIT},
+      balancetime = #{balancetime,jdbcType=TIMESTAMP},
+      auditstatus = #{auditstatus,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=INTEGER},
+      auditor = #{auditor,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where accountitemid = #{accountitemid,jdbcType=INTEGER}
+  </update>
+</mapper>

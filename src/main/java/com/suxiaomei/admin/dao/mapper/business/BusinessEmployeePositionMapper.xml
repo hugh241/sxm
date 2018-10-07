@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessEmployeePositionMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessEmployeePosition">
+    <id column="businessemployeepositionid" jdbcType="INTEGER" property="businessemployeepositionid" />
+    <result column="businessemployeeid" jdbcType="INTEGER" property="businessemployeeid" />
+    <result column="employeepositionid" jdbcType="INTEGER" property="employeepositionid" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessemployeepositionid, businessemployeeid, employeepositionid, price, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_employee_position
+    where businessemployeepositionid = #{businessemployeepositionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_employee_position
+    where businessemployeepositionid = #{businessemployeepositionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessEmployeePosition">
+    insert into business_employee_position (businessemployeepositionid, businessemployeeid, 
+      employeepositionid, price, createtime, 
+      updatetime, status)
+    values (#{businessemployeepositionid,jdbcType=INTEGER}, #{businessemployeeid,jdbcType=INTEGER}, 
+      #{employeepositionid,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessEmployeePosition">
+    insert into business_employee_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessemployeepositionid != null">
+        businessemployeepositionid,
+      </if>
+      <if test="businessemployeeid != null">
+        businessemployeeid,
+      </if>
+      <if test="employeepositionid != null">
+        employeepositionid,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessemployeepositionid != null">
+        #{businessemployeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="businessemployeeid != null">
+        #{businessemployeeid,jdbcType=INTEGER},
+      </if>
+      <if test="employeepositionid != null">
+        #{employeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessEmployeePosition">
+    update business_employee_position
+    <set>
+      <if test="businessemployeeid != null">
+        businessemployeeid = #{businessemployeeid,jdbcType=INTEGER},
+      </if>
+      <if test="employeepositionid != null">
+        employeepositionid = #{employeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessemployeepositionid = #{businessemployeepositionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessEmployeePosition">
+    update business_employee_position
+    set businessemployeeid = #{businessemployeeid,jdbcType=INTEGER},
+      employeepositionid = #{employeepositionid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessemployeepositionid = #{businessemployeepositionid,jdbcType=INTEGER}
+  </update>
+</mapper>

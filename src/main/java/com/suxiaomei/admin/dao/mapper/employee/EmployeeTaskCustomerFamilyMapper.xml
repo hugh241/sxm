@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeTaskCustomerFamilyMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeTaskCustomerFamily">
+    <id column="employeetaskcustomerfamilyid" jdbcType="INTEGER" property="employeetaskcustomerfamilyid" />
+    <result column="employeetaskid" jdbcType="INTEGER" property="employeetaskid" />
+    <result column="customerfamilyid" jdbcType="INTEGER" property="customerfamilyid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeetaskcustomerfamilyid, employeetaskid, customerfamilyid, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_task_customer_family
+    where employeetaskcustomerfamilyid = #{employeetaskcustomerfamilyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_task_customer_family
+    where employeetaskcustomerfamilyid = #{employeetaskcustomerfamilyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTaskCustomerFamily">
+    insert into employee_task_customer_family (employeetaskcustomerfamilyid, employeetaskid, 
+      customerfamilyid, createtime, updatetime, 
+      status)
+    values (#{employeetaskcustomerfamilyid,jdbcType=INTEGER}, #{employeetaskid,jdbcType=INTEGER}, 
+      #{customerfamilyid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTaskCustomerFamily">
+    insert into employee_task_customer_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeetaskcustomerfamilyid != null">
+        employeetaskcustomerfamilyid,
+      </if>
+      <if test="employeetaskid != null">
+        employeetaskid,
+      </if>
+      <if test="customerfamilyid != null">
+        customerfamilyid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeetaskcustomerfamilyid != null">
+        #{employeetaskcustomerfamilyid,jdbcType=INTEGER},
+      </if>
+      <if test="employeetaskid != null">
+        #{employeetaskid,jdbcType=INTEGER},
+      </if>
+      <if test="customerfamilyid != null">
+        #{customerfamilyid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTaskCustomerFamily">
+    update employee_task_customer_family
+    <set>
+      <if test="employeetaskid != null">
+        employeetaskid = #{employeetaskid,jdbcType=INTEGER},
+      </if>
+      <if test="customerfamilyid != null">
+        customerfamilyid = #{customerfamilyid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeetaskcustomerfamilyid = #{employeetaskcustomerfamilyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTaskCustomerFamily">
+    update employee_task_customer_family
+    set employeetaskid = #{employeetaskid,jdbcType=INTEGER},
+      customerfamilyid = #{customerfamilyid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeetaskcustomerfamilyid = #{employeetaskcustomerfamilyid,jdbcType=INTEGER}
+  </update>
+</mapper>

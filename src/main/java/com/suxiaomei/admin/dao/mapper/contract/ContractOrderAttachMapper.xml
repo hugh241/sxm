@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractOrderAttachMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.ContractOrderAttach">
+    <id column="contractorderattachid" jdbcType="INTEGER" property="contractorderattachid" />
+    <result column="contractorderid" jdbcType="INTEGER" property="contractorderid" />
+    <result column="businessattachid" jdbcType="INTEGER" property="businessattachid" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="times" jdbcType="SMALLINT" property="times" />
+    <result column="percentage" jdbcType="DECIMAL" property="percentage" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractorderattachid, contractorderid, businessattachid, price, total, times, percentage, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_order_attach
+    where contractorderattachid = #{contractorderattachid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_order_attach
+    where contractorderattachid = #{contractorderattachid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderAttach">
+    insert into contract_order_attach (contractorderattachid, contractorderid, 
+      businessattachid, price, total, 
+      times, percentage, createtime, 
+      updatetime, status)
+    values (#{contractorderattachid,jdbcType=INTEGER}, #{contractorderid,jdbcType=INTEGER}, 
+      #{businessattachid,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, 
+      #{times,jdbcType=SMALLINT}, #{percentage,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderAttach">
+    insert into contract_order_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractorderattachid != null">
+        contractorderattachid,
+      </if>
+      <if test="contractorderid != null">
+        contractorderid,
+      </if>
+      <if test="businessattachid != null">
+        businessattachid,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="percentage != null">
+        percentage,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractorderattachid != null">
+        #{contractorderattachid,jdbcType=INTEGER},
+      </if>
+      <if test="contractorderid != null">
+        #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="businessattachid != null">
+        #{businessattachid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=SMALLINT},
+      </if>
+      <if test="percentage != null">
+        #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderAttach">
+    update contract_order_attach
+    <set>
+      <if test="contractorderid != null">
+        contractorderid = #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="businessattachid != null">
+        businessattachid = #{businessattachid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=SMALLINT},
+      </if>
+      <if test="percentage != null">
+        percentage = #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractorderattachid = #{contractorderattachid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.ContractOrderAttach">
+    update contract_order_attach
+    set contractorderid = #{contractorderid,jdbcType=INTEGER},
+      businessattachid = #{businessattachid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      times = #{times,jdbcType=SMALLINT},
+      percentage = #{percentage,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractorderattachid = #{contractorderattachid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.contract.ContractOrderMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.contract.ContractOrder">
+    <id column="contractorderid" jdbcType="INTEGER" property="contractorderid" />
+    <result column="contractid" jdbcType="INTEGER" property="contractid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="orderstatus" jdbcType="SMALLINT" property="orderstatus" />
+    <result column="auditstatus" jdbcType="SMALLINT" property="auditstatus" />
+    <result column="whenlong" jdbcType="SMALLINT" property="whenlong" />
+    <result column="begindate" jdbcType="TIMESTAMP" property="begindate" />
+    <result column="enddate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="servicecharge" jdbcType="DECIMAL" property="servicecharge" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="totalsalary" jdbcType="DECIMAL" property="totalsalary" />
+    <result column="wagestype" jdbcType="INTEGER" property="wagestype" />
+    <result column="wages" jdbcType="DECIMAL" property="wages" />
+    <result column="holiday" jdbcType="SMALLINT" property="holiday" />
+    <result column="receivedmoney" jdbcType="DECIMAL" property="receivedmoney" />
+    <result column="checkouttype" jdbcType="TINYINT" property="checkouttype" />
+    <result column="specialservicecharge" jdbcType="DECIMAL" property="specialservicecharge" />
+    <result column="totalamount" jdbcType="DECIMAL" property="totalamount" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="auditingstatus" jdbcType="TINYINT" property="auditingstatus" />
+    <result column="updownstatus" jdbcType="TINYINT" property="updownstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractorderid, contractid, employeeid, ordernum, type, orderstatus, auditstatus, 
+    whenlong, begindate, enddate, servicecharge, salary, totalsalary, wagestype, wages, 
+    holiday, receivedmoney, checkouttype, specialservicecharge, totalamount, remark, 
+    auditingstatus, updownstatus, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_order
+    where contractorderid = #{contractorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_order
+    where contractorderid = #{contractorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.contract.ContractOrder">
+    insert into contract_order (contractorderid, contractid, employeeid, 
+      ordernum, type, orderstatus, 
+      auditstatus, whenlong, begindate, 
+      enddate, servicecharge, salary, 
+      totalsalary, wagestype, wages, 
+      holiday, receivedmoney, checkouttype, 
+      specialservicecharge, totalamount, remark, 
+      auditingstatus, updownstatus, createtime, 
+      updatetime, status)
+    values (#{contractorderid,jdbcType=INTEGER}, #{contractid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{ordernum,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{orderstatus,jdbcType=SMALLINT}, 
+      #{auditstatus,jdbcType=SMALLINT}, #{whenlong,jdbcType=SMALLINT}, #{begindate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP}, #{servicecharge,jdbcType=DECIMAL}, #{salary,jdbcType=DECIMAL}, 
+      #{totalsalary,jdbcType=DECIMAL}, #{wagestype,jdbcType=INTEGER}, #{wages,jdbcType=DECIMAL}, 
+      #{holiday,jdbcType=SMALLINT}, #{receivedmoney,jdbcType=DECIMAL}, #{checkouttype,jdbcType=TINYINT}, 
+      #{specialservicecharge,jdbcType=DECIMAL}, #{totalamount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{auditingstatus,jdbcType=TINYINT}, #{updownstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrder">
+    insert into contract_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractorderid != null">
+        contractorderid,
+      </if>
+      <if test="contractid != null">
+        contractid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="auditstatus != null">
+        auditstatus,
+      </if>
+      <if test="whenlong != null">
+        whenlong,
+      </if>
+      <if test="begindate != null">
+        begindate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="servicecharge != null">
+        servicecharge,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="totalsalary != null">
+        totalsalary,
+      </if>
+      <if test="wagestype != null">
+        wagestype,
+      </if>
+      <if test="wages != null">
+        wages,
+      </if>
+      <if test="holiday != null">
+        holiday,
+      </if>
+      <if test="receivedmoney != null">
+        receivedmoney,
+      </if>
+      <if test="checkouttype != null">
+        checkouttype,
+      </if>
+      <if test="specialservicecharge != null">
+        specialservicecharge,
+      </if>
+      <if test="totalamount != null">
+        totalamount,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="auditingstatus != null">
+        auditingstatus,
+      </if>
+      <if test="updownstatus != null">
+        updownstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractorderid != null">
+        #{contractorderid,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="whenlong != null">
+        #{whenlong,jdbcType=SMALLINT},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicecharge != null">
+        #{servicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=DECIMAL},
+      </if>
+      <if test="totalsalary != null">
+        #{totalsalary,jdbcType=DECIMAL},
+      </if>
+      <if test="wagestype != null">
+        #{wagestype,jdbcType=INTEGER},
+      </if>
+      <if test="wages != null">
+        #{wages,jdbcType=DECIMAL},
+      </if>
+      <if test="holiday != null">
+        #{holiday,jdbcType=SMALLINT},
+      </if>
+      <if test="receivedmoney != null">
+        #{receivedmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="checkouttype != null">
+        #{checkouttype,jdbcType=TINYINT},
+      </if>
+      <if test="specialservicecharge != null">
+        #{specialservicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="totalamount != null">
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingstatus != null">
+        #{auditingstatus,jdbcType=TINYINT},
+      </if>
+      <if test="updownstatus != null">
+        #{updownstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.contract.ContractOrder">
+    update contract_order
+    <set>
+      <if test="contractid != null">
+        contractid = #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="orderstatus != null">
+        orderstatus = #{orderstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="auditstatus != null">
+        auditstatus = #{auditstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="whenlong != null">
+        whenlong = #{whenlong,jdbcType=SMALLINT},
+      </if>
+      <if test="begindate != null">
+        begindate = #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicecharge != null">
+        servicecharge = #{servicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=DECIMAL},
+      </if>
+      <if test="totalsalary != null">
+        totalsalary = #{totalsalary,jdbcType=DECIMAL},
+      </if>
+      <if test="wagestype != null">
+        wagestype = #{wagestype,jdbcType=INTEGER},
+      </if>
+      <if test="wages != null">
+        wages = #{wages,jdbcType=DECIMAL},
+      </if>
+      <if test="holiday != null">
+        holiday = #{holiday,jdbcType=SMALLINT},
+      </if>
+      <if test="receivedmoney != null">
+        receivedmoney = #{receivedmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="checkouttype != null">
+        checkouttype = #{checkouttype,jdbcType=TINYINT},
+      </if>
+      <if test="specialservicecharge != null">
+        specialservicecharge = #{specialservicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="totalamount != null">
+        totalamount = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingstatus != null">
+        auditingstatus = #{auditingstatus,jdbcType=TINYINT},
+      </if>
+      <if test="updownstatus != null">
+        updownstatus = #{updownstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contractorderid = #{contractorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.contract.ContractOrder">
+    update contract_order
+    set contractid = #{contractid,jdbcType=INTEGER},
+      employeeid = #{employeeid,jdbcType=INTEGER},
+      ordernum = #{ordernum,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      orderstatus = #{orderstatus,jdbcType=SMALLINT},
+      auditstatus = #{auditstatus,jdbcType=SMALLINT},
+      whenlong = #{whenlong,jdbcType=SMALLINT},
+      begindate = #{begindate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      servicecharge = #{servicecharge,jdbcType=DECIMAL},
+      salary = #{salary,jdbcType=DECIMAL},
+      totalsalary = #{totalsalary,jdbcType=DECIMAL},
+      wagestype = #{wagestype,jdbcType=INTEGER},
+      wages = #{wages,jdbcType=DECIMAL},
+      holiday = #{holiday,jdbcType=SMALLINT},
+      receivedmoney = #{receivedmoney,jdbcType=DECIMAL},
+      checkouttype = #{checkouttype,jdbcType=TINYINT},
+      specialservicecharge = #{specialservicecharge,jdbcType=DECIMAL},
+      totalamount = #{totalamount,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      auditingstatus = #{auditingstatus,jdbcType=TINYINT},
+      updownstatus = #{updownstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where contractorderid = #{contractorderid,jdbcType=INTEGER}
+  </update>
+</mapper>

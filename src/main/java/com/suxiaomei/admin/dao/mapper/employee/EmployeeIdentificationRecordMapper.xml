@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeIdentificationRecordMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeIdentificationRecord">
+    <id column="employeeidentificationrecordid" jdbcType="INTEGER" property="employeeidentificationrecordid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="worktypeid" jdbcType="TINYINT" property="worktypeid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeeidentificationrecordid, isocid, businessid, amount, type, worktypeid, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_identification_record
+    where employeeidentificationrecordid = #{employeeidentificationrecordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_identification_record
+    where employeeidentificationrecordid = #{employeeidentificationrecordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationRecord">
+    insert into employee_identification_record (employeeidentificationrecordid, isocid, 
+      businessid, amount, type, 
+      worktypeid, createtime, updatetime, 
+      status)
+    values (#{employeeidentificationrecordid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, 
+      #{businessid,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{worktypeid,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationRecord">
+    insert into employee_identification_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationrecordid != null">
+        employeeidentificationrecordid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="worktypeid != null">
+        worktypeid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeidentificationrecordid != null">
+        #{employeeidentificationrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="worktypeid != null">
+        #{worktypeid,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationRecord">
+    update employee_identification_record
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="worktypeid != null">
+        worktypeid = #{worktypeid,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeeidentificationrecordid = #{employeeidentificationrecordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationRecord">
+    update employee_identification_record
+    set isocid = #{isocid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      worktypeid = #{worktypeid,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeeidentificationrecordid = #{employeeidentificationrecordid,jdbcType=INTEGER}
+  </update>
+</mapper>

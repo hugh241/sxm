@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.isoc.IsocMemberMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocMember">
+    <id column="isocmemberid" jdbcType="INTEGER" property="isocmemberid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isocmemberid, isocid, businessid, memberid, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_member
+    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_member
+    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
+    insert into isoc_member (isocmemberid, isocid, businessid, 
+      memberid, createtime, updatetime, 
+      status)
+    values (#{isocmemberid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{memberid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
+    insert into isoc_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isocmemberid != null">
+        isocmemberid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isocmemberid != null">
+        #{isocmemberid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
+    update isoc_member
+    <set>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
+    update isoc_member
+    set isocid = #{isocid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      memberid = #{memberid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
+  </update>
+</mapper>

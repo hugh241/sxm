@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeTrainMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeTrain">
+    <id column="employeetrainid" jdbcType="INTEGER" property="employeetrainid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="trainname" jdbcType="VARCHAR" property="trainname" />
+    <result column="trainschool" jdbcType="VARCHAR" property="trainschool" />
+    <result column="startdate" jdbcType="DATE" property="startdate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="theoryscore" jdbcType="TINYINT" property="theoryscore" />
+    <result column="practicescore" jdbcType="TINYINT" property="practicescore" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeetrainid, employeeid, businessid, trainname, trainschool, startdate, enddate, 
+    theoryscore, practicescore, remark, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_train
+    where employeetrainid = #{employeetrainid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_train
+    where employeetrainid = #{employeetrainid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTrain">
+    insert into employee_train (employeetrainid, employeeid, businessid, 
+      trainname, trainschool, startdate, 
+      enddate, theoryscore, practicescore, 
+      remark, createtime, updatetime, 
+      status)
+    values (#{employeetrainid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{trainname,jdbcType=VARCHAR}, #{trainschool,jdbcType=VARCHAR}, #{startdate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{theoryscore,jdbcType=TINYINT}, #{practicescore,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTrain">
+    insert into employee_train
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeetrainid != null">
+        employeetrainid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="trainname != null">
+        trainname,
+      </if>
+      <if test="trainschool != null">
+        trainschool,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="theoryscore != null">
+        theoryscore,
+      </if>
+      <if test="practicescore != null">
+        practicescore,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeetrainid != null">
+        #{employeetrainid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="trainname != null">
+        #{trainname,jdbcType=VARCHAR},
+      </if>
+      <if test="trainschool != null">
+        #{trainschool,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="theoryscore != null">
+        #{theoryscore,jdbcType=TINYINT},
+      </if>
+      <if test="practicescore != null">
+        #{practicescore,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTrain">
+    update employee_train
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="trainname != null">
+        trainname = #{trainname,jdbcType=VARCHAR},
+      </if>
+      <if test="trainschool != null">
+        trainschool = #{trainschool,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        startdate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="theoryscore != null">
+        theoryscore = #{theoryscore,jdbcType=TINYINT},
+      </if>
+      <if test="practicescore != null">
+        practicescore = #{practicescore,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeetrainid = #{employeetrainid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeTrain">
+    update employee_train
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      trainname = #{trainname,jdbcType=VARCHAR},
+      trainschool = #{trainschool,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      theoryscore = #{theoryscore,jdbcType=TINYINT},
+      practicescore = #{practicescore,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeetrainid = #{employeetrainid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeCreditCardMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+    <id column="employeecreditcardid" jdbcType="INTEGER" property="employeecreditcardid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="isocqrcodeid" jdbcType="INTEGER" property="isocqrcodeid" />
+    <result column="fronturl" jdbcType="VARCHAR" property="fronturl" />
+    <result column="behindurl" jdbcType="VARCHAR" property="behindurl" />
+    <result column="validitytime" jdbcType="DATE" property="validitytime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeecreditcardid, employeeid, isocid, isocqrcodeid, fronturl, behindurl, validitytime, 
+    createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_credit_card
+    where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_credit_card
+    where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+    insert into employee_credit_card (employeecreditcardid, employeeid, 
+      isocid, isocqrcodeid, fronturl, 
+      behindurl, validitytime, createtime, 
+      updatetime, status)
+    values (#{employeecreditcardid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{isocid,jdbcType=INTEGER}, #{isocqrcodeid,jdbcType=INTEGER}, #{fronturl,jdbcType=VARCHAR}, 
+      #{behindurl,jdbcType=VARCHAR}, #{validitytime,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+    insert into employee_credit_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeecreditcardid != null">
+        employeecreditcardid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="isocqrcodeid != null">
+        isocqrcodeid,
+      </if>
+      <if test="fronturl != null">
+        fronturl,
+      </if>
+      <if test="behindurl != null">
+        behindurl,
+      </if>
+      <if test="validitytime != null">
+        validitytime,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeecreditcardid != null">
+        #{employeecreditcardid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="isocqrcodeid != null">
+        #{isocqrcodeid,jdbcType=INTEGER},
+      </if>
+      <if test="fronturl != null">
+        #{fronturl,jdbcType=VARCHAR},
+      </if>
+      <if test="behindurl != null">
+        #{behindurl,jdbcType=VARCHAR},
+      </if>
+      <if test="validitytime != null">
+        #{validitytime,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+    update employee_credit_card
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="isocqrcodeid != null">
+        isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER},
+      </if>
+      <if test="fronturl != null">
+        fronturl = #{fronturl,jdbcType=VARCHAR},
+      </if>
+      <if test="behindurl != null">
+        behindurl = #{behindurl,jdbcType=VARCHAR},
+      </if>
+      <if test="validitytime != null">
+        validitytime = #{validitytime,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+    update employee_credit_card
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      isocid = #{isocid,jdbcType=INTEGER},
+      isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER},
+      fronturl = #{fronturl,jdbcType=VARCHAR},
+      behindurl = #{behindurl,jdbcType=VARCHAR},
+      validitytime = #{validitytime,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
+  </update>
+</mapper>

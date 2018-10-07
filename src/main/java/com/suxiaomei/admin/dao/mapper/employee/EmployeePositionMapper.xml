@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.employee.EmployeePositionMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeePosition">
+    <id column="employeepositionid" jdbcType="INTEGER" property="employeepositionid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="creditcardurl" jdbcType="VARCHAR" property="creditcardurl" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="com.suxiaomei.admin.entity.employee.extend.EmployeePositionExtend">
+    <id column="employeepositionid" jdbcType="INTEGER" property="employeepositionid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="creditcardurl" jdbcType="VARCHAR" property="creditcardurl" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="positionName" jdbcType="VARCHAR" property="positionName" />
+    <collection property="employeeIdentification" ofType="EmployeeIdentificationExtend" select="com.suxiaomei.admin.dao.employee.EmployeeIdentificationMapper.findNewestByEmployeeidAndWorktype" column="{employeeid=employeeid,worktype=type}" ></collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    employeepositionid, employeeid, type, price, introduce, creditcardurl, createtime, 
+    updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_position
+    where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_position
+    where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
+    insert into employee_position (employeepositionid, employeeid, type, 
+      price, introduce, creditcardurl, 
+      createtime, updatetime, status
+      )
+    values (#{employeepositionid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, 
+      #{price,jdbcType=DECIMAL}, #{introduce,jdbcType=VARCHAR}, #{creditcardurl,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
+    insert into employee_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeepositionid != null">
+        employeepositionid,
+      </if>
+      <if test="employeeid != null">
+        employeeid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="creditcardurl != null">
+        creditcardurl,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeepositionid != null">
+        #{employeepositionid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="creditcardurl != null">
+        #{creditcardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
+    update employee_position
+    <set>
+      <if test="employeeid != null">
+        employeeid = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="creditcardurl != null">
+        creditcardurl = #{creditcardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
+    update employee_position
+    set employeeid = #{employeeid,jdbcType=INTEGER},
+      type = #{type,jdbcType=SMALLINT},
+      price = #{price,jdbcType=DECIMAL},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      creditcardurl = #{creditcardurl,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="findByEmployeeid" parameterType="java.lang.Integer" resultMap="ExtendResultMap">
+    select 
+    ep.*,dvv.dictionaryvalue positionName
+    from employee_position ep
+    left join (
+    	select * from dictionary_value dv where dictionaryid = (
+    		select dictionaryid from dictionary where dictionarykey = 'positiontype' limit 0,1
+    	) order by savevalue asc
+    ) dvv on dvv.savevalue = ep.type
+    where ep.employeeid = #{employeeid,jdbcType=INTEGER}
+  </select>
+</mapper>

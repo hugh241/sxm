@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.business.BusinessExamineOrderMapper">
+  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+    <id column="businessexamineorderid" jdbcType="INTEGER" property="businessexamineorderid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="totalprice" jdbcType="INTEGER" property="totalprice" />
+    <result column="concessionalprice" jdbcType="INTEGER" property="concessionalprice" />
+    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="orderstatus" jdbcType="TINYINT" property="orderstatus" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    businessexamineorderid, businessid, isocid, ordernum, totalprice, concessionalprice, 
+    paytime, orderstatus, createtime, updatetime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_examine_order
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_examine_order
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+    insert into business_examine_order (businessexamineorderid, businessid, 
+      isocid, ordernum, totalprice, 
+      concessionalprice, paytime, orderstatus, 
+      createtime, updatetime, status
+      )
+    values (#{businessexamineorderid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{isocid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, #{totalprice,jdbcType=INTEGER}, 
+      #{concessionalprice,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+    insert into business_examine_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessexamineorderid != null">
+        businessexamineorderid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="isocid != null">
+        isocid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="concessionalprice != null">
+        concessionalprice,
+      </if>
+      <if test="paytime != null">
+        paytime,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessexamineorderid != null">
+        #{businessexamineorderid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=INTEGER},
+      </if>
+      <if test="concessionalprice != null">
+        #{concessionalprice,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null">
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+    update business_examine_order
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="isocid != null">
+        isocid = #{isocid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=INTEGER},
+      </if>
+      <if test="concessionalprice != null">
+        concessionalprice = #{concessionalprice,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null">
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null">
+        orderstatus = #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+    update business_examine_order
+    set businessid = #{businessid,jdbcType=INTEGER},
+      isocid = #{isocid,jdbcType=INTEGER},
+      ordernum = #{ordernum,jdbcType=VARCHAR},
+      totalprice = #{totalprice,jdbcType=INTEGER},
+      concessionalprice = #{concessionalprice,jdbcType=INTEGER},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      orderstatus = #{orderstatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+  </update>
+</mapper>
