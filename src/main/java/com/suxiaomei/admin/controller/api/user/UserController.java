@@ -35,8 +35,7 @@ public class UserController extends BaseController{
 			resultMap.put("data", flag);
 			return SUCCESS(resultMap);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -52,8 +51,7 @@ public class UserController extends BaseController{
 				return ERROR(resultMap,Code.SUBMIT_DATA_ERROR);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 		return SUCCESS(resultMap);
 	}
@@ -67,8 +65,7 @@ public class UserController extends BaseController{
 			resultMap.put("data",userService.findAll(cUser));
 			return SUCCESS(resultMap);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -81,8 +78,7 @@ public class UserController extends BaseController{
 			int flag = userService.add(user);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -95,8 +91,7 @@ public class UserController extends BaseController{
 			int flag = userService.resetPassword(user);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -109,8 +104,7 @@ public class UserController extends BaseController{
 			int flag = userService.updateUserStatus(userid,0);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 }

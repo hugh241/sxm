@@ -26,16 +26,6 @@
     delete from identification_log
     where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
-    insert into identification_log (identificationlogid, employeepositionid, 
-      worktype, operationtime, operationcontent, 
-      operationremark, createtime, updatetime, 
-      status)
-    values (#{identificationlogid,jdbcType=INTEGER}, #{employeepositionid,jdbcType=INTEGER}, 
-      #{worktype,jdbcType=TINYINT}, #{operationtime,jdbcType=DATE}, #{operationcontent,jdbcType=VARCHAR}, 
-      #{operationremark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.common.IdentificationLog">
     insert into identification_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -139,4 +129,19 @@
       status = #{status,jdbcType=TINYINT}
     where identificationlogid = #{identificationlogid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <select id="findByEmployeepositionid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from identification_log
+    where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
+    order by createtime desc
+  </select>
+  <insert id="insert" parameterType="IdentificationLog">
+    insert into identification_log (employeepositionid,worktype, operationtime, operationcontent,operationremark)
+    values (#{employeepositionid,jdbcType=INTEGER},#{worktype,jdbcType=TINYINT}, #{operationtime,jdbcType=DATE}, 
+    	#{operationcontent,jdbcType=VARCHAR},#{operationremark,jdbcType=VARCHAR})
+  </insert>
 </mapper>

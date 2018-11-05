@@ -35,6 +35,8 @@ public class EmployeeExd extends Employee{
 	private List<EmployeePositionExtend> positions;//护理员所有工种
 	private int age;
 	private int workingmonth;
+	private int businessid;
+	private String creatorname;
 	public List<EmployeePositionExtend> getPositions() {
 		return positions;
 	}
@@ -52,5 +54,17 @@ public class EmployeeExd extends Employee{
 	}
 	public void setWorkingmonth(int workingmonth) {
 		this.workingmonth = workingmonth;
+	}
+	public int getBusinessid() {
+		return businessid;
+	}
+	public void setBusinessid(int businessid) {
+		this.businessid = businessid;
+	}
+	public String getCreatorname() {
+		return creatorname;
+	}
+	public void setCreatorname(String creatorname) {
+		this.creatorname = creatorname;
 	}
 }

@@ -18,10 +18,6 @@
     from role_module
     where rolemoduleid = #{rolemoduleid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from role_module
-    where rolemoduleid = #{rolemoduleid,jdbcType=INTEGER}
-  </delete>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.RoleModule">
     insert into role_module
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -105,6 +101,7 @@
     where m.url = concat('',#{module,jdbcType=VARCHAR},'') and m.sxmsystemid = #{type,jdbcType=INTEGER}
     and r.roleid = #{roleid,jdbcType=INTEGER} and r.type = #{type,jdbcType=INTEGER} and m.status = 1 and r.status = 1
     and rm.status = 1
+    limit 0,1
   </select>
   <insert id="insertByRoleidAndSxmsystemid" parameterType="java.lang.Integer">
     insert into role_module(roleid,moduleid)
@@ -124,8 +121,12 @@
   <update id="deleteRoleModule">
   	delete from role_module where roleid = #{roleid,jdbcType=INTEGER} and moduleid = #{moduleid,jdbcType=INTEGER}
   </update>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.RoleModule">
+  <insert id="insert" parameterType="roleModule" useGeneratedKeys="true" keyProperty="rolemoduleid">
     insert into role_module (roleid, moduleid)
     values (#{roleid,jdbcType=INTEGER}, #{moduleid,jdbcType=INTEGER})
   </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role_module
+    where rolemoduleid = #{rolemoduleid,jdbcType=INTEGER}
+  </delete>
 </mapper>

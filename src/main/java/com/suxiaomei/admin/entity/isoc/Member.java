@@ -1,15 +1,15 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 /**
  * 家协会员企业
  * @author zl
  */
-public class Member implements Serializable{
+public class Member extends BaseEntity{
 	private static final long serialVersionUID = 1L;
-	private int	memberid;
+	private Integer	memberid;
 	private Integer businessid;//企业id
-	private int isocid;//家协id
+	private Integer isocid;//家协id
 	private String name;//机构名字
 	private String gszh = "";//工商证号
 	private String clsj;//成立时间
@@ -37,23 +37,8 @@ public class Member implements Serializable{
 	private int	zjzkhrs;//中介制客户人数
 	private int	ygzzgrs;//员工制职工人数
 	private int	ygzkhrs;//员工制客户人数
-	private int shstatus;//申请状态 0申请中 1申请通过 2申请驳回
+	private Integer shstatus;//申请状态 0申请中 1申请通过 2申请驳回 3删除
 	private String result = "";//备注
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
-	public int getIsocid() {
-		return isocid;
-	}
-	public void setIsocid(int isocid) {
-		this.isocid = isocid;
-	}
-	public int getMemberid() {
-		return memberid;
-	}
-	public void setMemberid(int memberid) {
-		this.memberid = memberid;
-	}
 	public String getName() {
 		return name;
 	}
@@ -210,35 +195,17 @@ public class Member implements Serializable{
 	public void setYgzkhrs(int ygzkhrs) {
 		this.ygzkhrs = ygzkhrs;
 	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
-	}
 	public Integer getBusinessid() {
 		return businessid;
 	}
 	public void setBusinessid(Integer businessid) {
 		this.businessid = businessid;
 	}
-	public int getShstatus() {
-		return shstatus;
+	public Integer getIsocid() {
+		return isocid;
 	}
-	public void setShstatus(int shstatus) {
-		this.shstatus = shstatus;
+	public void setIsocid(Integer isocid) {
+		this.isocid = isocid;
 	}
 	public String getResult() {
 		return result;
@@ -251,5 +218,17 @@ public class Member implements Serializable{
 	}
 	public void setZw(String zw) {
 		this.zw = zw;
+	}
+	public Integer getMemberid() {
+		return memberid;
+	}
+	public void setMemberid(Integer memberid) {
+		this.memberid = memberid;
+	}
+	public Integer getShstatus() {
+		return shstatus;
+	}
+	public void setShstatus(Integer shstatus) {
+		this.shstatus = shstatus;
 	}
 }

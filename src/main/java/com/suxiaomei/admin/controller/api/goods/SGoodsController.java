@@ -16,7 +16,7 @@ import com.suxiaomei.admin.common.Code;
 import com.suxiaomei.admin.common.aop.SystemLog;
 import com.suxiaomei.admin.controller.api.BaseController;
 import com.suxiaomei.admin.entity.common.Goods;
-import com.suxiaomei.admin.entity.common.extend.IsocGoodsOrder;
+import com.suxiaomei.admin.entity.isoc.IsocExamineOrder;
 import com.suxiaomei.admin.service.common.GoodsService;
 import com.suxiaomei.admin.util.QueryResult;
 
@@ -63,8 +63,7 @@ public class SGoodsController extends BaseController{
 			resultMap.put("data",goodsList);
 			return SUCCESS(resultMap);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLEFAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -116,7 +115,7 @@ public class SGoodsController extends BaseController{
 	public Map<String, Object> searchOrderList(@RequestParam String condition) {
 		Map<String,Object> resultMap = new HashMap<>();
 		try {
-			QueryResult<IsocGoodsOrder> goodsList = goodsService.findOrdersByConditionAndUserType(condition,cUser);
+			QueryResult<IsocExamineOrder> goodsList = goodsService.findOrdersByConditionAndUserType(condition,cUser);
 			resultMap.put("data",goodsList);
 			return SUCCESS(resultMap);
 		} catch (Exception e) {

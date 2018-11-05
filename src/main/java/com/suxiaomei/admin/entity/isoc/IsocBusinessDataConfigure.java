@@ -33,7 +33,7 @@ public class IsocBusinessDataConfigure extends BaseEntity{
 	private int	isocbusinessdataconfigureid;
 	private int	isocid;//家协id
 	private String configname;//配置名称
-	private Integer type;//配置类型 0企业认证项配置 1护理员认证项配置
+	private Integer type;//配置类型 0企业认证项配置 1护理员认证项配置 2学校认证配置
 	private String remark;//备注
 	public int getIsocbusinessdataconfigureid() {
 		return isocbusinessdataconfigureid;

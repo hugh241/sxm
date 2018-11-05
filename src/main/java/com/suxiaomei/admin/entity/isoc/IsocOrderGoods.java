@@ -1,6 +1,7 @@
 package com.suxiaomei.admin.entity.isoc;
 
 import com.suxiaomei.admin.entity.BaseEntity;
+import com.suxiaomei.admin.entity.common.Goods;
 /**
  * 家协购买产品订单-每个产品购买的详细
  *　　　　　　　 ┏┓       ┏┓+ +
@@ -34,6 +35,18 @@ public class IsocOrderGoods extends BaseEntity{
 	private int	num;//购买数量
 	private int	unitprice;//单价
 	private int	totalprice;//总价
+	private Goods goods;//产品
+	public IsocOrderGoods() {}
+	public IsocOrderGoods(int isocordergoodsid, int isocexamineorderid, int goodsid, int num, int unitprice,
+			int totalprice) {
+		this.isocordergoodsid = isocordergoodsid;
+		this.isocexamineorderid = isocexamineorderid;
+		this.goodsid = goodsid;
+		this.num = num;
+		this.unitprice = unitprice;
+		this.totalprice = totalprice;
+	}
+
 	private static final long serialVersionUID = 1L;
 	public int getIsocordergoodsid() {
 		return isocordergoodsid;
@@ -70,5 +83,11 @@ public class IsocOrderGoods extends BaseEntity{
 	}
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
+	}
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 }

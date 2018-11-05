@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.suxiaomei.admin.entity.common.extend.IsocGoodsOrder;
 import com.suxiaomei.admin.entity.isoc.IsocExamineOrder;
 
 public interface IsocExamineOrderMapper {
@@ -25,13 +24,13 @@ public interface IsocExamineOrderMapper {
      * @param order 查询条件
      * @return
      */
-	List<IsocGoodsOrder> findByPageList(@Param("startNum")int startNum,@Param("pageSize")int pageSize,@Param("order")IsocGoodsOrder order);
+	List<IsocExamineOrder> findByPageList(@Param("startNum")int startNum,@Param("pageSize")int pageSize,@Param("order")IsocExamineOrder order);
 	/**
 	 * 根据条件查询总数
 	 * @param order
 	 * @return
 	 */
-	int findCountByCondition(@Param("order")IsocGoodsOrder order);
+	Integer findCountByCondition(@Param("order")IsocExamineOrder order);
 	/**
 	 * 通过订单
 	 * @param record

@@ -39,16 +39,6 @@
     delete from employee_position
     where employeepositionid = #{employeepositionid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
-    insert into employee_position (employeepositionid, employeeid, type, 
-      price, introduce, creditcardurl, 
-      createtime, updatetime, status
-      )
-    values (#{employeepositionid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, 
-      #{price,jdbcType=DECIMAL}, #{introduce,jdbcType=VARCHAR}, #{creditcardurl,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeePosition">
     insert into employee_position
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -166,4 +156,13 @@
     ) dvv on dvv.savevalue = ep.type
     where ep.employeeid = #{employeeid,jdbcType=INTEGER}
   </select>
+  <select id="findByEmployeeidAndType" resultMap="BaseResultMap">
+    Select * from employee_position
+    where type = #{type,jdbcType=INTEGER} and employeeid = #{employeeid,jdbcType=INTEGER} and status = 1 
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="EmployeePosition" useGeneratedKeys="true" keyProperty="employeepositionid">
+    insert into employee_position (employeeid, type)
+    values (#{employeeid,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT})
+  </insert>
 </mapper>

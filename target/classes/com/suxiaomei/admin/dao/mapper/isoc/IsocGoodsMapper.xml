@@ -12,15 +12,15 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
+  <resultMap id="ExtendResultMap" type="IsocGoodsExtend" extends="BaseResultMap">
+    <result column="nums" jdbcType="INTEGER" property="nums" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="oPrice" jdbcType="INTEGER" property="oPrice" />
+  	<association property="goods" javaType="Goods" select="com.suxiaomei.admin.dao.common.GoodsMapper.selectByPrimaryKey" column="goodsid"></association>
+  </resultMap>
   <sql id="Base_Column_List">
     isocgoodsid, isocid, goodsid, price, total, consume, createtime, updatetime, status
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from isoc_goods
-    where isocgoodsid = #{isocgoodsid,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from isoc_goods
     where isocgoodsid = #{isocgoodsid,jdbcType=INTEGER}
@@ -35,20 +35,16 @@
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocGoods">
-    update isoc_goods
-    set isocid = #{isocid,jdbcType=INTEGER},
-      goodsid = #{goodsid,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
-      total = #{total,jdbcType=INTEGER},
-      consume = #{consume,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_goods
     where isocgoodsid = #{isocgoodsid,jdbcType=INTEGER}
-  </update>
-  
-  
+  </select>
   <select id="findByIsocidAndGoodsid" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -103,4 +99,31 @@
     </set>
     where isocgoodsid = #{isocgoodsid,jdbcType=INTEGER}
   </update>
+  <select id="findDetailById" resultMap="ExtendResultMap">
+    select 
+	   	ig.isocgoodsid,ig.isocid,ig.goodsid,ig.price,ig.total,ig.consume,ig.status,ig.createtime,ig.updatetime,
+	   	IFNULL((ig.total-ig.consume),0) as nums,g.name,g.price as oPrice
+    from isoc_goods ig
+    left join goods g on g.goodsid = ig.goodsid
+    where ig.isocgoodsid = #{isocgoodsid,jdbcType=INTEGER} 
+    limit 0,1
+  </select>
+  <select id="findAllGoodsByIsocid" resultMap="ExtendResultMap">
+   	select 
+	   	IFNULL(ig.isocgoodsid,0) as isocgoodsid,IFNULL(ig.isocid,0) as isocid,ig.goodsid,
+	   	IFNULL(ig.price,0) as price,IFNULL(ig.total,0) as total,IFNULL(ig.consume,0) as consume,
+	   	IFNULL(ig.status,0) as status,ig.createtime,ig.updatetime,IFNULL((ig.total-ig.consume),0) as nums,
+	   	g.name,g.price as oPrice
+   	from goods g
+   	left join isoc_goods ig on (ig.goodsid = g.goodsid and ig.isocid = #{isocid,jdbcType=INTEGER})
+   	group by g.goodsid
+  </select>
+  <select id="findIsocGoodsByIsocid" resultMap="ExtendResultMap">
+   	select 
+   		ig.*,(ig.total-ig.consume) as nums,g.name,g.price as oPrice 
+   	from isoc_goods ig
+   	left join goods g on ig.goodsid = g.goodsid
+   	where ig.isocid =  #{isocid,jdbcType=INTEGER}
+   	group by ig.isocgoodsid
+  </select>
 </mapper>

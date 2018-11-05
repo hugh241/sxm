@@ -1,8 +1,10 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
+import java.util.List;
+
+import com.suxiaomei.admin.entity.BaseEntity;
 /**
- * 企业认证审核项目
+ * 企业认证审核项目/护理员认证审核项目
  *　　　　　　　 ┏┓       ┏┓+ +
  *　　　　　　　┏┛┻━━━━━━━┛┻┓ + +
  *　　　　　　　┃　　　　　　 ┃
@@ -27,16 +29,14 @@ import java.io.Serializable;
  * @author zl
  * 2018年7月25日 下午2:56:40
  */
-public class IsocBusinessOrderData implements Serializable{
+public class IsocBusinessOrderData extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	isocbusinessorderdataid;
 	private int	relationid;//关联id
 	private int type;//类型 0企业认证 1护理员认证
 	private String name;
 	private int auditstatus;//审核状态 0审核中 1通过 2驳回
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
+	private List<IsocBusinessOrderDataDetail> details;
 	public int getIsocbusinessorderdataid() {
 		return isocbusinessorderdataid;
 	}
@@ -61,28 +61,16 @@ public class IsocBusinessOrderData implements Serializable{
 	public void setAuditstatus(int auditstatus) {
 		this.auditstatus = auditstatus;
 	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
-	}
 	public int getType() {
 		return type;
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public List<IsocBusinessOrderDataDetail> getDetails() {
+		return details;
+	}
+	public void setDetails(List<IsocBusinessOrderDataDetail> details) {
+		this.details = details;
 	}
 }

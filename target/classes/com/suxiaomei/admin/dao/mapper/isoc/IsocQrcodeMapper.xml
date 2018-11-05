@@ -24,14 +24,6 @@
     delete from isoc_qrcode
     where isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocQrcode">
-    insert into isoc_qrcode (isocqrcodeid, isocid, relationid, 
-      type, qrcode, createtime, 
-      updatetime, status)
-    values (#{isocqrcodeid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{relationid,jdbcType=INTEGER}, 
-      #{type,jdbcType=TINYINT}, #{qrcode,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocQrcode">
     insert into isoc_qrcode
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -125,4 +117,19 @@
       status = #{status,jdbcType=TINYINT}
     where isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <select id="findByIsocidAndRelationidAndType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_qrcode
+    where isocid = #{isocid,jdbcType=INTEGER} and relationid = #{relationid,jdbcType=INTEGER} and type = #{type,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="IsocQrcode" useGeneratedKeys="true" keyProperty="isocqrcodeid">
+    insert into isoc_qrcode (isocid, relationid,type, qrcode)
+    values (#{isocid,jdbcType=INTEGER}, #{relationid,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{qrcode,jdbcType=VARCHAR})
+  </insert>
 </mapper>

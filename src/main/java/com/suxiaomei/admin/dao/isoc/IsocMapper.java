@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.suxiaomei.admin.entity.isoc.Isoc;
+import com.suxiaomei.admin.entity.isoc.extend.IsocEmpowerExtend;
 import com.suxiaomei.admin.entity.isoc.extend.IsocExtend;
 
 public interface IsocMapper {
@@ -37,7 +38,7 @@ public interface IsocMapper {
 	 * @param isoc
 	 * @return
 	 */
-	int findCountByCondition(@Param("isoc")Isoc isoc);
+	Integer findCountByCondition(@Param("isoc")Isoc isoc);
 	/**
 	 * 根据家协名称
 	 * 查询是否存在 同名 的家协
@@ -56,4 +57,34 @@ public interface IsocMapper {
 	 * @return
 	 */
 	Isoc findByAddressid(@Param("addressid")Integer addressid);
+	/**
+	 * 根据家协id查询家协详细信息
+	 * @param isocid
+	 * @return
+	 */
+	IsocExtend findDetailByIsocid(Integer isocid);
+	/**
+	 * 根据授权企业id查询授权企业所属的家协
+	 * @param isocempowerfirmid
+	 * @return
+	 */
+	Isoc findByIsocempowerfirmid(Integer isocempowerfirmid);
+	/**
+	 * 根据企业id查询出没有认证该企业为会员的所有家协
+	 * @param businessid
+	 * @return
+	 */
+	List<Isoc> findIsocWitchNotAuthMembers(Integer businessid);
+	/**
+	 * 根据企业id查询认证该企为会员的所有家协
+	 * @param businessid
+	 * @return
+	 */
+	List<Isoc> findIsocWitchAuthMember(Integer businessid);
+	/**
+	 * 根据企业id查询认证了该企业的所有家协和家协下的授权单位
+	 * @param businessid
+	 * @return
+	 */
+	List<IsocEmpowerExtend> findIsocEmpowerByBusinessid(Integer businessid);
 }

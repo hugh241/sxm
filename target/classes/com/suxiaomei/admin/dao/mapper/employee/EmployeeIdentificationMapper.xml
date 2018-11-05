@@ -42,18 +42,6 @@
     delete from employee_identification
     where employeeidentificationid = #{employeeidentificationid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
-    insert into employee_identification (employeeidentificationid, employeeid, 
-      isocid, employeeidentificationorderid, 
-      worktype, adopttime, begindate, 
-      enddate, createtime, updatetime, 
-      status)
-    values (#{employeeidentificationid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
-      #{isocid,jdbcType=INTEGER}, #{employeeidentificationorderid,jdbcType=INTEGER}, 
-      #{worktype,jdbcType=TINYINT}, #{adopttime,jdbcType=TIMESTAMP}, #{begindate,jdbcType=TIMESTAMP}, 
-      #{enddate,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentification">
     insert into employee_identification
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -198,4 +186,24 @@
     and ei.enddate > now()
     order by ei.enddate desc limit 0,1
   </select>
+  <select id="findEmployeeLastEnddate" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_identification
+    where status = 1 and employeeid = #{employeeid,jdbcType=INTEGER} 
+    and isocid = #{isocid,jdbcType=INTEGER} 
+    <if test="worktype != null">
+    	and worktype = #{worktype,jdbcType=INTEGER} 
+    </if>
+    and enddate > now()
+    order by enddate desc
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="EmployeeIdentification">
+    insert into employee_identification (employeeid,isocid, employeeidentificationorderid, 
+      worktype, adopttime, begindate,enddate)
+    values (#{employeeid,jdbcType=INTEGER},#{isocid,jdbcType=INTEGER}, #{employeeidentificationorderid,jdbcType=INTEGER}, 
+      #{worktype,jdbcType=TINYINT}, #{adopttime,jdbcType=TIMESTAMP}, #{begindate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP})
+  </insert>
 </mapper>

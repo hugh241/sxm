@@ -37,12 +37,6 @@
     headheight, headtop, headleft, hasqrcode, qrcodepositiontype, qrcodewidth, qrcodeheight, 
     qrcodetop, qrcodeleft, usestatus, createtime, updatetime, status
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from isoc_credit_card_template
-    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from isoc_credit_card_template
     where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
@@ -69,18 +63,82 @@
       #{usestatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+    update isoc_credit_card_template
+    set isocid = #{isocid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      hasname = #{hasname,jdbcType=TINYINT},
+      namepositiontype = #{namepositiontype,jdbcType=TINYINT},
+      nametop = #{nametop,jdbcType=SMALLINT},
+      nameleft = #{nameleft,jdbcType=SMALLINT},
+      namefontfamily = #{namefontfamily,jdbcType=VARCHAR},
+      namefontsize = #{namefontsize,jdbcType=TINYINT},
+      namecolor = #{namecolor,jdbcType=VARCHAR},
+      hashead = #{hashead,jdbcType=TINYINT},
+      headpositiontype = #{headpositiontype,jdbcType=TINYINT},
+      headwidth = #{headwidth,jdbcType=SMALLINT},
+      headheight = #{headheight,jdbcType=SMALLINT},
+      headtop = #{headtop,jdbcType=SMALLINT},
+      headleft = #{headleft,jdbcType=SMALLINT},
+      hasqrcode = #{hasqrcode,jdbcType=TINYINT},
+      qrcodepositiontype = #{qrcodepositiontype,jdbcType=TINYINT},
+      qrcodewidth = #{qrcodewidth,jdbcType=SMALLINT},
+      qrcodeheight = #{qrcodeheight,jdbcType=SMALLINT},
+      qrcodetop = #{qrcodetop,jdbcType=SMALLINT},
+      qrcodeleft = #{qrcodeleft,jdbcType=SMALLINT},
+      usestatus = #{usestatus,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_credit_card_template
+    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  </select>
+  <select id="findByPageList" resultMap="BaseResultMap">
+	select * from isoc_credit_card_template
+	<where>
+		<if test="tem.name!=null and tem.name != ''">
+			and name like concat('%', #{tem.name}, '%')
+		</if>
+		<if test="tem.type != null">
+			and type = #{tem.type}
+		</if>
+		<if test="tem.isocid != null">
+			and isocid = #{tem.isocid}
+		</if>
+	</where>
+	order by createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from isoc_credit_card_template
+	<where>
+		<if test="tem.name!=null and tem.name != ''">
+			and name like concat('%', #{tem.name}, '%')
+		</if>
+		<if test="tem.type != null">
+			and type = #{tem.type}
+		</if>
+		<if test="tem.isocid != null">
+			and isocid = #{tem.isocid}
+		</if>
+	</where>
+  </select>
+  <insert id="insertSelective" parameterType="IsocCreditCardTemplate" useGeneratedKeys="true" keyProperty="isoccreditcardtemplateid">
     insert into isoc_credit_card_template
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="isoccreditcardtemplateid != null">
-        isoccreditcardtemplateid,
-      </if>
-      <if test="isocid != null">
         isocid,
-      </if>
-      <if test="type != null">
         type,
-      </if>
       <if test="name != null">
         name,
       </if>
@@ -147,26 +205,10 @@
       <if test="usestatus != null">
         usestatus,
       </if>
-      <if test="createtime != null">
-        createtime,
-      </if>
-      <if test="updatetime != null">
-        updatetime,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="isoccreditcardtemplateid != null">
-        #{isoccreditcardtemplateid,jdbcType=INTEGER},
-      </if>
-      <if test="isocid != null">
         #{isocid,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
         #{type,jdbcType=TINYINT},
-      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -233,23 +275,11 @@
       <if test="usestatus != null">
         #{usestatus,jdbcType=TINYINT},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
+  <update id="updateByPrimaryKeySelective" parameterType="IsocCreditCardTemplate">
     update isoc_credit_card_template
     <set>
-      <if test="isocid != null">
-        isocid = #{isocid,jdbcType=INTEGER},
-      </if>
       <if test="type != null">
         type = #{type,jdbcType=TINYINT},
       </if>
@@ -319,47 +349,20 @@
       <if test="usestatus != null">
         usestatus = #{usestatus,jdbcType=TINYINT},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
     </set>
     where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocCreditCardTemplate">
-    update isoc_credit_card_template
-    set isocid = #{isocid,jdbcType=INTEGER},
-      type = #{type,jdbcType=TINYINT},
-      name = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      hasname = #{hasname,jdbcType=TINYINT},
-      namepositiontype = #{namepositiontype,jdbcType=TINYINT},
-      nametop = #{nametop,jdbcType=SMALLINT},
-      nameleft = #{nameleft,jdbcType=SMALLINT},
-      namefontfamily = #{namefontfamily,jdbcType=VARCHAR},
-      namefontsize = #{namefontsize,jdbcType=TINYINT},
-      namecolor = #{namecolor,jdbcType=VARCHAR},
-      hashead = #{hashead,jdbcType=TINYINT},
-      headpositiontype = #{headpositiontype,jdbcType=TINYINT},
-      headwidth = #{headwidth,jdbcType=SMALLINT},
-      headheight = #{headheight,jdbcType=SMALLINT},
-      headtop = #{headtop,jdbcType=SMALLINT},
-      headleft = #{headleft,jdbcType=SMALLINT},
-      hasqrcode = #{hasqrcode,jdbcType=TINYINT},
-      qrcodepositiontype = #{qrcodepositiontype,jdbcType=TINYINT},
-      qrcodewidth = #{qrcodewidth,jdbcType=SMALLINT},
-      qrcodeheight = #{qrcodeheight,jdbcType=SMALLINT},
-      qrcodetop = #{qrcodetop,jdbcType=SMALLINT},
-      qrcodeleft = #{qrcodeleft,jdbcType=SMALLINT},
-      usestatus = #{usestatus,jdbcType=TINYINT},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
-    where isoccreditcardtemplateid = #{isoccreditcardtemplateid,jdbcType=INTEGER}
+  <update id="updateResetTemplateByTypeAndIsocid">
+  	update isoc_credit_card_template set usestatus = 0 
+  	where type = #{type,jdbcType=INTEGER} 
+  		and isocid = #{isocid,jdbcType=INTEGER}
   </update>
+  <select id="findUseingTemplateByTypeAndIsocid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_credit_card_template
+    where type = #{type,jdbcType=INTEGER}
+    and isocid = #{isocid,jdbcType=INTEGER} and usestatus = 1
+    limit 0,1
+  </select>
 </mapper>

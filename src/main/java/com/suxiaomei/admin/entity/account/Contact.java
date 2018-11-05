@@ -1,20 +1,17 @@
 package com.suxiaomei.admin.entity.account;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 联系人
  * @author zl
  */
-public class Contact implements Serializable{
+public class Contact extends BaseEntity{
 	private int	contactid;
 	private int type;//3企业 5家协
-	private int relationid;
+	private int relationid;//家协id或企业id
 	private String name;
 	private String phone;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public int getContactid() {
 		return contactid;
@@ -45,23 +42,5 @@ public class Contact implements Serializable{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

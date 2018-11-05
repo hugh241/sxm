@@ -27,16 +27,6 @@
     delete from employee_credit_card
     where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
-    insert into employee_credit_card (employeecreditcardid, employeeid, 
-      isocid, isocqrcodeid, fronturl, 
-      behindurl, validitytime, createtime, 
-      updatetime, status)
-    values (#{employeecreditcardid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
-      #{isocid,jdbcType=INTEGER}, #{isocqrcodeid,jdbcType=INTEGER}, #{fronturl,jdbcType=VARCHAR}, 
-      #{behindurl,jdbcType=VARCHAR}, #{validitytime,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
     insert into employee_credit_card
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -137,17 +127,34 @@
     </set>
     where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCreditCard">
+  
+  
+  
+  <select id="findByIsocid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_credit_card
+    where isocid = #{isocid,jdbcType=INTEGER}
+  </select>
+  <update id="updateByPrimaryKey" parameterType="EmployeeCreditCard">
     update employee_credit_card
-    set employeeid = #{employeeid,jdbcType=INTEGER},
-      isocid = #{isocid,jdbcType=INTEGER},
-      isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER},
+    set isocqrcodeid = #{isocqrcodeid,jdbcType=INTEGER},
       fronturl = #{fronturl,jdbcType=VARCHAR},
       behindurl = #{behindurl,jdbcType=VARCHAR},
-      validitytime = #{validitytime,jdbcType=DATE},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+      validitytime = #{validitytime,jdbcType=DATE}
     where employeecreditcardid = #{employeecreditcardid,jdbcType=INTEGER}
   </update>
+  <select id="findByIsocidAndEmployeeid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_credit_card
+    where isocid = #{isocid,jdbcType=INTEGER}
+    and employeeid = #{employeeid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <insert id="insert" parameterType="EmployeeCreditCard" useGeneratedKeys="true" keyProperty="employeecreditcardid">
+    insert into employee_credit_card (employeeid,isocid,isocqrcodeid,fronturl,behindurl,validitytime)
+    values (#{employeeid,jdbcType=INTEGER},#{isocid,jdbcType=INTEGER}, #{isocqrcodeid,jdbcType=INTEGER}, 
+    	#{fronturl,jdbcType=VARCHAR},#{behindurl,jdbcType=VARCHAR}, #{validitytime,jdbcType=DATE})
+  </insert>
 </mapper>

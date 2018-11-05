@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.employee;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 员工信誉卡
@@ -28,40 +28,37 @@ import java.io.Serializable;
  * @author zl
  * 2018年8月13日 下午5:40:05
  */
-public class EmployeeCreditCard implements Serializable{
+public class EmployeeCreditCard extends BaseEntity{
 	private static final long serialVersionUID = 1L;
-	private int	employeecreditcardid;
-	private int	employeeid;
-	private int	isocid;
-	private int	isocqrcodeid;//二维码id
+	private Integer	employeecreditcardid;
+	private Integer	employeeid;
+	private Integer	isocid;
+	private Integer	isocqrcodeid;//二维码id
 	private String fronturl = "";//正面地址
 	private String behindurl = "";//反面地址
 	private String validitytime = "0000-00-00";//有效到期时间
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
-	public int getEmployeecreditcardid() {
+	public Integer getEmployeecreditcardid() {
 		return employeecreditcardid;
 	}
-	public void setEmployeecreditcardid(int employeecreditcardid) {
+	public void setEmployeecreditcardid(Integer employeecreditcardid) {
 		this.employeecreditcardid = employeecreditcardid;
 	}
-	public int getEmployeeid() {
+	public Integer getEmployeeid() {
 		return employeeid;
 	}
-	public void setEmployeeid(int employeeid) {
+	public void setEmployeeid(Integer employeeid) {
 		this.employeeid = employeeid;
 	}
-	public int getIsocid() {
+	public Integer getIsocid() {
 		return isocid;
 	}
-	public void setIsocid(int isocid) {
+	public void setIsocid(Integer isocid) {
 		this.isocid = isocid;
 	}
-	public int getIsocqrcodeid() {
+	public Integer getIsocqrcodeid() {
 		return isocqrcodeid;
 	}
-	public void setIsocqrcodeid(int isocqrcodeid) {
+	public void setIsocqrcodeid(Integer isocqrcodeid) {
 		this.isocqrcodeid = isocqrcodeid;
 	}
 	public String getFronturl() {
@@ -81,23 +78,5 @@ public class EmployeeCreditCard implements Serializable{
 	}
 	public void setValiditytime(String validitytime) {
 		this.validitytime = validitytime;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

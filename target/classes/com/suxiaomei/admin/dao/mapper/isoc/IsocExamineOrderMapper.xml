@@ -13,17 +13,7 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
-  <resultMap id="ExtendResultMap" type="com.suxiaomei.admin.entity.common.extend.IsocGoodsOrder">
-    <id column="isocexamineorderid" jdbcType="INTEGER" property="isocexamineorderid" />
-    <result column="isocid" jdbcType="INTEGER" property="isocid" />
-    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
-    <result column="totalprice" jdbcType="INTEGER" property="totalprice" />
-    <result column="concessionalprice" jdbcType="INTEGER" property="concessionalprice" />
-    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
-    <result column="orderstatus" jdbcType="TINYINT" property="orderstatus" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+  <resultMap id="ExtendResultMap" type="isocExamineOrder" extends="BaseResultMap">
     <result column="isocname" jdbcType="VARCHAR" property="isocname" />
     <collection property="isocOrderGoods" ofType="isocOrderGoods" select="com.suxiaomei.admin.dao.isoc.IsocOrderGoodsMapper.findByIsocexamineorderid" column="isocexamineorderid" ></collection>
   </resultMap>
@@ -37,20 +27,6 @@
     from isoc_examine_order
     where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from isoc_examine_order
-    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocExamineOrder">
-    insert into isoc_examine_order (isocexamineorderid, isocid, ordernum, 
-      totalprice, concessionalprice, paytime, 
-      orderstatus, createtime, updatetime, 
-      status)
-    values (#{isocexamineorderid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, 
-      #{totalprice,jdbcType=INTEGER}, #{concessionalprice,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, 
-      #{orderstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocExamineOrder">
     insert into isoc_examine_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -146,7 +122,7 @@
 				and ieo.isocid = #{order.isocid}
 			</if>
 			<if test="order.createtime != null and order.createtime != ''">
-				and ieo.createtime = #{order.createtime}
+				and ieo.createtime like concat(#{order.createtime}, '%')
 			</if>
 			and ieo.status = 1
 		</where>
@@ -165,7 +141,7 @@
 			and ieo.isocid = #{order.isocid}
 		</if>
 		<if test="order.createtime != null and order.createtime != ''">
-			and ieo.createtime = #{order.createtime}
+			and ieo.createtime like concat(#{order.createtime}, '%')
 		</if>
 		and ieo.status = 1
 	</where>
@@ -178,4 +154,13 @@
     </set>
     where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
   </update>
+  <insert id="insert" parameterType="IsocExamineOrder" useGeneratedKeys="true" keyProperty="isocexamineorderid">
+    insert into isoc_examine_order (isocid, ordernum,totalprice, concessionalprice, paytime,orderstatus)
+    values (#{isocid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR},#{totalprice,jdbcType=INTEGER}, 
+      #{concessionalprice,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP},#{orderstatus,jdbcType=TINYINT})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_examine_order
+    where isocexamineorderid = #{isocexamineorderid,jdbcType=INTEGER}
+  </delete>
 </mapper>

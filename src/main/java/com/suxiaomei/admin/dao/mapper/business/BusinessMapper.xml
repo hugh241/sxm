@@ -26,6 +26,7 @@
   <resultMap id="ExtendDetailResultMap" type="BusinessExtend" extends="ExtendResultMap">
   	<collection property="isocBusinesses" ofType="isocIdentificationBusinessExtend" select="com.suxiaomei.admin.dao.isoc.IsocIdentificationBusinessMapper.findByBusinessid" column="businessid"></collection>
   	<collection property="contacts" ofType="contact" select="com.suxiaomei.admin.dao.account.ContactMapper.findByRelationidAndType" column="{relationid=businessid,type=3}"></collection>
+  	<collection property="members" ofType="member" select="com.suxiaomei.admin.dao.isoc.MemberMapper.findByBusinessid" column="businessid"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     businessid, sxmsystemid, fullname, shortname, corporations, license, phone, address, 
@@ -41,20 +42,6 @@
     delete from business
     where businessid = #{businessid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.Business">
-    insert into business (businessid, sxmsystemid, fullname, 
-      shortname, corporations, license, 
-      phone, address, email, 
-      logo, url, summary, 
-      accredittime, createtime, updatetime, 
-      status)
-    values (#{businessid,jdbcType=INTEGER}, #{sxmsystemid,jdbcType=INTEGER}, #{fullname,jdbcType=VARCHAR}, 
-      #{shortname,jdbcType=VARCHAR}, #{corporations,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{accredittime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.Business">
     insert into business
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -209,25 +196,6 @@
     </set>
     where businessid = #{businessid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.Business">
-    update business
-    set sxmsystemid = #{sxmsystemid,jdbcType=INTEGER},
-      fullname = #{fullname,jdbcType=VARCHAR},
-      shortname = #{shortname,jdbcType=VARCHAR},
-      corporations = #{corporations,jdbcType=VARCHAR},
-      license = #{license,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR},
-      accredittime = #{accredittime,jdbcType=TIMESTAMP},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
-    where businessid = #{businessid,jdbcType=INTEGER}
-  </update>
   
   
   <select id="findByPageList" resultMap="ExtendResultMap">
@@ -286,4 +254,75 @@
 	) iib on b.businessid = iib.businessid
 	where b.businessid = #{businessid,jdbcType=INTEGER} limit 0,1
   </select>
+  <insert id="insert" parameterType="business" useGeneratedKeys="true" keyProperty="businessid">
+    insert into business (sxmsystemid, fullname, 
+      shortname, corporations, license, 
+      phone, address, email, 
+      logo, url, summary, 
+      accredittime)
+    values (#{sxmsystemid,jdbcType=INTEGER}, #{fullname,jdbcType=VARCHAR}, 
+      #{shortname,jdbcType=VARCHAR}, #{corporations,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{accredittime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="findBAuthByPageList" resultMap="BaseResultMap">
+	select b.*
+	from isoc_identification_business iib
+	left join business b on b.businessid = iib.businessid
+	left join isoc_empower_firm ief on (ief.businessid = b.businessid and ief.isocid = iib.isocid)
+	<where>
+		<if test="con.isocid!=null">
+			and iib.isocid = #{con.isocid}
+		</if>
+		<if test="con.fullname!=null">
+			and b.fullname like concat('%', #{con.fullname}, '%')
+		</if>
+		<choose>
+			<when test="con.type==1">
+				and ief.status = 1
+			</when>
+			<otherwise>
+				and (ief.status is NULL or ief.status = 0)
+			</otherwise>
+		</choose>
+		and iib.enddate > now()
+	</where>
+	group by b.businessid
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findBAuthCountByCondition" resultType="Integer">
+	select count(*)
+	from isoc_identification_business iib
+	left join business b on b.businessid = iib.businessid
+	left join isoc_empower_firm ief on (ief.businessid = b.businessid and ief.isocid = iib.isocid)
+	<where>
+		<if test="con.isocid!=null">
+			and iib.isocid = #{con.isocid}
+		</if>
+		<if test="con.fullname!=null">
+			and b.fullname like concat('%', #{con.fullname}, '%')
+		</if>
+		<choose>
+			<when test="con.type==1">
+				and ief.status = 1
+			</when>
+			<otherwise>
+				and (ief.status is NULL or ief.status = 0)
+			</otherwise>
+		</choose>
+		and iib.enddate > now()
+	</where>
+  </select>
+  <update id="updateByPrimaryKey" parameterType="Business">
+    update business
+    set fullname = #{fullname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR}
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </update>
 </mapper>

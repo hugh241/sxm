@@ -5,10 +5,10 @@ import com.suxiaomei.admin.entity.isoc.Isoc;
 public class IsocExtend extends Isoc{
 	private static final long serialVersionUID = 1L;
 	private String username;//家协账号名称
-	private String address;//分校范围
+	private String address;//分销范围
 	private Integer provinceid;//省id
 	private Integer cityid;//市id
-	private String password;//密码
+	private String password = "******";//密码
 	public String getUsername() {
 		return username;
 	}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suxiaomei.admin.dao.common.StatisticsMapper">
+  <sql id="getEmployeeidByIsocid">
+    select e.employeeid from employee e
+    left join business_employee be on be.employeeid = e.employeeid
+    left join isoc_member im on im.businessid = be.businessid
+    left join employee_identification ei on (ei.employeeid = e.employeeid and ei.isocid = im.isocid)
+    where im.isocid = #{isocid,jdbcType=INTEGER}
+    <if test="type==1">
+      and ei.enddate > now()
+    </if>
+  </sql>
+  <select id="findIsocMembersEmployeeGenderStatistics" resultType="java.util.HashMap">
+    select sex,count(*) count from employee
+    where employeeid in (
+      <include refid="getEmployeeidByIsocid" />
+    )
+    group by sex
+  </select>
+  <select id="findIsocMembersEmployeeWorktypeStatistics" resultType="java.util.HashMap">
+    select dv.dictionaryvalue name,count(ep.employeepositionid) count from employee e
+	left join employee_position ep on ep.employeeid = e.employeeid
+	left join dictionary_value dv on dv.savevalue = ep.type
+	left join dictionary d on d.dictionaryid = dv.dictionaryid
+	where e.employeeid in (
+	  <include refid="getEmployeeidByIsocid" />
+    ) and d.dictionarykey = 'positiontype'
+	group by ep.type
+  </select>
+  <select id="findIsocMembersEmployeeAgeStatistics" resultType="java.util.HashMap">
+    select 
+	  case
+	    when r.age &lt; 20 then '20岁以下'
+		when r.age &lt; 25 then '20-25'
+		when r.age &lt; 30 then '25-30'
+		when r.age &lt; 35 then '30-35'
+		when r.age &lt; 40 then '35-40'
+		when r.age &lt; 45 then '40-45'
+		when r.age &lt; 50 then '45-50'
+		else '50以上'
+	  end name,count(*) count
+	from (
+	  select e.employeeid,IFNULL(TIMESTAMPDIFF(YEAR, e.birthday, CURDATE()),0) age
+	  from employee e
+	  where e.employeeid in (
+		<include refid="getEmployeeidByIsocid" />
+	  )
+	) r group by name
+  </select>
+  <select id="findIsocMembersEmployeeExperienceStatistics" resultType="java.util.HashMap">
+    select 
+	  case 
+		when r.years &lt; 1 then '1'
+		when r.years &lt; 2 then '2'
+		when r.years &lt; 3 then '3'
+		when r.years &lt; 4 then '4'
+		when r.years &lt; 5 then '5'
+		when r.years &lt; 6 then '6'
+		when r.years &lt; 7 then '7'
+		when r.years &lt; 8 then '8'
+		when r.years &lt; 9 then '9'
+		when r.years &lt; 10 then '10'
+		else '10年以上'
+	  end years,count(*) count
+	from (
+	  select e.employeeid,IFNULL(TIMESTAMPDIFF(YEAR,ee.workinglife, CURDATE()),0) years
+	  from employee e
+	  left join employee_extend ee on e.employeeid = ee.employeeid
+	  where e.employeeid in (
+		<include refid="getEmployeeidByIsocid" />
+	  )
+	) r group by years
+  </select>
+  <select id="findIsocMembersEmployeeProvinceStatistics" resultType="java.util.HashMap">
+    select 
+	  p.province,count(r.employeeid) count
+	from province p
+    left join (
+	  select e.employeeid,e.idcard,e.province from employee e
+	  left join business_employee be on be.employeeid = e.employeeid
+	  left join isoc_member im on im.businessid = be.businessid
+	  left join employee_identification ei on (ei.employeeid = e.employeeid and ei.isocid = im.isocid)
+	  where im.isocid = #{isocid,jdbcType=INTEGER}
+	  <if test="type==1">
+        and ei.enddate > now()
+      </if>
+	  group by e.employeeid
+	) r on p.provinceid = r.province
+	group by p.provinceid
+	limit 1,34
+  </select>
+  <select id="findIsocMembersEmployeeCityStatistics" resultType="java.util.HashMap">
+    select 
+	  c.city,count(r.employeeid) count
+	from city c
+	left join (
+	  select e.employeeid,e.idcard,e.city from employee e
+	  left join business_employee be on be.employeeid = e.employeeid
+	  left join isoc_member im on im.businessid = be.businessid 
+	  left join employee_identification ei on (ei.employeeid = e.employeeid and ei.isocid = im.isocid)
+	  where im.isocid = #{isocid,jdbcType=INTEGER} 
+	  <if test="type==1">
+        and ei.enddate > now()
+      </if>
+	  group by e.employeeid
+	) r on c.cityid = r.city
+	where c.provinceid = #{provinceid,jdbcType=INTEGER}
+	group by c.cityid
+  </select>
+</mapper>

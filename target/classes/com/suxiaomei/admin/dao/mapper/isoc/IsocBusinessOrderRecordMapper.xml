@@ -22,14 +22,6 @@
     delete from isoc_business_order_record
     where isocbusinessorderrecordid = #{isocbusinessorderrecordid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderRecord">
-    insert into isoc_business_order_record (isocbusinessorderrecordid, isocbusinessorderid, 
-      result, createtime, updatetime, 
-      status)
-    values (#{isocbusinessorderrecordid,jdbcType=INTEGER}, #{isocbusinessorderid,jdbcType=INTEGER}, 
-      #{result,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrderRecord">
     insert into isoc_business_order_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -103,4 +95,16 @@
       status = #{status,jdbcType=TINYINT}
     where isocbusinessorderrecordid = #{isocbusinessorderrecordid,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="findByIsocbusinessidorderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_business_order_record
+    where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="isocBusinessOrderRecord">
+    insert into isoc_business_order_record (isocbusinessorderid,result)
+    values (#{isocbusinessorderid,jdbcType=INTEGER},#{result,jdbcType=VARCHAR})
+  </insert>
 </mapper>

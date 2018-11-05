@@ -31,6 +31,8 @@ public class Employee extends BaseEntity{
 	private int differentplaces;//是否愿意外地上班 0否 1是
 	private String professiondate = "0000-00-00";//入司日期
 	private String introduce;//阿姨描述
+	private Integer province;//省
+	private Integer city;//市
 	public int getEmployeeid() {
 		return employeeid;
 	}
@@ -168,5 +170,17 @@ public class Employee extends BaseEntity{
 	}
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
+	}
+	public Integer getProvince() {
+		return province;
+	}
+	public void setProvince(Integer province) {
+		this.province = province;
+	}
+	public Integer getCity() {
+		return city;
+	}
+	public void setCity(Integer city) {
+		this.city = city;
 	}
 }

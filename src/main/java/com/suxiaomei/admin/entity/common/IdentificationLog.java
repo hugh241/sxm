@@ -1,17 +1,39 @@
 package com.suxiaomei.admin.entity.common;
 
-import java.io.Serializable;
-
-public class IdentificationLog implements Serializable{
+import com.suxiaomei.admin.entity.BaseEntity;
+/**
+ * 工种操作记录
+ *　　　　　　　 ┏┓       ┏┓+ +
+ *　　　　　　　┏┛┻━━━━━━━┛┻┓ + +
+ *　　　　　　　┃　　　　　　 ┃
+ *　　　　　　　┃　　　━　　　┃ ++ + + +
+ *　　　　　　 █████━█████  ┃+
+ *　　　　　　　┃　　　　　　 ┃ +
+ *　　　　　　　┃　　　┻　　　┃
+ *　　　　　　　┃　　　　　　 ┃ + +
+ *　　　　　　　┗━━┓　　　 ┏━┛
+ *               ┃　　  ┃
+ *　　　　　　　　　┃　　  ┃ + + + +
+ *　　　　　　　　　┃　　　┃　Code is far away from bug with the god animal protecting
+ *　　　　　　　　　┃　　　┃ + 　　　　         神兽保佑,代码无bug
+ *　　　　　　　　　┃　　　┃
+ *　　　　　　　　　┃　　　┃　　+
+ *　　　　　　　　　┃　 　 ┗━━━┓ + +
+ *　　　　　　　　　┃ 　　　　　┣┓
+ *　　　　　　　　　┃ 　　　　　┏┛
+ *　　　　　　　　　┗┓┓┏━━━┳┓┏┛ + + + +
+ *　　　　　　　　　 ┃┫┫　 ┃┫┫
+ *　　　　　　　　　 ┗┻┛　 ┗┻┛+ + + +
+ * @author zl
+ * 2018年10月15日 下午5:50:19
+ */
+public class IdentificationLog extends BaseEntity{
 	private int	identificationlogid;
 	private int	employeepositionid;
 	private int	worktype;//工种savevalue
 	private String operationtime;
 	private String operationcontent;
 	private String operationremark;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public IdentificationLog(){}
 	public IdentificationLog(int employeepositionid,int worktype,String operationtime,String operationcontent,String operationremark){
@@ -56,23 +78,5 @@ public class IdentificationLog implements Serializable{
 	}
 	public void setOperationremark(String operationremark) {
 		this.operationremark = operationremark;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

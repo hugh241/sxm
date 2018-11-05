@@ -38,6 +38,9 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
+  <resultMap id="ExtendResultMap" type="memberExtend" extends="BaseResultMap">
+    <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+  </resultMap>
   <sql id="Base_Column_List">
     memberid, isocid, businessid, name, gszh, clsj, xyzh, jydz, rhsj, jyxm, jyfs, fwdh, 
     zw, czdh, lxry, frdb, xb, mz, jg, cssj, zzmm, qyzw, shzw, sfzh, bgdh, yddh, zjzzgrs, 
@@ -53,28 +56,6 @@
     delete from member
     where memberid = #{memberid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.Member">
-    insert into member (memberid, isocid, businessid, 
-      name, gszh, clsj, xyzh, 
-      jydz, rhsj, jyxm, jyfs, 
-      fwdh, zw, czdh, lxry, 
-      frdb, xb, mz, jg, 
-      cssj, zzmm, qyzw, shzw, 
-      sfzh, bgdh, yddh, zjzzgrs, 
-      zjzkhrs, ygzzgrs, ygzkhrs, 
-      shstatus, result, createtime, 
-      updatetime, status)
-    values (#{memberid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{gszh,jdbcType=VARCHAR}, #{clsj,jdbcType=DATE}, #{xyzh,jdbcType=VARCHAR}, 
-      #{jydz,jdbcType=VARCHAR}, #{rhsj,jdbcType=DATE}, #{jyxm,jdbcType=VARCHAR}, #{jyfs,jdbcType=VARCHAR}, 
-      #{fwdh,jdbcType=VARCHAR}, #{zw,jdbcType=VARCHAR}, #{czdh,jdbcType=VARCHAR}, #{lxry,jdbcType=VARCHAR}, 
-      #{frdb,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{mz,jdbcType=VARCHAR}, #{jg,jdbcType=VARCHAR}, 
-      #{cssj,jdbcType=DATE}, #{zzmm,jdbcType=VARCHAR}, #{qyzw,jdbcType=VARCHAR}, #{shzw,jdbcType=VARCHAR}, 
-      #{sfzh,jdbcType=VARCHAR}, #{bgdh,jdbcType=VARCHAR}, #{yddh,jdbcType=VARCHAR}, #{zjzzgrs,jdbcType=INTEGER}, 
-      #{zjzkhrs,jdbcType=INTEGER}, #{ygzzgrs,jdbcType=INTEGER}, #{ygzkhrs,jdbcType=INTEGER}, 
-      #{shstatus,jdbcType=TINYINT}, #{result,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.Member">
     insert into member
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -400,11 +381,81 @@
     </set>
     where memberid = #{memberid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.Member">
+  
+  
+  <select id="findApplyingOrPassApplyByBusinessidAndIsocid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where businessid = #{businessid,jdbcType=INTEGER} and isocid = #{isocid,jdbcType=INTEGER}
+    and (shstatus = 0 or (shstatus = 1 and memberid in (select memberid from isoc_member)))
+  </select>
+  <insert id="insert" parameterType="member" useGeneratedKeys="true" keyProperty="memberid">
+    insert into member (isocid, businessid, 
+      name, gszh, clsj, xyzh, 
+      jydz, rhsj, jyxm, jyfs, 
+      fwdh, zw, czdh, lxry, 
+      frdb, xb, mz, jg, 
+      cssj, zzmm, qyzw, shzw, 
+      sfzh, bgdh, yddh, zjzzgrs, 
+      zjzkhrs, ygzzgrs, ygzkhrs, 
+      shstatus, result)
+    values (#{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{gszh,jdbcType=VARCHAR}, #{clsj,jdbcType=DATE}, #{xyzh,jdbcType=VARCHAR}, 
+      #{jydz,jdbcType=VARCHAR}, #{rhsj,jdbcType=DATE}, #{jyxm,jdbcType=VARCHAR}, #{jyfs,jdbcType=VARCHAR}, 
+      #{fwdh,jdbcType=VARCHAR}, #{zw,jdbcType=VARCHAR}, #{czdh,jdbcType=VARCHAR}, #{lxry,jdbcType=VARCHAR}, 
+      #{frdb,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{mz,jdbcType=VARCHAR}, #{jg,jdbcType=VARCHAR}, 
+      #{cssj,jdbcType=DATE}, #{zzmm,jdbcType=VARCHAR}, #{qyzw,jdbcType=VARCHAR}, #{shzw,jdbcType=VARCHAR}, 
+      #{sfzh,jdbcType=VARCHAR}, #{bgdh,jdbcType=VARCHAR}, #{yddh,jdbcType=VARCHAR}, #{zjzzgrs,jdbcType=INTEGER}, 
+      #{zjzkhrs,jdbcType=INTEGER}, #{ygzzgrs,jdbcType=INTEGER}, #{ygzkhrs,jdbcType=INTEGER}, 
+      #{shstatus,jdbcType=TINYINT}, #{result,jdbcType=VARCHAR})
+  </insert>
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	select m.*,i.name isocname
+	from member m
+	left join isoc i on i.isocid = m.isocid
+	<where>
+		<if test="member.isocid != null">
+			and m.isocid = #{member.isocid}
+		</if>
+		<if test="member.businessid != null">
+			and m.businessid = #{member.businessid}
+		</if>
+		<if test="member.shstatus != null">
+			and m.shstatus = #{member.shstatus}
+		</if>
+		<if test="member.name != null">
+			and m.name like concat('%',#{member.name},'%')
+		</if>
+	</where>
+	order by m.createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from member
+	<where>
+		<if test="member.isocid != null">
+			and isocid = #{member.isocid}
+		</if>
+		<if test="member.shstatus != null">
+			and shstatus = #{member.shstatus}
+		</if>
+		<if test="member.name != null">
+			and name like concat('%',#{member.name},'%')
+		</if>
+	</where>
+  </select>
+  <select id="findByBusinessid" parameterType="Integer" resultMap="ExtendResultMap">
+	select m.*,i.name isocname from isoc_member im
+	left join member m on m.memberid = im.memberid
+	left join isoc i on i.isocid = im.isocid
+	where m.businessid = #{member.isocid,jdbcType=INTEGER}
+	group by im.isocmemberid
+	order by im.createtime desc
+  </select>
+  <update id="updateByPrimaryKey" parameterType="member">
     update member
-    set isocid = #{isocid,jdbcType=INTEGER},
-      businessid = #{businessid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       gszh = #{gszh,jdbcType=VARCHAR},
       clsj = #{clsj,jdbcType=DATE},
       xyzh = #{xyzh,jdbcType=VARCHAR},
@@ -432,10 +483,7 @@
       ygzzgrs = #{ygzzgrs,jdbcType=INTEGER},
       ygzkhrs = #{ygzkhrs,jdbcType=INTEGER},
       shstatus = #{shstatus,jdbcType=TINYINT},
-      result = #{result,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+      result = #{result,jdbcType=VARCHAR}
     where memberid = #{memberid,jdbcType=INTEGER}
   </update>
 </mapper>

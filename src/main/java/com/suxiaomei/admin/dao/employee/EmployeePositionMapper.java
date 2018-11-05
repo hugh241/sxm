@@ -2,6 +2,8 @@ package com.suxiaomei.admin.dao.employee;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.suxiaomei.admin.entity.employee.EmployeePosition;
 import com.suxiaomei.admin.entity.employee.extend.EmployeePositionExtend;
 
@@ -23,4 +25,11 @@ public interface EmployeePositionMapper {
      * @return
      */
     List<EmployeePositionExtend> findByEmployeeid(Integer employeeid);
+    /**
+     * 根据员工id和工种类型查询护理员工种记录
+     * @param employeeid
+     * @param type
+     * @return
+     */
+	EmployeePosition findByEmployeeidAndType(@Param("employeeid")int employeeid,@Param("type")int type);
 }

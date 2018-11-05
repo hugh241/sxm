@@ -27,7 +27,12 @@ public class FileUploadUtil {
             e.printStackTrace();
         }
 	}
-	
+	/**
+	 * 删除图片
+	 * @param LOCALORIGINNAL
+	 * @param LOCALMOBILE
+	 * @param LOCALPC
+	 */
 	public static void deleteImg(String ORIGINNAL,String MOBILE,String PC){
         File file1 = new File(ORIGINNAL);  
         if(file1.exists()){
@@ -43,6 +48,15 @@ public class FileUploadUtil {
         }
 	}
 	
+	/**
+	 * 上传图片
+	 * @param file
+	 * @param currentDate
+	 * @param LOCALORIGINNAL
+	 * @param LOCALPC
+	 * @param LOCALMOBILE
+	 * @return
+	 */
 	public static String _saveImg(MultipartFile file,String currentDate,String ORIGINNAL,String PC,String MOBILE){
 		String fileName = new Date().getTime()+Util.getRandom()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."), file.getOriginalFilename().length());
         //保存 并返回

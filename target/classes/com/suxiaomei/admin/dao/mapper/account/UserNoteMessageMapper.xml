@@ -19,12 +19,6 @@
     usernotemessageid, userid, type, relationid, title, content, readstatus, reminddate, 
     executedate, createtime, updatetime, status
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_note_message
-    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_note_message
     where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
@@ -159,19 +153,33 @@
     </set>
     where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.account.UserNoteMessage">
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_note_message
+    where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
+  </select>
+  <select id="findListByCondition" resultMap="BaseResultMap">
+    SELECT * from user_note_message
+    <where>
+      <if test="condition != null and condition != ''">
+    	(
+    	  title like concat('%', #{condition,jdbcType=VARCHAR}, '%')
+    	  or content like concat('%', #{condition,jdbcType=VARCHAR}, '%')
+    	) 
+      </if>
+   	  and type = #{type,jdbcType=INTEGER} and userid = #{userid,jdbcType=INTEGER} 
+   	  and status = 1 and CURDATE() &gt;= reminddate and CURDATE() &lt;= executedate
+    </where>
+   	order by readstatus asc,reminddate desc
+  </select>
+  <update id="updateByPrimaryKey" parameterType="UserNoteMessage">
     update user_note_message
-    set userid = #{userid,jdbcType=INTEGER},
-      type = #{type,jdbcType=TINYINT},
-      relationid = #{relationid,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      readstatus = #{readstatus,jdbcType=TINYINT},
-      reminddate = #{reminddate,jdbcType=DATE},
-      executedate = #{executedate,jdbcType=DATE},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+    set readstatus = #{readstatus,jdbcType=TINYINT}
     where usernotemessageid = #{usernotemessageid,jdbcType=INTEGER}
   </update>
 </mapper>

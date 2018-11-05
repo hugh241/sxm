@@ -29,6 +29,14 @@ public class BaseController extends HttpServlet{
 		map.put(CODE, Code.SUCCESS.getCode());
 		return map;
 	}
+	
+	public Map<String, Object> SUCCESS(Map<String, Object> map,Object obj) {
+		map = map == null ? map = new HashMap<>() : map;
+		map.put("data", obj);
+		map.put(MESSAGE, Code.SUCCESS.getMessage());
+		map.put(CODE, Code.SUCCESS.getCode());
+		return map;
+	}
 
 	public Map<String, Object> ERROR(Map<String, Object> map) {
 		map = map == null ? map = new HashMap<>() : map;
@@ -44,21 +52,29 @@ public class BaseController extends HttpServlet{
 		map.put(CODE, code.getCode());
 		return map;
 	}
+
+	public Map<String, Object> ERROR(Map<String, Object> resultMap, Exception e) {
+		e.printStackTrace();
+		resultMap = resultMap == null ? resultMap = new HashMap<>() : resultMap;
+		resultMap.put(MESSAGE, Code.CONTROLLE_FAILED.getMessage());
+		resultMap.put(CODE, Code.CONTROLLE_FAILED.getCode());
+		return resultMap;
+	}
 	
-	public Map<String,Object> GENERALRETURN(Map<String, Object> map,int flag){
-		map = map == null ? map = new HashMap<>() : map;
-		map.put("data",flag);
+	public Map<String,Object> GENERALRETURN(Map<String, Object> resultMap,int flag){
+		resultMap = resultMap == null ? resultMap = new HashMap<>() : resultMap;
+		resultMap.put("data",flag);
 		if(flag == 1) {
-			map.put(CODE, 241);
-			map.put(MESSAGE, Code.getName(241));
+			resultMap.put(CODE, 241);
+			resultMap.put(MESSAGE, Code.getName(241));
 		}else if(flag == 0) {
-			map.put(CODE, 449);
-			map.put(MESSAGE, Code.getName(449));
+			resultMap.put(CODE, 449);
+			resultMap.put(MESSAGE, Code.getName(449));
 		}else {
-			map.put(CODE, flag);
-			map.put(MESSAGE, Code.getName(flag));
+			resultMap.put(CODE, flag);
+			resultMap.put(MESSAGE, Code.getName(flag));
 		}
-		return map;
+		return resultMap;
 	}
 	
 	@ModelAttribute

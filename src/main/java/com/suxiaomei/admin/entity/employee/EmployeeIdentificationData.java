@@ -3,6 +3,7 @@ package com.suxiaomei.admin.entity.employee;
 import java.io.Serializable;
 /**
  * 护理员认证资料表
+ * (没有使用-isoc_business_order_data替代)
  * @author zl
  */
 public class EmployeeIdentificationData implements Serializable{

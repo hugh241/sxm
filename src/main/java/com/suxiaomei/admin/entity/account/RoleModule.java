@@ -10,6 +10,11 @@ public class RoleModule extends BaseEntity{
 	private int	roleid;
 	private int	moduleid;
 	private static final long serialVersionUID = 1L;
+	public RoleModule(){}
+	public RoleModule(int roleid, int moduleid) {
+		this.moduleid = moduleid;
+		this.roleid = roleid;
+	}
 	public int getRolemoduleid() {
 		return rolemoduleid;
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suxiaomei.admin.dao.employee.EmployeeIdentificationOrderMapper">
-  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.employee.EmployeeIdentificationOrder">
+  <resultMap id="BaseResultMap" type="EmployeeIdentificationOrder">
     <id column="employeeidentificationorderid" jdbcType="INTEGER" property="employeeidentificationorderid" />
     <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
     <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
@@ -20,37 +20,27 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
+  <resultMap id="ExtendDatasResultMap" type="EmployeeIdentificationOrderExtend" extends="BaseResultMap">
+    <collection property="datas" ofType="IsocBusinessOrderData" select="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderDataMapper.findByRelationidAndType" column="{relationid=employeeidentificationorderid,type=1}"></collection>
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="EmployeeIdentificationOrderExtend" extends="BaseResultMap">
+    <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+    <association property="business" javaType="Business" select="com.suxiaomei.admin.dao.business.BusinessMapper.selectByPrimaryKey" column="businessid"></association>
+    <association property="employee" javaType="Employee" select="com.suxiaomei.admin.dao.employee.EmployeeMapper.selectByPrimaryKey" column="employeeid"></association>
+    <association property="isoc" javaType="Isoc" select="com.suxiaomei.admin.dao.isoc.IsocMapper.findByIsocempowerfirmid" column="isocempowerfirmid"></association>
+    <association property="isocEmpowerFirm" javaType="IsocEmpowerFirm" select="com.suxiaomei.admin.dao.isoc.IsocEmpowerFirmMapper.selectByPrimaryKey" column="isocempowerfirmid"></association>
+  	<collection property="datas" ofType="IsocBusinessOrderData" select="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderDataMapper.findByRelationidAndType" column="{relationid=employeeidentificationorderid,type=1}"></collection>
+  	<collection property="records" ofType="EmployeeIdentificationOrderRecord" select="com.suxiaomei.admin.dao.employee.EmployeeIdentificationOrderRecordMapper.findByEmployeeidentificationorderid" column="employeeidentificationorderid"></collection>
+  </resultMap>
   <sql id="Base_Column_List">
     employeeidentificationorderid, ordernum, employeeid, businessid, isocempowerfirmid, 
     worktype, identificationstatus, adopttime, school, exercisesscore, theoryscore, result, 
     employeecheckid, remark, createtime, updatetime, status
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from employee_identification_order
-    where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee_identification_order
     where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationOrder">
-    insert into employee_identification_order (employeeidentificationorderid, ordernum, 
-      employeeid, businessid, isocempowerfirmid, 
-      worktype, identificationstatus, adopttime, 
-      school, exercisesscore, theoryscore, 
-      result, employeecheckid, remark, 
-      createtime, updatetime, status
-      )
-    values (#{employeeidentificationorderid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, 
-      #{employeeid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{isocempowerfirmid,jdbcType=INTEGER}, 
-      #{worktype,jdbcType=VARCHAR}, #{identificationstatus,jdbcType=TINYINT}, #{adopttime,jdbcType=TIMESTAMP}, 
-      #{school,jdbcType=VARCHAR}, #{exercisesscore,jdbcType=DECIMAL}, #{theoryscore,jdbcType=DECIMAL}, 
-      #{result,jdbcType=VARCHAR}, #{employeecheckid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationOrder">
     insert into employee_identification_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -160,78 +150,160 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationOrder">
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_identification_order
+    where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
+  </select>
+  <select id="findDatasDetailByPrimaryKey" parameterType="java.lang.Integer" resultMap="ExtendDatasResultMap">
+    select *,1 from employee_identification_order
+    where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
+  </select>
+  <select id="findDetailByPrimaryKey" parameterType="java.lang.Integer" resultMap="ExtendResultMap">
+    select *,1 from employee_identification_order
+    where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocbusinessorderdataid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select eio.* from employee_identification_order eio
+    left join isoc_business_order_data ibod on (ibod.relationid = eio.employeeidentificationorderid and ibod.type = 1)
+    where ibod.isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocbusinessorderdatadetailid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select eio.* from employee_identification_order eio
+    left join isoc_business_order_data ibod on (ibod.relationid = eio.employeeidentificationorderid and ibod.type = 1)
+    left join isoc_business_order_data_detail ibodd on ibodd.isocbusinessorderdataid = ibod.isocbusinessorderdataid
+    where ibodd.isocbusinessorderdatadetailid = #{isocbusinessorderdatadetailid,jdbcType=INTEGER}
+  </select>
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	SELECT eio.*,1,iq.qrcode from employee_identification_order eio 
+	left join business b on b.businessid = eio.businessid
+	left join employee e on e.employeeid = eio.employeeid
+	left join isoc_empower_firm ief on ief.isocempowerfirmid = eio.isocempowerfirmid
+	left join isoc_qrcode iq on (
+		iq.isocid = ief.isocid and iq.relationid = e.employeeid and iq.type = 2
+	)
+	<where>
+	 	<if test="con.condition!=null and con.condition!=''">
+	 		and (b.fullname like concat('%',#{con.condition},'%') or e.name like concat('%',#{con.condition},'%'))
+	 	</if>
+	 	<if test="con.status != null">
+			and eio.status = #{con.status,jdbcType=INTEGER}
+		</if>
+	 	<if test="con.iStatus != null">
+	 		and 
+	 		<choose>
+	 			<when test="con.iStatus == 0"><!-- 查询申请中的数据 -->
+	 				(eio.identificationstatus = 0 or eio.identificationstatus = 2 or eio.identificationstatus = 4)
+	 			</when>
+	 			<when test="con.iStatus == -1"><!-- 查询所有驳回/申请通过的数据 -->
+	 				eio.identificationstatus != 0 and eio.identificationstatus != 2 and eio.identificationstatus != 4
+	 			</when>
+	 			<otherwise><!-- 根据传入的状态码查询（1,3,5,6），这里查询的是驳回或审核通过的数据 -->
+	 				eio.identificationstatus = #{con.iStatus,jdbcType=INTEGER}
+	 			</otherwise>
+	 		</choose>
+		</if>
+		<if test="con.identificationstatus != null"><!-- 根据审核状态查询0,1,2,3,4,5,6 -->
+			and eio.identificationstatus = #{con.identificationstatus,jdbcType=INTEGER}
+		</if>
+		<if test="con.isocid != null">
+			and eio.isocempowerfirmid in 
+			(
+				select 
+					isocempowerfirmid 
+				from isoc_empower_firm 
+				where isocid = #{con.isocid,jdbcType=INTEGER} and businessid is null
+			)
+		</if>
+		<if test="con.businessid != null">
+			and 
+			<choose>
+				<when test="con.sStatus == 3"><!-- 申请企业查询 -->
+					eio.businessid = #{con.businessid,jdbcType=INTEGER}
+				</when>
+				<otherwise><!-- 审核企业查询 -->
+					eio.isocempowerfirmid in 
+					(
+						select 
+							isocempowerfirmid 
+						from isoc_empower_firm 
+						where businessid = #{con.businessid,jdbcType=INTEGER}
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</where>
+	order by eio.identificationstatus asc,eio.createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from employee_identification_order eio 
+	left join business b on b.businessid = eio.businessid
+	left join employee e on e.employeeid = eio.employeeid
+	<where>
+	 	<if test="con.condition!=null and con.condition!=''">
+	 		and (b.fullname like concat('%',#{con.condition},'%') or e.name like concat('%',#{con.condition},'%'))
+	 	</if>
+	 	<if test="con.status != null">
+			and eio.status = #{con.status,jdbcType=INTEGER}
+		</if>
+	 	<if test="con.iStatus != null">
+	 		and 
+	 		<choose>
+	 			<when test="con.iStatus == 0"><!-- 查询申请中的数据 -->
+	 				(eio.identificationstatus = 0 or eio.identificationstatus = 2 or eio.identificationstatus = 4)
+	 			</when>
+	 			<when test="con.iStatus == -1"><!-- 查询所有驳回/申请通过的数据 -->
+	 				eio.identificationstatus != 0 and eio.identificationstatus != 2 and eio.identificationstatus != 4
+	 			</when>
+	 			<otherwise>
+	 				eio.identificationstatus = #{con.iStatus,jdbcType=INTEGER}
+	 			</otherwise>
+	 		</choose>
+		</if>
+		<if test="con.isocid != null">
+			and eio.isocempowerfirmid in 
+			(
+				select 
+					isocempowerfirmid 
+				from isoc_empower_firm 
+				where isocid = #{con.isocid,jdbcType=INTEGER} and businessid is null
+			)
+		</if>
+		<if test="con.businessid != null">
+			and eio.isocempowerfirmid in 
+			(
+				select 
+					isocempowerfirmid 
+				from isoc_empower_firm 
+				where businessid = #{con.businessid,jdbcType=INTEGER}
+			)
+		</if>
+	</where>
+  </select>
+  <update id="updateByPrimaryKey" parameterType="EmployeeIdentificationOrder">
     update employee_identification_order
-    <set>
-      <if test="ordernum != null">
-        ordernum = #{ordernum,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeid != null">
-        employeeid = #{employeeid,jdbcType=INTEGER},
-      </if>
-      <if test="businessid != null">
-        businessid = #{businessid,jdbcType=INTEGER},
-      </if>
-      <if test="isocempowerfirmid != null">
-        isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER},
-      </if>
-      <if test="worktype != null">
-        worktype = #{worktype,jdbcType=VARCHAR},
-      </if>
-      <if test="identificationstatus != null">
-        identificationstatus = #{identificationstatus,jdbcType=TINYINT},
-      </if>
+    set worktype = #{worktype,jdbcType=VARCHAR},
+      identificationstatus = #{identificationstatus,jdbcType=TINYINT},
       <if test="adopttime != null">
         adopttime = #{adopttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="school != null">
-        school = #{school,jdbcType=VARCHAR},
-      </if>
-      <if test="exercisesscore != null">
-        exercisesscore = #{exercisesscore,jdbcType=DECIMAL},
-      </if>
-      <if test="theoryscore != null">
-        theoryscore = #{theoryscore,jdbcType=DECIMAL},
-      </if>
-      <if test="result != null">
-        result = #{result,jdbcType=VARCHAR},
-      </if>
-      <if test="employeecheckid != null">
-        employeecheckid = #{employeecheckid,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-    </set>
-    where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.employee.EmployeeIdentificationOrder">
-    update employee_identification_order
-    set ordernum = #{ordernum,jdbcType=VARCHAR},
-      employeeid = #{employeeid,jdbcType=INTEGER},
-      businessid = #{businessid,jdbcType=INTEGER},
-      isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER},
-      worktype = #{worktype,jdbcType=VARCHAR},
-      identificationstatus = #{identificationstatus,jdbcType=TINYINT},
-      adopttime = #{adopttime,jdbcType=TIMESTAMP},
       school = #{school,jdbcType=VARCHAR},
       exercisesscore = #{exercisesscore,jdbcType=DECIMAL},
       theoryscore = #{theoryscore,jdbcType=DECIMAL},
       result = #{result,jdbcType=VARCHAR},
       employeecheckid = #{employeecheckid,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+      remark = #{remark,jdbcType=VARCHAR}
     where employeeidentificationorderid = #{employeeidentificationorderid,jdbcType=INTEGER}
   </update>
+  <insert id="insert" parameterType="EmployeeIdentificationOrder" useGeneratedKeys="true" keyProperty="employeeidentificationorderid">
+    insert into employee_identification_order (ordernum,employeeid,businessid,isocempowerfirmid,worktype,identificationstatus)
+    values (#{ordernum,jdbcType=VARCHAR},#{employeeid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{isocempowerfirmid,jdbcType=INTEGER},#{worktype,jdbcType=VARCHAR}, #{identificationstatus,jdbcType=TINYINT})
+  </insert>
 </mapper>

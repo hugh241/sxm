@@ -1,28 +1,25 @@
 package com.suxiaomei.admin.entity.employee;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 /**
  * 护理员认证订单
  * @author zl
  */
-public class EmployeeIdentificationOrder implements Serializable{
+public class EmployeeIdentificationOrder extends BaseEntity{
 	private int	employeeidentificationorderid;
 	private String ordernum;
-	private int	employeeid;
+	private Integer	employeeid;
 	private int	businessid;
 	private int	isocempowerfirmid;
 	private Integer employeecheckid;//背调id
 	private String worktype;//保存家协产品id字符串，逗号隔开
 	private int	identificationstatus = 0;//0首次提交 1第一次驳回 2第二次提交 3第二次驳回 4第三次提交 5第三次驳回 6认证通过
-	private String adopttime = "0000-00-00";
+	private String adopttime;//审核日期
 	private String result = "";
 	private String remark = "";
 	private String school = "";//培训学校
 	private double exercisesscore = 0.0;//理论分数
 	private double theoryscore = 0.0;//实操分数
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public int getEmployeeidentificationorderid() {
 		return employeeidentificationorderid;
@@ -36,10 +33,10 @@ public class EmployeeIdentificationOrder implements Serializable{
 	public void setOrdernum(String ordernum) {
 		this.ordernum = ordernum;
 	}
-	public int getEmployeeid() {
+	public Integer getEmployeeid() {
 		return employeeid;
 	}
-	public void setEmployeeid(int employeeid) {
+	public void setEmployeeid(Integer employeeid) {
 		this.employeeid = employeeid;
 	}
 	public int getBusinessid() {
@@ -77,24 +74,6 @@ public class EmployeeIdentificationOrder implements Serializable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 	public String getResult() {
 		return result;

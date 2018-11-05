@@ -61,8 +61,7 @@ public class SIsocController extends BaseController{
 			condition = URLDecoder.decode(URLDecoder.decode(condition,"utf-8"),"utf-8");
 			resultMap.put("data",isocService.findByPageList(condition));
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 		return SUCCESS(resultMap);
 	}
@@ -76,8 +75,7 @@ public class SIsocController extends BaseController{
 			int flag = isocService.add(ie);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -132,8 +130,7 @@ public class SIsocController extends BaseController{
 		try {
 			resultMap.put("data",isocService.findConfigByIsocid(isocid));
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 		return SUCCESS(resultMap);
 	}
@@ -147,8 +144,7 @@ public class SIsocController extends BaseController{
 			int flag = isocService.addConfig(config);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -161,8 +157,7 @@ public class SIsocController extends BaseController{
 			int flag = isocService.updateConfig(config);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -175,8 +170,7 @@ public class SIsocController extends BaseController{
 			int flag = isocService.deleteConfig(id);
 			return GENERALRETURN(resultMap,flag);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	

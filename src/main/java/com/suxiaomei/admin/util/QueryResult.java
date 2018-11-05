@@ -26,8 +26,8 @@ public class QueryResult<T> {
 	public int getTotalRow() {
 		return totalRow;
 	}
-	public void setTotalRow(int totalRow) {
-		this.totalRow = totalRow;
+	public void setTotalRow(Integer totalRow) {
+		this.totalRow = totalRow==null?0:totalRow;
 	}
 	public int getPageIndex() {
 		return pageIndex;

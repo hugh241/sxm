@@ -32,7 +32,7 @@ public class IsocGoods extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	isocgoodsid;
 	private int	isocid;
-	private int	goodsid;
+	private int	goodsid;//产品id
 	private int	price;//家协价格
 	private int	total;//购买总数
 	private int	consume;//消耗总数

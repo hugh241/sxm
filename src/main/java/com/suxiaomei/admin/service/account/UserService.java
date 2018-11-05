@@ -41,6 +41,14 @@ public interface UserService {
 	 */
 	JSONObject findByUsernameAndPassword(User user);
 	/**
+	 * 根据手机号查询用户信息
+	 * 1.企业验证码登录需要调用
+	 * @param mobile
+	 * @param type 0跟新redis登录信息 !0 不跟新redis登录信息
+	 * @return
+	 */
+	JSONObject findByMobile(String mobile, int type);
+	/**
 	 * 注销当前登录用户
 	 * 1.管理端注销
 	 * @param cUser

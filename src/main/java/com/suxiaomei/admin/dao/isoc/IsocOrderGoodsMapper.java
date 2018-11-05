@@ -22,4 +22,10 @@ public interface IsocOrderGoodsMapper {
      * @return
      */
     List<IsocOrderGoods> findByIsocexamineorderid(int isocexamineorderid);
+    /**
+     * 根据订单id删除订单产品详细
+     * @param id
+     * @return
+     */
+	int deleteByIsocexamineorderid(int isocexamineorderid);
 }

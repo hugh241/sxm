@@ -17,25 +17,16 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
-  <resultMap id="ExtendResultMap" type="isocExtend">
-    <id column="isocid" jdbcType="INTEGER" property="isocid" />
-    <result column="sxmsystemid" jdbcType="INTEGER" property="sxmsystemid" />
-    <result column="addressid" jdbcType="INTEGER" property="addressid" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="caddress" jdbcType="VARCHAR" property="caddress" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
-    <result column="appid" jdbcType="VARCHAR" property="appid" />
-    <result column="appsecret" jdbcType="VARCHAR" property="appsecret" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+  <resultMap id="ExtendResultMap" type="isocExtend" extends="BaseResultMap">
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="provinceid" jdbcType="TINYINT" property="provinceid" />
     <result column="cityid" jdbcType="TINYINT" property="cityid" />
+  </resultMap>
+  <resultMap id="EmpowerResultMap" type="IsocEmpowerExtend">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <collection property="isocEmpowerFirm" ofType="IsocEmpowerFirm" select="com.suxiaomei.admin.dao.isoc.IsocEmpowerFirmMapper.findByIsocid" column="id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     isocid, sxmsystemid, addressid, name, mobile, logo, caddress, email, introduce, appid, 
@@ -93,7 +84,7 @@
   </select>
   
   <select id="findByPageList" resultMap="ExtendResultMap">
-	select i.*,u.name username,a.provinceid,a.cityid,concat(p.province,IFNULL(c.city,'')) address
+	select i.*,u.username username,a.provinceid,a.cityid,concat(p.province,IFNULL(c.city,'')) address
 	from isoc i
 	left join role r on (r.relationid = i.isocid and r.type = 5)
 	left join user u on u.roleid = r.roleid
@@ -111,7 +102,6 @@
 	group by i.isocid
 	limit #{pageNo},#{pageSize}
   </select>
-  
   <select id="findCountByCondition" resultType="Integer">
 	select count(*) from isoc
 	<where>
@@ -123,7 +113,6 @@
 		</if>
 	</where>
   </select>
-  
   <select id="findByName" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -245,4 +234,43 @@
     </set>
     where isocid = #{isocid,jdbcType=INTEGER}
   </update>
+  <select id="findDetailByIsocid" parameterType="Integer" resultMap="ExtendResultMap">
+	select i.*,u.username username,a.provinceid,a.cityid,concat(p.province,IFNULL(c.city,'')) address
+	from isoc i
+	left join role r on (r.relationid = i.isocid and r.type = 5)
+	left join user u on u.roleid = r.roleid
+	left join address a on a.addressid = i.addressid
+	left join province p on p.provinceid = a.provinceid
+	left join city c on c.cityid = a.cityid
+	where i.isocid = #{isocid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocempowerfirmid" parameterType="Integer" resultMap="BaseResultMap">
+	select i.* from isoc i
+	left join isoc_empower_firm ief on ief.isocid = i.isocid
+	where ief.isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
+  </select>
+  <select id="findIsocWitchNotAuthMembers" parameterType="Integer" resultMap="BaseResultMap">
+	select i.* from isoc i
+	where i.isocid not in (
+	  select isocid 
+	  from member 
+	  where 
+		businessid = #{businessid,jdbcType=INTEGER} 
+		and (shstatus = 0 or shstatus = 1)
+	)
+  </select>
+  <select id="findIsocWitchAuthMember" parameterType="Integer" resultMap="BaseResultMap">
+	select i.* from isoc i
+	where i.isocid in (
+	  select isocid 
+	  from isoc_member 
+	  where businessid = #{businessid,jdbcType=INTEGER}
+	)
+  </select>
+  <select id="findIsocEmpowerByBusinessid" parameterType="Integer" resultMap="EmpowerResultMap">
+	select i.isocid id,i.name name from isoc i
+	left join isoc_identification_business ib on ib.isocid = i.isocid 
+	where ib.businessid = #{businessid,jdbcType=INTEGER} and ib.enddate > now() 
+	group by i.isocid
+  </select>
 </mapper>

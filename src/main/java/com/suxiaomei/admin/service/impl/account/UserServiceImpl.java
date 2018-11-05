@@ -30,14 +30,7 @@ public class UserServiceImpl implements UserService {
 	public JSONObject findByUsernameAndPassword(User user) {
 		User u = userDao.selectByUsername(user.getUsername());
 		if(u != null && u.getPassword().equals(Md5.Bit32(user.getUsername()+Md5.Bit32(user.getPassword())))){
-			u.setType(u.getRole().getType());
-			JSONObject json = JSONObject.fromObject(u);
-			json.remove("password");
-			//得到token,并将user信息保存到redis
-			String token = TokenUtil.createUserToken(redisTemplate,u.getUsername(),u,config.USERINFOSAVETIME);
-			json.put("token", token);
-			json.remove("handler");
-			return json;
+			return takeCareLoginInfo(u);
 		}
 		return null;
 	}
@@ -75,6 +68,13 @@ public class UserServiceImpl implements UserService {
 		if(tU != null){
 			return 423;//存在当前新增用户名的用户
 		}
+		//2.判断手机号是否已注册
+		if(user.getMobile() != null && !"".equals(user.getMobile())) {
+			tU = userDao.findByMobile(user.getMobile());
+			if(tU != null) {
+				return 437;
+			}
+		}
 		if(user.getRoleid() <= 0) {
 			return 426;
 		}
@@ -106,5 +106,32 @@ public class UserServiceImpl implements UserService {
 			return 1;
 		}
 		return 426;
+	}
+
+	@Override
+	public JSONObject findByMobile(String mobile,int type) {
+		User u = userDao.findByMobile(mobile);
+		if(u != null) {
+			if(type == 0) {
+				return takeCareLoginInfo(u);
+			}
+			return JSONObject.fromObject(u);
+		}
+		return null;
+	}
+	/**
+	 * 处理登录后的返回用户信息
+	 * @param u
+	 * @return
+	 */
+	public JSONObject takeCareLoginInfo(User u) {
+		u.setType(u.getRole().getType());
+		JSONObject json = JSONObject.fromObject(u);
+		json.remove("password");
+		//得到token,并将user信息保存到redis
+		String token = TokenUtil.createUserToken(redisTemplate,u.getUsername(),u,config.TIMESTAMP.get(0));
+		json.put("token", token);
+		json.remove("handler");
+		return json;
 	}
 }

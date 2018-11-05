@@ -25,16 +25,6 @@
     delete from isoc_log
     where isoclogid = #{isoclogid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
-    insert into isoc_log (isoclogid, date, ip, 
-      remark, commite, response_date, 
-      createtime, updatetime, status
-      )
-    values (#{isoclogid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{commite,jdbcType=VARCHAR}, #{responseDate,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocLog">
     insert into isoc_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -138,4 +128,12 @@
       status = #{status,jdbcType=TINYINT}
     where isoclogid = #{isoclogid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <insert id="insert" parameterType="isocLog">
+    insert into isoc_log (date, ip,remark, commite, response_date)
+    values (#{date,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{commite,jdbcType=VARCHAR}, #{responseDate,jdbcType=INTEGER})
+  </insert>
 </mapper>

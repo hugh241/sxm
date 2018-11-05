@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 企业认证审核项目详细（多张图片地址）
@@ -28,14 +28,11 @@ import java.io.Serializable;
  * @author zl
  * 2018年7月25日 下午2:56:40
  */
-public class IsocBusinessOrderDataDetail implements Serializable{
+public class IsocBusinessOrderDataDetail extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	isocbusinessorderdatadetailid;
 	private int	isocbusinessorderdataid;
 	private String url;//图片地址
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	public int getIsocbusinessorderdatadetailid() {
 		return isocbusinessorderdatadetailid;
 	}
@@ -53,23 +50,5 @@ public class IsocBusinessOrderDataDetail implements Serializable{
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

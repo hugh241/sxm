@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.business;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 /**
  * 企业向家协购买产品的订单
  *　　　　　　　 ┏┓       ┏┓+ +
@@ -27,35 +27,32 @@ import java.io.Serializable;
  * @author zl
  * 2018年8月9日 下午12:01:11
  */
-public class BusinessExamineOrder implements Serializable{
+public class BusinessExamineOrder extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	businessexamineorderid;
-	private int	businessid;
-	private int	isocid;
+	private Integer businessid;
+	private Integer	isocid;
 	private String ordernum;
 	private int	totalprice;//总价
 	private int	concessionalprice;//优惠价
 	private String paytime = "0000-00-00 00:00:00";//通过/付款时间
 	private int	orderstatus;//0 审核中 1审核通过
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	public int getBusinessexamineorderid() {
 		return businessexamineorderid;
 	}
 	public void setBusinessexamineorderid(int businessexamineorderid) {
 		this.businessexamineorderid = businessexamineorderid;
 	}
-	public int getBusinessid() {
+	public Integer getBusinessid() {
 		return businessid;
 	}
-	public void setBusinessid(int businessid) {
+	public void setBusinessid(Integer businessid) {
 		this.businessid = businessid;
 	}
-	public int getIsocid() {
+	public Integer getIsocid() {
 		return isocid;
 	}
-	public void setIsocid(int isocid) {
+	public void setIsocid(Integer isocid) {
 		this.isocid = isocid;
 	}
 	public String getOrdernum() {
@@ -87,23 +84,5 @@ public class BusinessExamineOrder implements Serializable{
 	}
 	public void setOrderstatus(int orderstatus) {
 		this.orderstatus = orderstatus;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

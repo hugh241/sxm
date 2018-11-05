@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.employee;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 护理员认证审核记录表
@@ -28,14 +28,11 @@ import java.io.Serializable;
  * @author zl
  * 2018年7月27日 下午1:23:29
  */
-public class EmployeeIdentificationOrderRecord implements Serializable{
+public class EmployeeIdentificationOrderRecord extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	employeeidentificationorderrecordid;
 	private int	employeeidentificationorderid;
 	private String result;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	public int getEmployeeidentificationorderrecordid() {
 		return employeeidentificationorderrecordid;
 	}
@@ -53,23 +50,5 @@ public class EmployeeIdentificationOrderRecord implements Serializable{
 	}
 	public void setResult(String result) {
 		this.result = result;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

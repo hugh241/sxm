@@ -12,8 +12,8 @@ public class IsocEmpowerFirm extends BaseEntity{
 	private Integer businessid;
 	private String name;
 	private int	type;//授权单位类型 0 家协本身单位 1家协创建单位
-	private String corporations;//负责人
-	private String mobile;//联系电话
+	private String corporations = "";//负责人
+	private String mobile = "";//联系电话
 	private static final long serialVersionUID = 1L;
 	public IsocEmpowerFirm(){}
 	/**

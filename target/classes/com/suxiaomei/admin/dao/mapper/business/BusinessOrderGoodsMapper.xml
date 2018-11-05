@@ -139,4 +139,14 @@
       status = #{status,jdbcType=TINYINT}
     where businessordergoodsid = #{businessordergoodsid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  <select id="findByBusinessexamineorderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_order_goods
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.suxiaomei.admin.entity.isoc;
 
+import java.util.List;
+
 import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
@@ -36,6 +38,8 @@ public class IsocExamineOrder extends BaseEntity{
 	private int	concessionalprice;
 	private String paytime = "0000-00-00";
 	private int	orderstatus;//0 审核中 1审核通过
+	private List<IsocOrderGoods> isocOrderGoods;
+	private String isocname;
 	private static final long serialVersionUID = 1L;
 	public int getIsocexamineorderid() {
 		return isocexamineorderid;
@@ -78,5 +82,17 @@ public class IsocExamineOrder extends BaseEntity{
 	}
 	public void setOrderstatus(int orderstatus) {
 		this.orderstatus = orderstatus;
+	}
+	public List<IsocOrderGoods> getIsocOrderGoods() {
+		return isocOrderGoods;
+	}
+	public void setIsocOrderGoods(List<IsocOrderGoods> isocOrderGoods) {
+		this.isocOrderGoods = isocOrderGoods;
+	}
+	public String getIsocname() {
+		return isocname;
+	}
+	public void setIsocname(String isocname) {
+		this.isocname = isocname;
 	}
 }

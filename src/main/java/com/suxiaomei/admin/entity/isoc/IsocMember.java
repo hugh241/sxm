@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 家协会员企业关联记录
@@ -28,15 +28,12 @@ import java.io.Serializable;
  * @author zl
  * 2018年7月24日 下午1:25:00
  */
-public class IsocMember implements Serializable{
+public class IsocMember extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int isocmemberid;
 	private int isocid;
 	private int businessid;
 	private int memberid;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	public int getIsocmemberid() {
 		return isocmemberid;
 	}
@@ -60,23 +57,5 @@ public class IsocMember implements Serializable{
 	}
 	public void setMemberid(int memberid) {
 		this.memberid = memberid;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

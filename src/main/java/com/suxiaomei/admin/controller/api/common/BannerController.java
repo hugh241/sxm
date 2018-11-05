@@ -1,6 +1,5 @@
 package com.suxiaomei.admin.controller.api.common;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 

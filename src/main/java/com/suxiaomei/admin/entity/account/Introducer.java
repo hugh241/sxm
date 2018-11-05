@@ -1,12 +1,12 @@
 package com.suxiaomei.admin.entity.account;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 介绍人
  * @author zl
  */
-public class Introducer implements Serializable{
+public class Introducer extends BaseEntity{
 	private int	introducerid;
 	private Integer businessparamsid;//渠道编号
 	private String name;
@@ -14,9 +14,6 @@ public class Introducer implements Serializable{
 	private Integer parentid;//介绍人
 	private int type;//0一般机构 1阿姨 2客户 3公司 4其他
 	private int relationid;//关联id
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
 	public int getIntroducerid() {
 		return introducerid;
@@ -41,24 +38,6 @@ public class Introducer implements Serializable{
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 	public Integer getParentid() {
 		return parentid;

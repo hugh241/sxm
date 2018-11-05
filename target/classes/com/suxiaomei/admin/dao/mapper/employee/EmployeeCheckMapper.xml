@@ -31,14 +31,6 @@
     delete from employee_check
     where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
-    insert into employee_check (employeecheckid, employeeid, idcard, 
-      viastatus, createtime, updatetime, 
-      status, result)
-    values (#{employeecheckid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, 
-      #{viastatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT}, #{result,jdbcType=LONGVARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.employee.EmployeeCheck">
     insert into employee_check
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -142,4 +134,11 @@
       status = #{status,jdbcType=TINYINT}
     where employeecheckid = #{employeecheckid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <insert id="insert" parameterType="EmployeeCheck" useGeneratedKeys="true" keyProperty="employeecheckid">
+    insert into employee_check (employeeid, idcard,viastatus, result)
+    values (#{employeeid,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR},#{viastatus,jdbcType=TINYINT},#{result,jdbcType=LONGVARCHAR})
+  </insert>
 </mapper>

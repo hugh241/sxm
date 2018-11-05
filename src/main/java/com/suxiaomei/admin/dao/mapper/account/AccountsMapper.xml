@@ -23,14 +23,6 @@
     delete from accounts
     where accountsid = #{accountsid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.Accounts">
-    insert into accounts (accountsid, mobile, idcard, 
-      unionid, createtime, updatetime, 
-      status)
-    values (#{accountsid,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
-      #{unionid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.Accounts">
     insert into accounts
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -114,4 +106,11 @@
       status = #{status,jdbcType=TINYINT}
     where accountsid = #{accountsid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <insert id="insert" parameterType="accounts" useGeneratedKeys="true" keyProperty="accountsid">
+    insert into accounts (mobile, idcard,unionid)
+    values (#{mobile,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR},#{unionid,jdbcType=VARCHAR})
+  </insert>
 </mapper>

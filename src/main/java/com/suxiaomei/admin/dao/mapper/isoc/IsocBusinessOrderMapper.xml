@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderMapper">
-  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+  <resultMap id="BaseResultMap" type="isocBusinessOrder">
     <id column="isocbusinessorderid" jdbcType="INTEGER" property="isocbusinessorderid" />
     <result column="isocid" jdbcType="INTEGER" property="isocid" />
     <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="begindate" jdbcType="DATE" property="begindate" />
     <result column="enddate" jdbcType="DATE" property="enddate" />
@@ -14,9 +15,18 @@
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
+  <resultMap id="ExtendResultMap" type="isocBusinessOrderExtend" extends="BaseResultMap">
+    <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+    <result column="membername" jdbcType="VARCHAR" property="membername" />
+    <collection property="datas" ofType="IsocBusinessOrderData" select="com.suxiaomei.admin.dao.isoc.IsocBusinessOrderDataMapper.findByRelationidAndType" column="{relationid=isocbusinessorderid,type=0}"></collection>
+  </resultMap>
   <sql id="Base_Column_List">
-    isocbusinessorderid, isocid, businessid, level, begindate, enddate, result, auditstatus, 
+    isocbusinessorderid, isocid,type, businessid, level, begindate, enddate, result, auditstatus, 
     createtime, updatetime, status
+  </sql>
+  <sql id="Extend_Column_List">
+    ibo.isocbusinessorderid, ibo.isocid,ibo.type, ibo.businessid, ibo.level, ibo.begindate, ibo.enddate, ibo.result, ibo.auditstatus, 
+    ibo.createtime, ibo.updatetime, ibo.status,i.name isocname,m.name membername
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,16 +38,6 @@
     delete from isoc_business_order
     where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
-    insert into isoc_business_order (isocbusinessorderid, isocid, businessid, 
-      level, begindate, enddate, 
-      result, auditstatus, createtime, 
-      updatetime, status)
-    values (#{isocbusinessorderid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
-      #{level,jdbcType=VARCHAR}, #{begindate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, 
-      #{result,jdbcType=VARCHAR}, #{auditstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
     insert into isoc_business_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -147,18 +147,80 @@
     </set>
     where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocBusinessOrder">
+  
+  
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	select <include refid="Extend_Column_List" />,0
+	from isoc_business_order ibo
+	left join isoc_member im on (im.isocid = ibo.isocid and im.businessid = ibo.businessid)
+	left join isoc i on i.isocid = ibo.isocid
+	left join member m on m.memberid = im.memberid
+	<where>
+		<if test="order.isocid!=null">
+			and i.isocid = #{order.isocid,jdbcType=INTEGER}
+		</if>
+		<if test="order.businessid!=null">
+			and ibo.businessid = #{order.businessid,jdbcType=INTEGER}
+		</if>
+		<if test="order.membername != null and order.membername != ''">
+			and m.name like concat('%', #{order.membername}, '%')
+		</if>
+		<if test="order.auditstatus!=null">
+			and ibo.auditstatus = #{order.auditstatus,jdbcType=INTEGER}
+		</if>
+		<if test="order.type!=null">
+			and ibo.type = #{order.type,jdbcType=INTEGER}
+		</if>
+	</where>
+	order by ibo.auditstatus asc,ibo.createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) from isoc_business_order ibo
+	left join isoc_member im on (im.isocid = ibo.isocid and im.businessid = ibo.businessid)
+	left join isoc i on i.isocid = ibo.isocid
+	left join member m on m.memberid = im.memberid
+	<where>
+		<if test="order.isocid!=null">
+			and i.isocid = #{order.isocid,jdbcType=INTEGER}
+		</if>
+		<if test="order.businessid!=null">
+			and ibo.businessid = #{order.businessid,jdbcType=INTEGER}
+		</if>
+		<if test="order.membername != null and order.membername != ''">
+			and m.name like concat('%', #{order.membername}, '%')
+		</if>
+		<if test="order.auditstatus!=null">
+			and ibo.auditstatus = #{order.auditstatus,jdbcType=INTEGER}
+		</if>
+		<if test="order.type!=null">
+			and ibo.type = #{order.type,jdbcType=INTEGER}
+		</if>
+	</where>
+  </select>
+  <update id="updateByPrimaryKey" parameterType="isocBusinessOrder">
     update isoc_business_order
-    set isocid = #{isocid,jdbcType=INTEGER},
-      businessid = #{businessid,jdbcType=INTEGER},
-      level = #{level,jdbcType=VARCHAR},
+    set level = #{level,jdbcType=VARCHAR},
       begindate = #{begindate,jdbcType=DATE},
       enddate = #{enddate,jdbcType=DATE},
       result = #{result,jdbcType=VARCHAR},
-      auditstatus = #{auditstatus,jdbcType=TINYINT},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+      auditstatus = #{auditstatus,jdbcType=TINYINT}
     where isocbusinessorderid = #{isocbusinessorderid,jdbcType=INTEGER}
   </update>
+  <select id="findByIsocbusinessorderdataid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select ibo.* from isoc_business_order ibo
+    left join isoc_business_order_data ibod on (ibod.relationid = ibo.isocbusinessorderid and ibod.type = 0)
+    where ibod.isocbusinessorderdataid = #{isocbusinessorderdataid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocbusinessorderdatadetailid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select ibo.* from isoc_business_order ibo
+    left join isoc_business_order_data ibod on (ibod.relationid = ibo.isocbusinessorderid and ibod.type = 0)
+    left join isoc_business_order_data_detail ibodd on ibodd.isocbusinessorderdataid = ibod.isocbusinessorderdataid
+    where ibodd.isocbusinessorderdatadetailid = #{isocbusinessorderdatadetailid,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="IsocBusinessOrder" useGeneratedKeys="true" keyProperty="isocbusinessorderid">
+    insert into isoc_business_order (isocid, businessid,type,auditstatus)
+    values (#{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER},#{auditstatus,jdbcType=TINYINT})
+  </insert>
 </mapper>

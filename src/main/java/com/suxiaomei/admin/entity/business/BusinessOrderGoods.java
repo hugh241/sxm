@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.business;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 企业购买订单的商品详细
@@ -28,17 +28,14 @@ import java.io.Serializable;
  * @author zl
  * 2018年8月9日 下午12:01:11
  */
-public class BusinessOrderGoods implements Serializable{
+public class BusinessOrderGoods extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	businessordergoodsid;
-	private int	businessexamineorderid;
-	private int	isocgoodsid;
-	private int	num;
-	private int	unitprice;
-	private int	totalprice;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
+	private int	businessexamineorderid;//购买订单id
+	private int	isocgoodsid;//家协产品id
+	private int	num;//购买数量
+	private int	unitprice;//单价
+	private int	totalprice;//总价
 	public int getBusinessordergoodsid() {
 		return businessordergoodsid;
 	}
@@ -74,23 +71,5 @@ public class BusinessOrderGoods implements Serializable{
 	}
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

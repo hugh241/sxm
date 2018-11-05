@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suxiaomei.admin.dao.business.BusinessExamineOrderMapper">
-  <resultMap id="BaseResultMap" type="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+  <resultMap id="BaseResultMap" type="BusinessExamineOrder">
     <id column="businessexamineorderid" jdbcType="INTEGER" property="businessexamineorderid" />
     <result column="businessid" jdbcType="INTEGER" property="businessid" />
     <result column="isocid" jdbcType="INTEGER" property="isocid" />
@@ -13,6 +13,11 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap id="ExtendResultMap" type="BusinessExamineOrderExtend" extends="BaseResultMap">
+    <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+    <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+    <collection property="businessOrderGoods" ofType="BusinessOrderGoods" select="com.suxiaomei.admin.dao.business.BusinessOrderGoodsMapper.findByBusinessexamineorderid" column="businessexamineorderid"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     businessexamineorderid, businessid, isocid, ordernum, totalprice, concessionalprice, 
@@ -149,18 +154,60 @@
     </set>
     where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessExamineOrder">
+  
+  
+  
+  
+  <select id="findDetailByBusinessexamineorderid" parameterType="java.lang.Integer" resultMap="ExtendResultMap">
+    select beo.*,m.name as businessname,i.name as isocname 
+	FROM business_examine_order beo
+	left join isoc_member im on (im.businessid = beo.businessid and im.isocid = beo.isocid)
+	left join member m on m.memberid = im.memberid
+	left join isoc i on i.isocid = im.isocid
+    where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	SELECT beo.*,m.name as businessname,i.name as isocname 
+	FROM business_examine_order beo
+	left join isoc_member im on (im.businessid = beo.businessid and im.isocid = beo.isocid)
+	left join member m on m.memberid = im.memberid
+	left join isoc i on i.isocid = im.isocid
+	<where>
+		<if test="order.businessname!=null and order.businessname != ''">
+			and m.name like concat('%', #{order.businessname}, '%')
+		</if>
+		<if test="order.businessid != null">
+			and beo.businessid = #{order.businessid}
+		</if>
+		<if test="order.isocid != null">
+			and beo.isocid = #{order.isocid}
+		</if>
+	</where>
+	ORDER BY orderstatus asc,createtime desc
+	limit #{startNum},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*) FROM business_examine_order beo
+	left join isoc_member im on (im.businessid = beo.businessid and im.isocid = beo.isocid)
+	left join member m on m.memberid = im.memberid
+	left join isoc i on i.isocid = im.isocid
+	<where>
+		<if test="order.businessname !=null and order.businessname != ''">
+			and m.name like concat('%', #{order.businessname}, '%')
+		</if>
+		<if test="order.businessid != null">
+			and beo.businessid = #{order.businessid}
+		</if>
+		<if test="order.isocid != null">
+			and beo.isocid = #{order.isocid}
+		</if>
+	</where>
+  </select>
+  <update id="updateByPrimaryKey" parameterType="BusinessExamineOrder">
     update business_examine_order
-    set businessid = #{businessid,jdbcType=INTEGER},
-      isocid = #{isocid,jdbcType=INTEGER},
-      ordernum = #{ordernum,jdbcType=VARCHAR},
-      totalprice = #{totalprice,jdbcType=INTEGER},
-      concessionalprice = #{concessionalprice,jdbcType=INTEGER},
-      paytime = #{paytime,jdbcType=TIMESTAMP},
-      orderstatus = #{orderstatus,jdbcType=TINYINT},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+    set paytime = #{paytime,jdbcType=TIMESTAMP},
+      orderstatus = #{orderstatus,jdbcType=TINYINT}
     where businessexamineorderid = #{businessexamineorderid,jdbcType=INTEGER}
   </update>
 </mapper>

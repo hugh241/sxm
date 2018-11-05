@@ -3,7 +3,6 @@ package com.suxiaomei.admin.entity.common;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.suxiaomei.admin.entity.BaseEntity;
 /**
  * 系统模块

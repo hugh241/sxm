@@ -27,16 +27,6 @@
     delete from business_params
     where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
-    insert into business_params (businessparamsid, businessid, type, 
-      name, isdefault, vkey, 
-      value, createtime, updatetime, 
-      status)
-    values (#{businessparamsid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
-      #{name,jdbcType=VARCHAR}, #{isdefault,jdbcType=TINYINT}, #{vkey,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessParams">
     insert into business_params
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -150,4 +140,13 @@
       status = #{status,jdbcType=TINYINT}
     where businessparamsid = #{businessparamsid,jdbcType=INTEGER}
   </update>
+  
+  
+  <insert id="insert" parameterType="businessParams" useGeneratedKeys="true" keyProperty="businessparamsid">
+    insert into business_params (businessid, type, 
+      name, isdefault, vkey,value)
+    values (#{businessid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{isdefault,jdbcType=TINYINT}, #{vkey,jdbcType=VARCHAR}, 
+      #{value,jdbcType=VARCHAR})
+  </insert>
 </mapper>

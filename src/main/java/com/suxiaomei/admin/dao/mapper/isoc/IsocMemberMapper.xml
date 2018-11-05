@@ -19,18 +19,6 @@
     from isoc_member
     where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from isoc_member
-    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
-    insert into isoc_member (isocmemberid, isocid, businessid, 
-      memberid, createtime, updatetime, 
-      status)
-    values (#{isocmemberid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, 
-      #{memberid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocMember">
     insert into isoc_member
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -114,4 +102,35 @@
       status = #{status,jdbcType=TINYINT}
     where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <insert id="insert" parameterType="isocMember" useGeneratedKeys="true" keyProperty="isocmemberid">
+    insert into isoc_member (isocid, businessid,memberid)
+    values (#{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER},#{memberid,jdbcType=INTEGER})
+  </insert>
+  <select id="findByMemberid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_member
+    where memberid = #{memberid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_member
+    where isocmemberid = #{isocmemberid,jdbcType=INTEGER}
+  </delete>
+  <select id="findByBusinessid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_member
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocidAndBusinessid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_member
+    where businessid = #{businessid,jdbcType=INTEGER} and isocid = #{isocid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
 </mapper>

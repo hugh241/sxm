@@ -16,13 +16,13 @@ public class BaseEntity implements Serializable{
 		return createtime;
 	}
 	public void setCreatetime(String createtime) {
-		this.createtime = createtime != null ? createtime.substring(0, 19):createtime;
+		this.createtime = createtime != null&&createtime.length()>18 ? createtime.substring(0, 19):createtime;
 	}
 	public String getUpdatetime() {
 		return updatetime;
 	}
 	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime != null ? updatetime.substring(0, 19):updatetime;;
+		this.updatetime = updatetime != null && updatetime.length() > 19 ? updatetime.substring(0, 19):updatetime;;
 	}
 	public int getStatus() {
 		return status;

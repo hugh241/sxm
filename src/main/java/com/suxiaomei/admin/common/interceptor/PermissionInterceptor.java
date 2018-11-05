@@ -64,6 +64,10 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		if(!InterceptorUtil.isUserPass(url)){//无论是否登录都不需拦截的连接
 			return true;
 		}
+		if(request.getHeader("token") == null || request.getHeader("username") == null) {
+			sendUnRightJSON(response);
+			return false;
+		}
 		String token = request.getHeader("token");
 		String username = URLDecoder.decode(URLDecoder.decode(request.getHeader("username"),"utf-8"),"utf-8");
 		if(token == null || username == null || "".equals(token.trim()) || "".equals(username.trim())) {

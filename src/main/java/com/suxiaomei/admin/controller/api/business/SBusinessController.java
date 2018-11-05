@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.suxiaomei.admin.common.Code;
 import com.suxiaomei.admin.common.aop.SystemLog;
 import com.suxiaomei.admin.controller.api.BaseController;
 import com.suxiaomei.admin.entity.business.extend.BusinessExtend;
 import com.suxiaomei.admin.service.business.BusinessService;
+import com.suxiaomei.admin.util.QueryResult;
 
 /**
  * 管理系统企业管理
@@ -58,11 +58,10 @@ public class SBusinessController extends BaseController{
 		Map<String,Object> resultMap = new HashMap<>();
 		try {
 			condition = URLDecoder.decode(URLDecoder.decode(condition,"utf-8"),"utf-8");
-			resultMap.put("data",businessService.findByPageList(condition));
-			return SUCCESS(resultMap);
+			QueryResult<BusinessExtend> list = businessService.findByPageList(condition);
+			return SUCCESS(resultMap,list);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 	
@@ -73,11 +72,9 @@ public class SBusinessController extends BaseController{
 		Map<String,Object> resultMap = new HashMap<>();
 		try {
 			BusinessExtend br = businessService.findDetailByBusinessid(id);
-			resultMap.put("data",br);
-			return SUCCESS(resultMap);
+			return SUCCESS(resultMap,br);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ERROR(resultMap,Code.CONTROLLE_FAILED);
+			return ERROR(resultMap,e);
 		}
 	}
 }

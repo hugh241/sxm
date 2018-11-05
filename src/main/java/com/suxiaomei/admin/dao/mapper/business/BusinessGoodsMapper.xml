@@ -25,14 +25,6 @@
     delete from business_goods
     where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
-    insert into business_goods (businessgoodsid, businessid, isocgoodsid, 
-      total, consume, createtime, 
-      updatetime, status)
-    values (#{businessgoodsid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{isocgoodsid,jdbcType=INTEGER}, 
-      #{total,jdbcType=INTEGER}, #{consume,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
     insert into business_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -115,15 +107,37 @@
     </set>
     where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.business.BusinessGoods">
+  
+  
+  
+  
+  <select id="findByBusinessidAndIsocGoodsid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_goods
+    where businessid = #{businessid,jdbcType=INTEGER} and isocgoodsid = #{isocgoodsid,jdbcType=INTEGER}
+    limit 0,1
+  </select>
+  <update id="updateByPrimaryKey" parameterType="BusinessGoods">
     update business_goods
-    set businessid = #{businessid,jdbcType=INTEGER},
-      isocgoodsid = #{isocgoodsid,jdbcType=INTEGER},
-      total = #{total,jdbcType=INTEGER},
-      consume = #{consume,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
+    set total = #{total,jdbcType=INTEGER},
+      consume = #{consume,jdbcType=INTEGER}
     where businessgoodsid = #{businessgoodsid,jdbcType=INTEGER}
   </update>
+  <insert id="insert" parameterType="BusinessGoods">
+    insert into business_goods (businessid, isocgoodsid,total, consume)
+    values (#{businessid,jdbcType=INTEGER}, #{isocgoodsid,jdbcType=INTEGER}, 
+      #{total,jdbcType=INTEGER}, #{consume,jdbcType=INTEGER})
+  </insert>
+  <select id="findBusinessGoodsByIsocidAndBusinessidForBusinesss" resultMap="BaseResultMap">
+  	select 
+  	  IFNULL(bg.businessgoodsid,0) businessgoodsid,IFNULL(bg.businessid,0) businessid,IFNULL(bg.total,0) total,
+	  IFNULL(bg.consume,0) consule,IFNULL(bg.status,0) status,bg.createtime,bg.updatetime,g.name,ig.price,
+	  ig.isocgoodsid,IFNULL((bg.total-bg.consume),0) as nums
+	from isoc_goods ig
+	left join business_goods bg on (ig.isocgoodsid = bg.isocgoodsid and bg.businessid = #{businessid,jdbcType=INTEGER})
+	left join goods g on g.goodsid = ig.goodsid
+	where ig.isocid = #{isocid,jdbcType=INTEGER}
+	group by ig.isocgoodsid
+  </select>
 </mapper>

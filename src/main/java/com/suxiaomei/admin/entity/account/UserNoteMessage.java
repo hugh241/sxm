@@ -1,6 +1,6 @@
 package com.suxiaomei.admin.entity.account;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 
 /**
  * 消息
@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @author zl
  * 2018年5月15日 下午4:05:53
  */
-public class UserNoteMessage implements Serializable{
+public class UserNoteMessage extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private int	usernotemessageid;
 	private int	userid;//用户id
@@ -39,9 +39,6 @@ public class UserNoteMessage implements Serializable{
 	private int	readstatus;//阅读状态 0未读 1已读
 	private String reminddate;//开始提醒日期
 	private String executedate;//执行日期
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	public int getUsernotemessageid() {
 		return usernotemessageid;
 	}
@@ -95,23 +92,5 @@ public class UserNoteMessage implements Serializable{
 	}
 	public void setExecutedate(String executedate) {
 		this.executedate = executedate;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

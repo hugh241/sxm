@@ -5,6 +5,7 @@
     <id column="isocidentificationbusinessid" jdbcType="INTEGER" property="isocidentificationbusinessid" />
     <result column="isocmemberid" jdbcType="INTEGER" property="isocmemberid" />
     <result column="isocid" jdbcType="INTEGER" property="isocid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="businessid" jdbcType="INTEGER" property="businessid" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="enddate" jdbcType="DATE" property="enddate" />
@@ -14,13 +15,15 @@
   </resultMap>
   <resultMap id="ExtendResultMap" type="IsocIdentificationBusinessExtend" extends="BaseResultMap">
     <result column="isocname" jdbcType="VARCHAR" property="isocname" />
+    <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
   </resultMap>
   <sql id="Base_Column_List">
-    isocidentificationbusinessid, isocmemberid, isocid, businessid, level, enddate, createtime, 
+    isocidentificationbusinessid,type, isocmemberid, isocid, businessid, level, enddate, createtime, 
     updatetime, status
   </sql>
   <sql id="Extend_Column_List">
-    iib.isocidentificationbusinessid, iib.isocmemberid, iib.isocid, iib.businessid, iib.level, iib.enddate, iib.createtime, 
+    iib.isocidentificationbusinessid,iib.type, iib.isocmemberid, iib.isocid, iib.businessid, iib.level, iib.enddate, iib.createtime, 
     iib.updatetime, iib.status, i.name isocname
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -29,20 +32,6 @@
     from isoc_identification_business
     where isocidentificationbusinessid = #{isocidentificationbusinessid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from isoc_identification_business
-    where isocidentificationbusinessid = #{isocidentificationbusinessid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocIdentificationBusiness">
-    insert into isoc_identification_business (isocidentificationbusinessid, isocmemberid, 
-      isocid, businessid, level, 
-      enddate, createtime, updatetime, 
-      status)
-    values (#{isocidentificationbusinessid,jdbcType=INTEGER}, #{isocmemberid,jdbcType=INTEGER}, 
-      #{isocid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
-      #{enddate,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocIdentificationBusiness">
     insert into isoc_identification_business
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -104,36 +93,6 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocIdentificationBusiness">
-    update isoc_identification_business
-    <set>
-      <if test="isocmemberid != null">
-        isocmemberid = #{isocmemberid,jdbcType=INTEGER},
-      </if>
-      <if test="isocid != null">
-        isocid = #{isocid,jdbcType=INTEGER},
-      </if>
-      <if test="businessid != null">
-        businessid = #{businessid,jdbcType=INTEGER},
-      </if>
-      <if test="level != null">
-        level = #{level,jdbcType=VARCHAR},
-      </if>
-      <if test="enddate != null">
-        enddate = #{enddate,jdbcType=DATE},
-      </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-    </set>
-    where isocidentificationbusinessid = #{isocidentificationbusinessid,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocIdentificationBusiness">
     update isoc_identification_business
     set isocmemberid = #{isocmemberid,jdbcType=INTEGER},
@@ -154,5 +113,71 @@
     from isoc_identification_business iib
     left join isoc i on i.isocid = iib.isocid
     where iib.businessid = #{businessid,jdbcType=INTEGER}
+  </select>
+  <select id="findByIsocidAndBusinessid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_identification_business
+    where isocid = #{isocid,jdbcType=INTEGER} and businessid = #{businessid,jdbcType=INTEGER} 
+    limit 0,1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from isoc_identification_business
+    where isocidentificationbusinessid = #{isocidentificationbusinessid,jdbcType=INTEGER}
+  </delete>
+  <update id="updateByPrimaryKeySelective" parameterType="isocIdentificationBusiness">
+    update isoc_identification_business
+    <set>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+    </set>
+    where isocidentificationbusinessid = #{isocidentificationbusinessid,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="isocIdentificationBusiness">
+    insert into isoc_identification_business (isocmemberid,isocid,type,businessid, level,enddate)
+    values (#{isocmemberid,jdbcType=INTEGER},#{isocid,jdbcType=INTEGER},#{type,jdbcType=INTEGER}, 
+    #{businessid,jdbcType=INTEGER},#{level,jdbcType=VARCHAR},#{enddate,jdbcType=DATE})
+  </insert>
+  <select id="findByPageList" resultMap="ExtendResultMap">
+	SELECT iib.*,i.name isocname,m.name businessname,m.fwdh mobile
+	from isoc_identification_business iib
+	left join isoc i on i.isocid = iib.isocid
+	left join isoc_member im on iib.isocmemberid = im.isocmemberid
+	left join member m on m.memberid = im.memberid
+	<where>
+		<if test="iib.isocid!=null">
+			and i.isocid = #{iib.isocid,jdbcType=INTEGER}
+		</if>
+		<if test="iib.businessname != null and iib.businessname != ''">
+			and m.name like concat('%', #{iib.businessname}, '%')
+		</if>
+		<if test="iib.type!=null">
+			and iib.type = #{iib.type,jdbcType=INTEGER}
+		</if>
+	</where>
+	order by iib.createtime desc
+	limit #{pageNo},#{pageSize}
+  </select>
+  <select id="findCountByCondition" resultType="Integer">
+	select count(*)
+	from isoc_identification_business iib
+	left join isoc i on i.isocid = iib.isocid
+	left join isoc_member im on iib.isocmemberid = im.isocmemberid
+	left join member m on m.memberid = im.memberid
+	<where>
+		<if test="iib.isocid!=null">
+			and i.isocid = #{iib.isocid,jdbcType=INTEGER}
+		</if>
+		<if test="iib.businessname != null and iib.businessname != ''">
+			and m.name like concat('%', #{iib.businessname}, '%')
+		</if>
+		<if test="iib.type!=null">
+			and iib.type = #{iib.type,jdbcType=INTEGER}
+		</if>
+	</where>
   </select>
 </mapper>

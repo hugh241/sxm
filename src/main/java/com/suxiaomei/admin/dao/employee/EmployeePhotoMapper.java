@@ -31,5 +31,5 @@ public interface EmployeePhotoMapper {
 	 * @param photo
 	 * @return
 	 */
-	int findCountByCondition(@Param("photo")EmployeePhoto photo);
+	Integer findCountByCondition(@Param("photo")EmployeePhoto photo);
 }

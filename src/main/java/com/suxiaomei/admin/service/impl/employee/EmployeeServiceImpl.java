@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.suxiaomei.admin.common.GlobalConfig;
+import com.suxiaomei.admin.dao.common.IdentificationLogMapper;
 import com.suxiaomei.admin.dao.employee.EmployeeMapper;
 import com.suxiaomei.admin.entity.account.User;
+import com.suxiaomei.admin.entity.common.IdentificationLog;
 import com.suxiaomei.admin.entity.employee.Employee;
 import com.suxiaomei.admin.entity.employee.extend.EmployeeExd;
 import com.suxiaomei.admin.service.employee.EmployeeService;
@@ -23,9 +25,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeMapper employeeDao;
 	@Autowired
 	private GlobalConfig config;
+	@Autowired
+	private IdentificationLogMapper identificationLogDao;
 
 	@Override
-	public QueryResult<EmployeeExd> findByPageList(String condition, User cUser) {
+	public QueryResult<EmployeeExd> findByPageList(String condition, User user) {
 		JSONObject json = JSONObject.fromObject(condition);
 		Employee employee = new Employee();
 		if(json.containsKey("where")){
@@ -38,9 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		QueryResult<EmployeeExd> employeeQ = new QueryResult<>((int)json.get("pageNo"), (int)json.get("pageSize"));
-		List<EmployeeExd> list = employeeDao.findByPageList((employeeQ.getPageIndex()-1)*employeeQ.getPageSize(),employeeQ.getPageSize(),employee);
+		List<EmployeeExd> list = employeeDao.findByPageList((employeeQ.getPageIndex()-1)*employeeQ.getPageSize(),employeeQ.getPageSize(),employee,user.getRole());
 		employeeQ.setList(list);
-		employeeQ.setTotalRow(employeeDao.findCountByCondition(employee));
+		employeeQ.setTotalRow(employeeDao.findCountByCondition(employee,user.getRole()));
 		return employeeQ;
 	}
 
@@ -51,6 +55,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee.setPhoto(config.UPLOADPATH_MOBILE+employee.getPhoto());
 		}
 		return employee;
+	}
+
+	@Override
+	public List<IdentificationLog> findPLog(int id) {
+		List<IdentificationLog> ilList = identificationLogDao.findByEmployeepositionid(id);
+		return ilList;
 	}
 	
 	

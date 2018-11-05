@@ -62,7 +62,7 @@
     where username = #{username,jdbcType=VARCHAR} and status = 1
     limit 0,1
   </select>
-  <insert id="insertSelective" parameterType="user">
+  <insert id="insertSelective" parameterType="user" useGeneratedKeys="true" keyProperty="userid">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleid != null">
@@ -160,5 +160,12 @@
     	and u.status = #{status,jdbcType=INTEGER} and r.status = #{status,jdbcType=INTEGER}
     </if>
     order by u.createtime desc
+  </select>
+  <select id="findByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where mobile = #{mobile,jdbcType=VARCHAR}
+    limit 0,1
   </select>
 </mapper>

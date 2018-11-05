@@ -43,4 +43,10 @@ public interface GoodsMapper {
 	 * @return
 	 */
 	int updateGoodsStatus(@Param("goodsid")int goodsid,@Param("status")int status);
+	/**
+	 * 根据家协产品id查询产品
+	 * @param isocgoodsid
+	 * @return
+	 */
+	Goods findByIsocgoodsid(Integer isocgoodsid);
 }

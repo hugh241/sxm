@@ -5,14 +5,16 @@ import java.util.List;
 import com.suxiaomei.admin.entity.account.Contact;
 import com.suxiaomei.admin.entity.account.User;
 import com.suxiaomei.admin.entity.business.Business;
+import com.suxiaomei.admin.entity.isoc.Member;
 import com.suxiaomei.admin.entity.isoc.extend.IsocIdentificationBusinessExtend;
 
 public class BusinessExtend extends Business{
 	private static final long serialVersionUID = 1L;
 	private Integer identificationstatus;//企业认证状态 1已认证 2未认证 ！1！2未知
-	private User user;
 	private List<IsocIdentificationBusinessExtend> isocBusinesses;
+	private List<Member> members;
 	private List<Contact> contacts;
+	private User user;
 	public Integer getIdentificationstatus() {
 		return identificationstatus;
 	}
@@ -36,5 +38,11 @@ public class BusinessExtend extends Business{
 	}
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+	public List<Member> getMembers() {
+		return members;
+	}
+	public void setMembers(List<Member> members) {
+		this.members = members;
 	}
 }

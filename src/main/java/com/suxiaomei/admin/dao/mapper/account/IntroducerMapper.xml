@@ -27,16 +27,6 @@
     delete from introducer
     where introducerid = #{introducerid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.account.Introducer">
-    insert into introducer (introducerid, businessparamsid, parentid, 
-      name, mobile, type, 
-      relationid, createtime, updatetime, 
-      status)
-    values (#{introducerid,jdbcType=INTEGER}, #{businessparamsid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
-      #{relationid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <insert id="insertSelective" parameterType="com.suxiaomei.admin.entity.account.Introducer">
     insert into introducer
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -150,4 +140,14 @@
       status = #{status,jdbcType=TINYINT}
     where introducerid = #{introducerid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <insert id="insert" parameterType="introducer" useGeneratedKeys="true" keyProperty="introducerid">
+    insert into introducer (businessparamsid, parentid, 
+      name, mobile, type, relationid)
+    values (#{businessparamsid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{relationid,jdbcType=INTEGER})
+  </insert>
 </mapper>

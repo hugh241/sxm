@@ -7,9 +7,9 @@ public class User extends BaseEntity {
 	private int roleid;
 	private String name;
 	private String username;
-	private String password;
+	private String password = "";
 	private String mobile;
-	private String remark;//备注  企业员工账户时：如果需要该员工接收客户，则为1
+	private String remark = "";//备注  企业员工账户时：如果需要该员工接收客户，则为1
 	private Integer type;//当前账户类型
 	private Role role;//角色
 	private static final long serialVersionUID = 1L;

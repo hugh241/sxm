@@ -1,17 +1,39 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
-
-public class IsocLog implements Serializable{
+import com.suxiaomei.admin.entity.BaseEntity;
+/**
+ * 家协日志
+ *　　　　　　　 ┏┓       ┏┓+ +
+ *　　　　　　　┏┛┻━━━━━━━┛┻┓ + +
+ *　　　　　　　┃　　　　　　 ┃
+ *　　　　　　　┃　　　━　　　┃ ++ + + +
+ *　　　　　　 █████━█████  ┃+
+ *　　　　　　　┃　　　　　　 ┃ +
+ *　　　　　　　┃　　　┻　　　┃
+ *　　　　　　　┃　　　　　　 ┃ + +
+ *　　　　　　　┗━━┓　　　 ┏━┛
+ *               ┃　　  ┃
+ *　　　　　　　　　┃　　  ┃ + + + +
+ *　　　　　　　　　┃　　　┃　Code is far away from bug with the god animal protecting
+ *　　　　　　　　　┃　　　┃ + 　　　　         神兽保佑,代码无bug
+ *　　　　　　　　　┃　　　┃
+ *　　　　　　　　　┃　　　┃　　+
+ *　　　　　　　　　┃　 　 ┗━━━┓ + +
+ *　　　　　　　　　┃ 　　　　　┣┓
+ *　　　　　　　　　┃ 　　　　　┏┛
+ *　　　　　　　　　┗┓┓┏━━━┳┓┏┛ + + + +
+ *　　　　　　　　　 ┃┫┫　 ┃┫┫
+ *　　　　　　　　　 ┗┻┛　 ┗┻┛+ + + +
+ * @author zl
+ * 2018年10月8日 上午9:55:05
+ */
+public class IsocLog extends BaseEntity{
 	private int	isoclogid;
 	private String date;
 	private String ip;
 	private String remark;
 	private String commite;
-	private int	response_date;
-	private int	status = 1;
-	private String	createtime;
-	private String	updatetime;
+	private int	responseDate;
 	private static final long serialVersionUID = 1L;
 	public int getIsoclogid() {
 		return isoclogid;
@@ -43,28 +65,10 @@ public class IsocLog implements Serializable{
 	public void setCommite(String commite) {
 		this.commite = commite;
 	}
-	public int getResponse_date() {
-		return response_date;
+	public int getResponseDate() {
+		return responseDate;
 	}
-	public void setResponse_date(int response_date) {
-		this.response_date = response_date;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
+	public void setResponseDate(int responseDate) {
+		this.responseDate = responseDate;
 	}
 }

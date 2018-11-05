@@ -33,4 +33,12 @@ public interface EmployeeIdentificationMapper {
      * @return
      */
     EmployeeIdentificationExtend findNewestByEmployeeidAndWorktype(@Param("employeeid") Integer employeeid,@Param("worktype") Integer worktype);
+    /**
+     * 查询该护理员在当前家协下对当前工种最后认证的记录
+     * @param employeeid
+     * @param isocid
+     * @param worktype
+     * @return
+     */
+	EmployeeIdentification findEmployeeLastEnddate(@Param("employeeid")int employeeid,@Param("isocid")int isocid,@Param("worktype")Integer worktype);
 }

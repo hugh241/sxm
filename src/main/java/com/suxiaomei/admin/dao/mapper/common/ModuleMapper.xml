@@ -253,4 +253,17 @@
     where parentid = #{moduleid} and status = 1
     order by sort
   </select>
+  <select id="findAutomaticBySxmsystemid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from module
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER} and isautomatic = 1 and status = 1
+  </select>
+  <select id="findByUrlAndSxmsystemid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from module
+    where sxmsystemid = #{sxmsystemid,jdbcType=INTEGER} and url = #{url,jdbcType=VARCHAR}
+    limit 0,1
+  </select>
 </mapper>

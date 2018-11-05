@@ -23,20 +23,6 @@
     from isoc_empower_firm
     where isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from isoc_empower_firm
-    where isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.suxiaomei.admin.entity.isoc.IsocEmpowerFirm">
-    insert into isoc_empower_firm (isocempowerfirmid, businessid, isocid, 
-      name, type, corporations, 
-      mobile, createtime, updatetime, 
-      status)
-    values (#{isocempowerfirmid,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{corporations,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
-  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.suxiaomei.admin.entity.isoc.IsocEmpowerFirm">
     update isoc_empower_firm
     <set>
@@ -68,19 +54,6 @@
         status = #{status,jdbcType=TINYINT},
       </if>
     </set>
-    where isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.suxiaomei.admin.entity.isoc.IsocEmpowerFirm">
-    update isoc_empower_firm
-    set businessid = #{businessid,jdbcType=INTEGER},
-      isocid = #{isocid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT},
-      corporations = #{corporations,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT}
     where isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
   </update>
   
@@ -132,7 +105,45 @@
     select 
     <include refid="Base_Column_List" />
     from isoc_empower_firm
-    where isocid = #{isocid,jdbcType=INTEGER} and type = 0 
+    where isocid = #{isocid,jdbcType=INTEGER} and and businessid is null and type = 0 
     limit 0,1
   </select>
+  <select id="findByIsocidAndBusinessid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_empower_firm
+    where isocid = #{isocid,jdbcType=INTEGER} and businessid = #{businessid,jdbcType=INTEGER} 
+    and type = 1
+    limit 0,1
+  </select>
+  <select id="findByBusinessid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_empower_firm
+    where businessid = #{businessid,jdbcType=INTEGER} 
+    and type = 1 and status = 1
+  </select>
+  <select id="findByIsocid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from isoc_empower_firm
+    where isocid = #{isocid,jdbcType=INTEGER} and status = 1
+  </select>
+  <update id="updateByPrimaryKey" parameterType="isocEmpowerFirm">
+    update isoc_empower_firm
+    set businessid = #{businessid,jdbcType=INTEGER},
+      isocid = #{isocid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      corporations = #{corporations,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
+    where isocempowerfirmid = #{isocempowerfirmid,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="IsocEmpowerFirm">
+    insert into isoc_empower_firm (businessid, isocid,name, type, corporations, mobile)
+    values (#{businessid,jdbcType=INTEGER}, #{isocid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{corporations,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR})
+  </insert>
 </mapper>

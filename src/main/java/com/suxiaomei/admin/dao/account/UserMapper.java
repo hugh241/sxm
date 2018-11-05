@@ -50,4 +50,10 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<User> findNormalUserBySystemidAndTypeAndStatus(@Param("sxmsystemid")int sxmsystemid,@Param("type")int type,@Param("status")Integer status);
+	/**
+	 * 根据电话号码查询用户
+	 * @param fwdh
+	 * @return
+	 */
+	User findByMobile(@Param("mobile")String mobile);
 }

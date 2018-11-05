@@ -1,42 +1,39 @@
 package com.suxiaomei.admin.entity.isoc;
 
-import java.io.Serializable;
+import com.suxiaomei.admin.entity.BaseEntity;
 /**
  * 家协二维码地址存储表 包括家协阿姨 和家协会员企业 二维码地址
  * @author zl
  */
-public class IsocQrcode implements Serializable{
-	private int	isocqrcodeid;
-	private int	isocid;
-	private int	relationid;
-	private int	type;//1企业 2护理员
+public class IsocQrcode extends BaseEntity{
+	private Integer	isocqrcodeid;
+	private Integer	isocid;
+	private Integer	relationid;
+	private Integer	type;//1企业 2护理员
 	private String qrcode;
-	private int	status = 1;
-	private String createtime;
-	private String updatetime;
 	private static final long serialVersionUID = 1L;
-	public int getIsocqrcodeid() {
+	public Integer getIsocqrcodeid() {
 		return isocqrcodeid;
 	}
-	public void setIsocqrcodeid(int isocqrcodeid) {
+	public void setIsocqrcodeid(Integer isocqrcodeid) {
 		this.isocqrcodeid = isocqrcodeid;
 	}
-	public int getIsocid() {
+	public Integer getIsocid() {
 		return isocid;
 	}
-	public void setIsocid(int isocid) {
+	public void setIsocid(Integer isocid) {
 		this.isocid = isocid;
 	}
-	public int getRelationid() {
+	public Integer getRelationid() {
 		return relationid;
 	}
-	public void setRelationid(int relationid) {
+	public void setRelationid(Integer relationid) {
 		this.relationid = relationid;
 	}
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 	public String getQrcode() {
@@ -44,23 +41,5 @@ public class IsocQrcode implements Serializable{
 	}
 	public void setQrcode(String qrcode) {
 		this.qrcode = qrcode;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
 	}
 }

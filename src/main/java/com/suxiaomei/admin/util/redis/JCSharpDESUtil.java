@@ -14,6 +14,7 @@ import sun.misc.BASE64Encoder;
  * MD5加密
  * @author zl
  */
+@SuppressWarnings("restriction")
 public class JCSharpDESUtil  
 {  
     // DES加密的私钥，必须是8位长的字符串  
@@ -40,7 +41,7 @@ public class JCSharpDESUtil
      * @param data
      * @return
      */
-    public static String encrypt(String data){  
+	public static String encrypt(String data){  
 	    try{  
 	        Cipher enCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");// 得到加密对象Cipher  
 	        enCipher.init(Cipher.ENCRYPT_MODE, key, iv);// 设置工作模式为加密模式，给出密钥和向量  
@@ -58,7 +59,7 @@ public class JCSharpDESUtil
      * @param data
      * @return
      */
-    public static String decrypt(String data){  
+	public static String decrypt(String data){  
 	    try{  
 	        Cipher deCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");  
 	        deCipher.init(Cipher.DECRYPT_MODE, key, iv);  
